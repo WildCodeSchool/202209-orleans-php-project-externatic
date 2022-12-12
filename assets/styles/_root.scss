@@ -10,9 +10,25 @@
  $light: #F1F1F1;
  $dark: #333;
 
+ $border-radius: 15px;
+
  body {
      font-family: $font-body;
      font-size: 1.4rem;
+ }
+
+ .font-title {
+    font-family: $font-title;
+ }
+ .font-subtitle {
+    font-family: $font-subtitle;
+ }
+ .font-body {
+    font-family: $font-body;
+ }
+
+ .rounded {
+    border-radius: $border-radius;
  }
 
  @import "~bootstrap/scss/bootstrap";
