@@ -4,15 +4,34 @@
  $font-subtitle: 'Comfortaa', cursive;
  $font-body: 'Poppins', sans-serif;
 
- $primary: #CA2262;
- $secondary: #851342;
+ $primary: #851342;
+ $secondary: #CA2262;
  $terciary: #0EA7C9;
  $light: #F1F1F1;
  $dark: #333;
 
+ $border-radius: 15px;
+ $btn-border-radius: $border-radius;
+ $btn-padding-y: 0.7rem;
+ $btn-padding-x: 2rem;
+
  body {
      font-family: $font-body;
      font-size: 1.4rem;
+ }
+
+ .font-title {
+    font-family: $font-title;
+ }
+ .font-subtitle {
+    font-family: $font-subtitle;
+ }
+ .font-body {
+    font-family: $font-body;
+ }
+
+ .rounded {
+    border-radius: $border-radius;
  }
 
  @import "~bootstrap/scss/bootstrap";
