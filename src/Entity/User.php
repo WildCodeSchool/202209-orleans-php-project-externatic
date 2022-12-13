@@ -45,7 +45,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 10)]
     #[Assert\NotBlank()]
-    #[Assert\Length(min: 9)]
     #[Assert\Length(max: 10)]
     private ?string $phoneNumber = null;
 
