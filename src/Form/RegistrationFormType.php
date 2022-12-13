@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Vich\UploaderBundle\Form\Type\VichFileType;
 
 class RegistrationFormType extends AbstractType
 {
@@ -48,6 +49,13 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Numéro de téléphone',
                 'attr' => ['placeholder' => '0682828282'],
                 'label_attr' => ['class' => 'font-subtitle mt-2'],
+            ])
+            ->add('avatarFile', VichFileType::class, [
+                'label' => 'Photo de Profil',
+                'label_attr' => ['class' => 'font-subtitle mt-2'],
+                'required' => false,
+                'allow_delete' => true,
+                'download_uri' => true,
             ]);
     }
 
