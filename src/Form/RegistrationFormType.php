@@ -4,9 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -54,13 +52,6 @@ class RegistrationFormType extends AbstractType
                 'label' => 'Numéro de téléphone',
                 'attr' => ['placeholder' => '0682828282'],
                 'label_attr' => ['class' => 'font-subtitle mt-2'],
-            ])
-            ->add('avatarFile', VichFileType::class, [
-                'label' => 'Photo de Profil',
-                'label_attr' => ['class' => 'font-subtitle mt-2'],
-                'required' => false,
-                'allow_delete' => true,
-                'download_uri' => true,
             ]);
     }
 
