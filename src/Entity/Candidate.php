@@ -14,7 +14,7 @@ class Candidate
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 3)]
     private ?string $nationality = null;
 
     #[ORM\Column(length: 5)]

@@ -7,7 +7,7 @@
 {% block content %}
 	<div class="container">
 		<div class="row">
-			<div class="col col-md-6">
+			<div class="col-md-6">
 
 				<div class="d-flex justify-content-between align-items-center">
 					<img class="profilPicture " src="assets/images/Placeholder-pp.png" alt="">
@@ -17,7 +17,7 @@
 
 
 				<div class="row">
-					<div class="col col-sm-6">
+					<div class="col-sm-6">
 						<div>
 							<p class="font-title fw-bold m-1">Prénom</p>
 							<p class="">{{ user.firstname }}</p>
@@ -25,12 +25,12 @@
 
 						<div>
 							<p class="font-title fw-bold m-1">Nom</p>
-							<p>{{ user.firstname }}</p>
+							<p>{{ user.lastname }}</p>
 						</div>
 
 						<div>
 							<p class="font-title fw-bold m-1">Nationalité</p>
-							<p>{{ candidate.nationality }}</p>
+							<p>{{ candidate.nationality|country_name }}</p>
 						</div>
 
 						<div>
@@ -56,7 +56,7 @@
 						</div>
 					</div>
 
-					<div class="col col-sm-6">
+					<div class="col-sm-6">
 						<div>
 							<p class="font-title fw-bold m-1">Email</p>
 							<p>{{ user.email }}</p>
@@ -82,7 +82,7 @@
 
 
 				<div>
-					<p class="font-title fw-bold m-1">A propos de moi</p>
+					<p class="font-title fw-bold m-1">À propos de moi</p>
 					<p>{{ candidate.aboutMe|nl2br }}</p>
 				</div>
 
