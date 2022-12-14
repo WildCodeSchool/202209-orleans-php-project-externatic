@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Candidate index{% endblock %}
+
+{% block body %}
+    <h1>Candidate index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nationality</th>
+                <th>PostalCode</th>
+                <th>City</th>
+                <th>Address</th>
+                <th>Hobby</th>
+                <th>About_me</th>
+                <th>Github</th>
+                <th>Linkedin</th>
+                <th>Portfolio</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for candidate in candidates %}
+            <tr>
+                <td>{{ candidate.id }}</td>
+                <td>{{ candidate.nationality }}</td>
+                <td>{{ candidate.postalCode }}</td>
+                <td>{{ candidate.city }}</td>
+                <td>{{ candidate.address }}</td>
+                <td>{{ candidate.hobby }}</td>
+                <td>{{ candidate.aboutMe }}</td>
+                <td>{{ candidate.github }}</td>
+                <td>{{ candidate.linkedin }}</td>
+                <td>{{ candidate.portfolio }}</td>
+                <td>
+                    <a href="{{ path('app_candidate_show', {'id': candidate.id}) }}">show</a>
+                    <a href="{{ path('app_candidate_edit', {'id': candidate.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="11">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
