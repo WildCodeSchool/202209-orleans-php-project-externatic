@@ -4,10 +4,10 @@
     height: 75vh;
     overflow-y: scroll;
     scrollbar-color: $primary;
-    min-height: 500px;
+    min-height: $dashboard-min-height
 }
 .dashboard-nav{
     height: 80vh;
     overflow-y: scroll;
-    min-height: 500px;
+    min-height: $dashboard-min-height
 }
