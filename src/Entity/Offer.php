@@ -40,10 +40,11 @@ class Offer
 
     #[ORM\Column(nullable: true)]
     #[Assert\DateTime]
-    private ?\DateTimeImmutable $targetDate = null;
+    private ?DateTimeImmutable $targetDate = null;
 
     #[ORM\Column(nullable: true)]
     #[Assert\Type(type: Types::INTEGER)]
+    #[Assert\Positive]
     private ?int $annualWage = null;
 
     #[ORM\Column]
@@ -108,24 +109,24 @@ class Offer
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getTargetDate(): ?\DateTimeImmutable
+    public function getTargetDate(): ?DateTimeImmutable
     {
         return $this->targetDate;
     }
 
-    public function setTargetDate(?\DateTimeImmutable $targetDate): self
+    public function setTargetDate(?DateTimeImmutable $targetDate): self
     {
         $this->targetDate = $targetDate;
 

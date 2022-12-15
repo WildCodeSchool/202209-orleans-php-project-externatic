@@ -42,11 +42,13 @@ class OfferFixtures extends Fixture
 
         for ($i = 0; $i < self::NB_OFFER; $i++) {
             $offer = new Offer();
-            $offer->setTitle(self::TITLE_OFFERS[random_int(0, count(self::TITLE_OFFERS) - 1)]);
+            $offer->setTitle(self::TITLE_OFFERS[array_rand(self::TITLE_OFFERS)]);
             $offer->setDescription($faker->sentence(50));
             $randomCity = random_int(0, count(self::CITY_OFFERS) - 1);
+            $randomCity = array_rand(self::CITY_OFFERS);
             $offer->setPostalCode(self::CITY_OFFERS[$randomCity][1]);
             $offer->setCity(self::CITY_OFFERS[$randomCity][0]);
+
             $offer->setAnnualWage($faker->numberBetween(35, 70) * 1000);
             $offer->setIsImportant($faker->boolean());
 
