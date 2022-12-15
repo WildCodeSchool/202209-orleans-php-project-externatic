@@ -1,0 +1,7 @@
+$profilPictureDiameter: 80px;
+
+.profilPicture {
+    height: $profilPictureDiameter;
+    width: $profilPictureDiameter;
+    object-fit: cover;
+}
