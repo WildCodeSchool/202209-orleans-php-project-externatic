@@ -19,6 +19,7 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $date = new DateTimeImmutable('now');
+
         $candidate = new User();
         $candidate->setEmail('candidate@exemple.com');
         $candidate->setRoles(['ROLE_CANDIDATE']);
@@ -31,6 +32,7 @@ class UserFixtures extends Fixture
         $candidate->setLastname('Doe');
         $candidate->setPhoneNumber('0622222222');
         $candidate->setUpdatedAt($date);
+        $this->addReference('UserCandidate', $candidate);
 
         $manager->persist($candidate);
 
@@ -46,6 +48,7 @@ class UserFixtures extends Fixture
         $admin->setLastname('Doe');
         $admin->setPhoneNumber('0633333333');
         $admin->setUpdatedAt($date);
+        $this->addReference('UserAdmin', $admin);
 
         $manager->persist($admin);
 
