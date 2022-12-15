@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\CandidateRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CandidateRepository::class)]
 class Candidate
@@ -15,15 +16,40 @@ class Candidate
     private ?int $id = null;
 
     #[ORM\Column(length: 3)]
+    #[Assert\NotBlank(message: 'Le champ ne doit pas rester vide.')]
+    #[Assert\Length(
+        max: 100,
+        maxMessage: 'La nationalité ne doit pas dépasser {{ limit }} caractères',
+    )]
     private ?string $nationality = null;
 
     #[ORM\Column(length: 5)]
+    #[Assert\NotBlank(message: 'Le champ ne doit pas rester vide.')]
+    #[Assert\Length(
+        max: 5,
+        maxMessage: 'Le code postal ne doit pas dépasser {{ limit }} caractères',
+    )]
+    #[Assert\Regex(
+        pattern: '/^([0-9]{5})$/',
+        match: true,
+        message: 'Le code postal ne doit comprendre que des chiffres',
+    )]
     private ?string $postalCode = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: 'Le champ ne doit pas rester vide.')]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'La ville ne doit pas dépasser {{ limit }} caractères',
+    )]
     private ?string $city = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'La ville ne doit pas dépasser {{ limit }} caractères',
+    )]
+
     private ?string $address = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -33,12 +59,33 @@ class Candidate
     private ?string $aboutMe = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Le lien github ne doit pas dépasser {{ limit }} caractères',
+    )]
+    #[Assert\Url(
+        message: 'L\'URL saisie n\'est pas valide.',
+    )]
     private ?string $github = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Le lien linkedIn ne doit pas dépasser {{ limit }} caractères',
+    )]
+    #[Assert\Url(
+        message: 'L\'URL saisie n\'est pas valide.',
+    )]
     private ?string $linkedin = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(
+        max: 255,
+        maxMessage: 'Le lien du portfolio ne doit pas dépasser {{ limit }} caractères',
+    )]
+    #[Assert\Url(
+        message: 'L\'URL saisie n\'est pas valide.',
+    )]
     private ?string $portfolio = null;
 
     #[ORM\OneToOne(inversedBy: 'candidate', cascade: ['persist', 'remove'])]
