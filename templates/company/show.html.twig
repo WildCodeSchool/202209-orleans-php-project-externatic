@@ -9,17 +9,17 @@
 {% block body %}
 <div class="container p-4">
     <div>
-        <div class="font-title fs-2 mt-3">{{ company.name }}</div>
+        <h1 class="font-title fw-bold fs-2 mt-3 mb-0">{{ company.name }}</h1>
         <div>{{ company.email }}</div>
     </div>
     <div class="mt-3">
-        <div class="font-subtitle fs-4">Adresse:</div>
+        <h2 class="font-subtitle fs-4">Adresse:</h2>
         <span>{{ company.postalCode }}</span>
         <span>{{ company.city }}</span>
     </div>
    
     <div class="mt-3">
-        <div class="font-subtitle fs-4">Présentation:</div>
+        <h2 class="font-subtitle fs-4">Présentation:</h2>
         <div>{{ company.description }}</div>
     </div>
     <div class="mt-5">
