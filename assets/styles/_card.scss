@@ -1,13 +1,11 @@
 .card-background {
-    background: linear-gradient(180deg, #E9EEF3 0%, rgba(227, 233, 239, 0) 100%);
-    border-radius: 20px;
+    background: $background-gradient ;
+    border-radius: $border-radius;
     min-width: 200px;
-    //max-width: 300px;
-    //background-color: red;
 }
 
 .card-offer-title {     
-    font-family: 'Poppins';
+    font-family: $font-body;
     font-style: normal;
     font-weight: 700;
     font-size: 32px;
