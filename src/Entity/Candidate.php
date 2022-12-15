@@ -19,7 +19,6 @@ class Candidate
     #[Assert\NotBlank(message: 'Le champ ne doit pas rester vide.')]
     #[Assert\Length(
         max: 100,
-        maxMessage: 'La nationalité ne doit pas dépasser {{ limit }} caractères',
     )]
     private ?string $nationality = null;
 
@@ -27,12 +26,10 @@ class Candidate
     #[Assert\NotBlank(message: 'Le champ ne doit pas rester vide.')]
     #[Assert\Length(
         max: 5,
-        maxMessage: 'Le code postal ne doit pas dépasser {{ limit }} caractères',
     )]
     #[Assert\Regex(
         pattern: '/^([0-9]{5})$/',
         match: true,
-        message: 'Le code postal ne doit comprendre que des chiffres',
     )]
     private ?string $postalCode = null;
 
@@ -40,14 +37,12 @@ class Candidate
     #[Assert\NotBlank(message: 'Le champ ne doit pas rester vide.')]
     #[Assert\Length(
         max: 255,
-        maxMessage: 'La ville ne doit pas dépasser {{ limit }} caractères',
     )]
     private ?string $city = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(
         max: 255,
-        maxMessage: 'La ville ne doit pas dépasser {{ limit }} caractères',
     )]
 
     private ?string $address = null;
@@ -61,31 +56,22 @@ class Candidate
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(
         max: 255,
-        maxMessage: 'Le lien github ne doit pas dépasser {{ limit }} caractères',
     )]
-    #[Assert\Url(
-        message: 'L\'URL saisie n\'est pas valide.',
-    )]
+    #[Assert\Url()]
     private ?string $github = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(
         max: 255,
-        maxMessage: 'Le lien linkedIn ne doit pas dépasser {{ limit }} caractères',
     )]
-    #[Assert\Url(
-        message: 'L\'URL saisie n\'est pas valide.',
-    )]
+    #[Assert\Url()]
     private ?string $linkedin = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(
         max: 255,
-        maxMessage: 'Le lien du portfolio ne doit pas dépasser {{ limit }} caractères',
     )]
-    #[Assert\Url(
-        message: 'L\'URL saisie n\'est pas valide.',
-    )]
+    #[Assert\Url()]
     private ?string $portfolio = null;
 
     #[ORM\OneToOne(inversedBy: 'candidate', cascade: ['persist', 'remove'])]
