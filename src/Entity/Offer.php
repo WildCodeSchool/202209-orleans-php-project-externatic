@@ -7,6 +7,7 @@ use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OfferRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OfferRepository::class)]
 class Offer
@@ -17,27 +18,36 @@ class Offer
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(max: 255)]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(length: 5, nullable: true)]
+    #[Assert\Length(max: 5)]
     private ?string $postalCode = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(max: 255)]
     private ?string $city = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    #[Assert\NotBlank()]
+    #[Assert\DateTime]
+    private DateTimeImmutable $createdAt;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\DateTime]
     private ?\DateTimeImmutable $targetDate = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\Type(type: Types::INTEGER)]
     private ?int $annualWage = null;
 
     #[ORM\Column]
+    #[Assert\Type(type: Types::BOOLEAN)]
     private ?bool $isImportant = null;
 
     public function __construct()

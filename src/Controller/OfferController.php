@@ -10,10 +10,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/offer')]
+#[Route('/offer', name: 'app_offer_')]
 class OfferController extends AbstractController
 {
-    #[Route('/', name: 'app_offer_index', methods: ['GET'])]
+    #[Route('/', name: 'index', methods: ['GET'])]
     public function index(OfferRepository $offerRepository): Response
     {
         return $this->render('offer/index.html.twig', [
@@ -21,7 +21,7 @@ class OfferController extends AbstractController
         ]);
     }
 
-    #[Route('/new', name: 'app_offer_new', methods: ['GET', 'POST'])]
+    #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, OfferRepository $offerRepository): Response
     {
         $offer = new Offer();
@@ -40,7 +40,7 @@ class OfferController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_offer_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'show', methods: ['GET'])]
     public function show(Offer $offer): Response
     {
         return $this->render('offer/show.html.twig', [
@@ -48,7 +48,7 @@ class OfferController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_offer_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Offer $offer, OfferRepository $offerRepository): Response
     {
         $form = $this->createForm(OfferType::class, $offer);
@@ -66,7 +66,7 @@ class OfferController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_offer_delete', methods: ['POST'])]
+    #[Route('/{id}', name: 'delete', methods: ['POST'])]
     public function delete(Request $request, Offer $offer, OfferRepository $offerRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $offer->getId(), $request->request->get('_token'))) {

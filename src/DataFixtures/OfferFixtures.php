@@ -38,9 +38,9 @@ class OfferFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
+        $faker = Factory::create();
 
         for ($i = 0; $i < self::NB_OFFER; $i++) {
-            $faker = Factory::create();
             $offer = new Offer();
             $offer->setTitle(self::TITLE_OFFERS[random_int(0, count(self::TITLE_OFFERS) - 1)]);
             $offer->setDescription($faker->sentence(50));
