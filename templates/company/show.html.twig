@@ -22,13 +22,12 @@
         <div class="font-subtitle fs-4">Présentation:</div>
         <div>{{ company.description }}</div>
     </div>
-
+    <div class="mt-5">
+        <a class="btn btn-primary" aria-label="Retour" href="{{ path('app_company_index') }}">Retour</a>
+        <a class="btn btn-primary" aria-label="Modifier" href="{{ path('app_company_edit', {'id': company.id}) }}">Modifier</a>
+        {{ include('company/_delete_form.html.twig') }}
+    </div>
 </div>
 
 
-    <a href="{{ path('app_company_index') }}">back to list</a>
-
-    <a href="{{ path('app_company_edit', {'id': company.id}) }}">edit</a>
-
-    {{ include('company/_delete_form.html.twig') }}
 {% endblock %}
