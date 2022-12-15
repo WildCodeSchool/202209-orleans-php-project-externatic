@@ -1,0 +1,11 @@
+.dashboard-content{
+    height: 75vh;
+    overflow-y: scroll;
+    scrollbar-color: $primary;
+    min-height: 500px;
+}
+.dashboard-nav{
+    height: 80vh;
+    overflow-y: scroll;
+    min-height: 500px;
+}

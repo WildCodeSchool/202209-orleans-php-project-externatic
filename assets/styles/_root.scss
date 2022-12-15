@@ -10,16 +10,27 @@
  $light: #FFF;
  $dark: #333;
 
- $border-radius: 15px;
+ $border-radius: 20px;
  $btn-border-radius: $border-radius;
  $btn-padding-y: 0.7rem;
  $btn-padding-x: 2rem;
+
+ $dashboard-side-nav-gradient: linear-gradient(180.27deg, rgba(203, 238, 244, 0.81) 0.19%, rgba(14, 167, 201, 0) 99.72%);
+ $dashboard-content-gradient: linear-gradient(90.77deg, rgba(56, 148, 164, 0.3) 0.11%, rgba(47, 106, 119, 0) 50.67%);
 
  body {
      font-family: $font-body;
      font-size: 1.4rem;
  }
-
+ .dashboard-side-gradient{
+   background: $dashboard-side-nav-gradient;
+ }
+ .dashboard-content-gradient{
+   background: $dashboard-side-nav-gradient;
+ }
+ .rounded-right{
+   border-radius: 0 $border-radius $border-radius 0;
+ }
  .font-title {
     font-family: $font-title;
  }
