@@ -19,6 +19,14 @@
      font-family: $font-body;
      font-size: 1.4rem;
  }
+ footer {
+   .container{
+      padding-block: 2vw;
+   }
+   ul {
+      list-style-type: none;
+   }
+ }
 
  .font-title {
     font-family: $font-title;
