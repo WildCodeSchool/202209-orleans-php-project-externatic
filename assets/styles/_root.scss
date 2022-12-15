@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Montserrat:ital,wght@0,500;0,700;0,900;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+ $font-title: 'Montserrat', sans-serif;
+ $font-subtitle: 'Comfortaa', cursive;
+ $font-body: 'Poppins', sans-serif;
+
+ $primary: #851342;
+ $secondary: #CA2262;
+ $terciary: #0EA7C9;
+ $light: #FFF;
+ $dark: #333;
+
+ $border-radius: 15px;
+ $btn-border-radius: $border-radius;
+ $btn-padding-y: 0.7rem;
+ $btn-padding-x: 2rem;
+
+ body {
+     font-family: $font-body;
+     font-size: 1.4rem;
+ }
+
+ .font-title {
+    font-family: $font-title;
+ }
+ .font-subtitle {
+    font-family: $font-subtitle;
+ }
+ .font-body {
+    font-family: $font-body;
+ }
+
+ .rounded {
+    border-radius: $border-radius;
+ }
+
+ @import "~bootstrap/scss/bootstrap";

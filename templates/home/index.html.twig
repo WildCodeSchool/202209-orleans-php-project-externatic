@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Home{% endblock %}
-
+{% block navbar %}
+    {% include './component/_navigation_bar.html.twig' %}
+{% endblock %}
 {% block body %}
     <div class="pink-stripe">
-        <h1>
+        <h1 class="bg-primary">
             Let's start coding&nbsp;&#129304;
         </h1>
     </div>
