@@ -13,14 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/experience')]
 class ExperienceController extends AbstractController
 {
-    #[Route('/', name: 'app_experience_index', methods: ['GET'])]
-    public function index(ExperienceRepository $experienceRepository): Response
-    {
-        return $this->render('experience/index.html.twig', [
-            'experiences' => $experienceRepository->findAll(),
-        ]);
-    }
-
     #[Route('/new', name: 'app_experience_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ExperienceRepository $experienceRepository): Response
     {
@@ -37,14 +29,6 @@ class ExperienceController extends AbstractController
         return $this->renderForm('experience/new.html.twig', [
             'experience' => $experience,
             'form' => $form,
-        ]);
-    }
-
-    #[Route('/{id}', name: 'app_experience_show', methods: ['GET'])]
-    public function show(Experience $experience): Response
-    {
-        return $this->render('experience/show.html.twig', [
-            'experience' => $experience,
         ]);
     }
 
