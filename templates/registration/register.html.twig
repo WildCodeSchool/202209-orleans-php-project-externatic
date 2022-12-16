@@ -2,6 +2,10 @@
 
 {% block title %}{{ parent() ~ ' | Incription' }}{% endblock %}
 
+{% block navbar %}
+    {% include './component/_navigation_bar.html.twig' %}
+{% endblock %}
+
 {% block body %}
 <div class="container">
     <h1 class="font-title my-4">Inscription</h1>
