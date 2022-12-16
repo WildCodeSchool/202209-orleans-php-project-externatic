@@ -15,9 +15,26 @@
  $btn-padding-y: 0.7rem;
  $btn-padding-x: 2rem;
 
+ $color-background-start:#E9EEF3; 
+ $color-background-end:rgba(227, 233, 239, 0); 
+ $background-gradient:linear-gradient(180deg, $color-background-start 0%, $color-background-end 100%);
+
+ $font-size-card: 2rem;
+ 
+
+
+
  body {
      font-family: $font-body;
      font-size: 1.4rem;
+ }
+ footer {
+   .container{
+      padding-block: 2vw;
+   }
+   ul {
+      list-style-type: none;
+   }
  }
 
  .font-title {
