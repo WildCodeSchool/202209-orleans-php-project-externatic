@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/candidate')]
+#[Route('/candidat')]
 class CandidateController extends AbstractController
 {
     #[Route('/', name: 'app_candidate_index', methods: ['GET'])]
@@ -30,7 +30,7 @@ class CandidateController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_candidate_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/modifier', name: 'app_candidate_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Candidate $candidate, CandidateRepository $candidateRepository): Response
     {
         $form = $this->createForm(CandidateType::class, $candidate);
