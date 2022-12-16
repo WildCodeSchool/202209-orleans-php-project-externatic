@@ -17,8 +17,12 @@
 
  $dashboard-min-height: 500px;
 
- $dashboard-side-nav-gradient: linear-gradient(180.27deg, rgba(203, 238, 244, 0.81) 0.19%, rgba(14, 167, 201, 0) 99.72%);
- $dashboard-content-gradient: linear-gradient(195.77deg, rgba(148, 224, 238, 0.2) 0.11%, rgba(47, 106, 119, 0) 81.67%);
+ $gradient-sidenav-color-primary: rgba(203, 238, 244, 0.81);
+ $gradient-sidenav-color-secondary: rgba(14, 167, 201, 0);
+ $gradient-content-color-primary: rgba(148, 224, 238, 0.2);
+ $gradient-content-color-secondary:rgba(47, 106, 119, 0);
+ $dashboard-side-nav-gradient: linear-gradient(180.27deg, $gradient-sidenav-color-primary 0.19%, $gradient-sidenav-color-secondary 99.72%);
+ $dashboard-content-gradient: linear-gradient(195.77deg, $gradient-content-color-primary 0.11%, $gradient-content-color-secondary 81.67%);
 
  body {
      font-family: $font-body;
