@@ -16,14 +16,14 @@ class Candidate
     private ?int $id = null;
 
     #[ORM\Column(length: 3)]
-    #[Assert\NotBlank(message: 'Le champ ne doit pas rester vide.')]
+    #[Assert\NotBlank()]
     #[Assert\Length(
-        max: 100,
+        max: 3,
     )]
     private ?string $nationality = null;
 
     #[ORM\Column(length: 5)]
-    #[Assert\NotBlank(message: 'Le champ ne doit pas rester vide.')]
+    #[Assert\NotBlank()]
     #[Assert\Length(
         max: 5,
     )]
@@ -34,7 +34,7 @@ class Candidate
     private ?string $postalCode = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: 'Le champ ne doit pas rester vide.')]
+    #[Assert\NotBlank()]
     #[Assert\Length(
         max: 255,
     )]
@@ -44,7 +44,6 @@ class Candidate
     #[Assert\Length(
         max: 255,
     )]
-
     private ?string $address = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
