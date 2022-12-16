@@ -15,8 +15,12 @@
  $btn-padding-y: 0.7rem;
  $btn-padding-x: 2rem;
 
- $background-gradient:linear-gradient(180deg, #E9EEF3 0%, rgba(227, 233, 239, 0) 100%); 
+ $color-background-start:#E9EEF3; 
+ $color-background-end:rgba(227, 233, 239, 0); 
+ $background-gradient:linear-gradient(180deg, $color-background-start 0%, $color-background-end 100%);
 
+ $font-size-card: 2rem;
+ 
 
 
 
