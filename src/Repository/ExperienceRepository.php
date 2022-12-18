@@ -42,7 +42,7 @@ class ExperienceRepository extends ServiceEntityRepository
     public function findByExampleField(int $candidateId): array
     {
         return $this->createQueryBuilder('e')
-            ->andWhere('e.candidate = :candidateId')
+            ->Where('e.candidate = :candidateId')
             ->setParameter('candidateId', $candidateId)
             ->orderBy('e.endDate', 'DESC')
             ->getQuery()
