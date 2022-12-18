@@ -1,37 +1,49 @@
-<h1>Experiences professionnelles</h1>
+<div class="container mt-5">
+	<div class="row">
+		<div class="col-md-6">
 
-<table class="table">
-	<thead>
-		<tr>
-			<th>Company</th>
-			<th>StartDate</th>
-			<th>EndDate</th>
-			<th>IsCurrentPosition</th>
-			<th>JobTitle</th>
-			<th>JobDescription</th>
-			<th>actions</th>
-		</tr>
-	</thead>
-	<tbody>
-		{% for experience in experiences %}
-			<tr>
-				<td>{{ experience.company }}</td>
-				<td>{{ experience.startDate ? experience.startDate|date('Y-m-d') : '' }}</td>
-				<td>{{ experience.endDate ? experience.endDate|date('Y-m-d') : '' }}</td>
-				<td>{{ experience.isCurrentPosition ? 'Yes' : 'No' }}</td>
-				<td>{{ experience.jobTitle }}</td>
-				<td>{{ experience.jobDescription }}</td>
-				<td>
+			<div class="row justify-content-between align-items-center">
 
-					<a href="{{ path('app_experience_edit', {'id': experience.id}) }}">edit</a>
-				</td>
-			</tr>
-		{% else %}
-			<tr>
-				<td colspan="8">no records found</td>
-			</tr>
-		{% endfor %}
-	</tbody>
-</table>
+				<div class="d-flex justify-content-between align-items-center">
+					<h1 class="font-title">Expériences professionnelles</h1>
+				</div>
+			</div>
+			{% for experience in experiences %}
+				<div class="d-flex justify-content-between align-items-center mt-2">
+					<h2 class="font-title">Expérience professionnelle</h2>
+					<a class="btn btn-primary btn-sm" href="{{ path('app_experience_edit', {'id': experience.id}) }}">Modifier</a>
+				</div>
+				<div class="row mt-5">
+					<div class="row">
+						<p class="font-subtitle mb-1 col-lg-4">Entreprise</p>
+						<p class="col-lg-8">{{ experience.company }}</p>
+					</div>
+					<div class="row">
+						<p class="font-subtitle  mb-1 col-lg-4">Date de début</p>
+						<p class="col-lg-8">{{ experience.startDate ? experience.startDate|date('d/m/Y') : '' }}</p>
+					</div>
+					<div class="row">
+						<p class="font-subtitle  mb-1 col-lg-4">Date de fin</p>
+						<p class="col-lg-8">{{ experience.isCurrentPosition ? 'Poste actuel' : (experience.endDate ? experience.endDate|date('d/m/Y') : '') }}</p>
+					</div>
 
-<a href="{{ path('app_experience_new') }}">Create new</a>
+					<hr>
+
+					<div class="row">
+						<p class="font-subtitle mb-1 col-lg-4">Intitulé du poste</p>
+						<p class="col-lg-8">{{ experience.jobTitle }}</p>
+					</div>
+					<div class="row mb-5">
+						<p class="font-subtitle  mb-1 col-lg-4">Description du poste</p>
+						<p class="col-lg-8">{{ experience.jobDescription|nl2br }}</p>
+					</div>
+
+				</div>
+			{% else %}
+				<div>
+					<p>Aucune expérience</p>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+</div>
