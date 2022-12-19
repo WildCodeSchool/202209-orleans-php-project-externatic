@@ -48,6 +48,7 @@ class Candidate
     private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Experience::class)]
+    #[ORM\OrderBy(["endDate" => "DESC"])]
     private Collection $experiences;
 
     public function __construct()

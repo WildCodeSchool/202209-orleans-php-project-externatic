@@ -17,7 +17,8 @@
 					</div>
 					<div class="row">
 						<div class="row">
-							<p class="font-subtitle experiencePeriode mb-2 col-lg-4">{{ (experience.startDate ? experience.startDate|date('d/m/Y') : '') ~ 
+							<p class="font-subtitle experiencePeriode mb-2 col-lg-4">
+								{{ (experience.startDate ? experience.startDate|date('d/m/Y') : '') ~ 
 								' - ' ~ 
 								(experience.isCurrentPosition ? 'Poste actuel' : (experience.endDate ? experience.endDate|date('d/m/Y') : '')) }}</p>
 
