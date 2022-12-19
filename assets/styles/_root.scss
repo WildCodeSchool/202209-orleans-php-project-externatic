@@ -18,16 +18,12 @@
  $color-background-start:#E9EEF3; 
  $color-background-end:rgba(227, 233, 239, 0); 
  $background-gradient:linear-gradient(180deg, $color-background-start 0%, $color-background-end 100%);
-
+ 
  $font-size-card: 2rem;
  
+ @import "~bootstrap/scss/bootstrap";
 
 
-
- body {
-     font-family: $font-body;
-     font-size: 1.4rem;
- }
  footer {
    .container{
       padding-block: 2vw;
@@ -51,4 +47,9 @@
     border-radius: $border-radius;
  }
 
- @import "~bootstrap/scss/bootstrap";
+
+ body {
+   font-family: $font-body;
+   font-size: 1.3rem;
+   font-weight: 300;
+}
