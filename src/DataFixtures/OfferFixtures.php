@@ -6,10 +6,11 @@ use Faker\Factory;
 use App\Entity\Offer;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
-class OfferFixtures extends Fixture
+class OfferFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const NB_OFFER = 20;
+    public const NB_OFFER = 50;
 
     private const TITLE_OFFERS = [
         'Développeur C++ Oracle Full Remote H/F',
@@ -49,11 +50,18 @@ class OfferFixtures extends Fixture
             $offer->setCity(self::CITY_OFFERS[$randomCity][0]);
 
             $offer->setAnnualWage($faker->numberBetween(35, 70) * 1000);
+            $offer->setCompany($this->getReference('company_' . rand(1, CompanyFixtures::COMPANY_NUMBER) ));
             $offer->setIsImportant($faker->boolean());
 
             $manager->persist($offer);
         }
 
         $manager->flush();
+    }
+    public function getDependencies()
+    {
+        return [
+            CompanyFixtures::class
+        ];
     }
 }

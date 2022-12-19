@@ -51,6 +51,9 @@ class Offer
     #[Assert\Type(type: Types::BOOLEAN)]
     private ?bool $isImportant = null;
 
+    #[ORM\ManyToOne(inversedBy: 'offers')]
+    private ?Company $company = null;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTimeImmutable('now'));
@@ -153,6 +156,18 @@ class Offer
     public function setIsImportant(bool $isImportant): self
     {
         $this->isImportant = $isImportant;
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): self
+    {
+        $this->company = $company;
 
         return $this;
     }
