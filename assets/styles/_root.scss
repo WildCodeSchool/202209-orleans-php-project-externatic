@@ -24,7 +24,9 @@
  $dashboard-side-nav-gradient: linear-gradient(180.27deg, $gradient-sidenav-color-primary 0.19%, $gradient-sidenav-color-secondary 99.72%);
  $dashboard-content-gradient: linear-gradient(195.77deg, $gradient-content-color-primary 0.11%, $gradient-content-color-secondary 81.67%);
  $font-size-card: 2rem;
- 
+ $color-background-start:#E9EEF3; 
+ $color-background-end:rgba(227, 233, 239, 0); 
+ $background-gradient:linear-gradient(180deg, $color-background-start 0%, $color-background-end 100%);
  @import "~bootstrap/scss/bootstrap";
 
 
