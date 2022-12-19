@@ -22,19 +22,19 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
     ];
 
     private const CITY_OFFERS = [
-        ['Orléans','45000'],
-        ['Lacanau','33680'],
-        ['Soulac','33780'],
-        ['Nantes','45000'],
-        ['Pornic','44210'],
-        ['La Roche sur Yon','45000'],
-        ['Angers','49000'],
-        ['Tarbes','65000'],
-        ['Caen','14000'],
-        ['Mondeville','14120'],
-        ['Bordeaux','33000'],
-        ['Toulouse','31000'],
-        ['Roubaix','59100'],
+        ['Orléans', '45000'],
+        ['Lacanau', '33680'],
+        ['Soulac', '33780'],
+        ['Nantes', '45000'],
+        ['Pornic', '44210'],
+        ['La Roche sur Yon', '45000'],
+        ['Angers', '49000'],
+        ['Tarbes', '65000'],
+        ['Caen', '14000'],
+        ['Mondeville', '14120'],
+        ['Bordeaux', '33000'],
+        ['Toulouse', '31000'],
+        ['Roubaix', '59100'],
     ];
 
     public function load(ObjectManager $manager): void
@@ -50,7 +50,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
             $offer->setCity(self::CITY_OFFERS[$randomCity][0]);
 
             $offer->setAnnualWage($faker->numberBetween(35, 70) * 1000);
-            $offer->setCompany($this->getReference('company_' . rand(1, CompanyFixtures::COMPANY_NUMBER) ));
+            $offer->setCompany($this->getReference('company_' . rand(1, CompanyFixtures::COMPANY_NUMBER)));
             $offer->setIsImportant($faker->boolean());
 
             $manager->persist($offer);
