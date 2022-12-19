@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CandidateRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -44,6 +46,14 @@ class Candidate
     #[ORM\OneToOne(inversedBy: 'candidate', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
+
+    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Education::class)]
+    private Collection $education;
+
+    public function __construct()
+    {
+        $this->education = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -174,6 +184,36 @@ class Candidate
     public function setPostalCode(?string $postalCode): self
     {
         $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Education>
+     */
+    public function getEducation(): Collection
+    {
+        return $this->education;
+    }
+
+    public function addEducation(Education $education): self
+    {
+        if (!$this->education->contains($education)) {
+            $this->education->add($education);
+            $education->setCandidate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEducation(Education $education): self
+    {
+        if ($this->education->removeElement($education)) {
+            // set the owning side to null (unless already changed)
+            if ($education->getCandidate() === $this) {
+                $education->setCandidate(null);
+            }
+        }
 
         return $this;
     }
