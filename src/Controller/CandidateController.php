@@ -28,7 +28,7 @@ class CandidateController extends AbstractController
         return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,
             'user' => $candidate->getUser(),
-            'experiences' => $experienceRepository->findByExampleField($candidate->getId()),
+            'experiences' => $experienceRepository->findBy(['candidate' => $candidate->getId()], ['endDate' => 'DESC']),
         ]);
     }
 
