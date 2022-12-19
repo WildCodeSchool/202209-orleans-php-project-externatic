@@ -18,10 +18,11 @@
 		{% endblock %}
 	</head>
 	<body>
+	    {% block navbar %}
+            {% include './component/_navigation_bar.html.twig' %}
+        {% endblock %}
 		{% block body %}
-
 			{% block content %}{% endblock %}
-		
         {% endblock %}
 	</body>
 </html>
