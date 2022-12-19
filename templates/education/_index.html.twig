@@ -1,0 +1,43 @@
+<div class="row justify-content-between align-items-center">
+
+	<div class="d-flex justify-content-between align-items-center">
+		<h1 class="font-title">Formations</h1>
+	</div>
+</div>
+
+{% for education in candidate.education %}
+	<div class="d-flex flex-column">
+		<div class="d-flex justify-content-between align-items-center mt-2">
+			<h2 class="font-title m-0">{{ education.title }}</h2>
+			<a class="btn btn-primary btn-sm" href="{{ path('app_education_edit', {'id': education.id}) }}">Modifier</a>
+		</div>
+		<div class="row">
+			<div class="row">
+				<p class="font-subtitle experiencePeriode mb-2 col-lg-4">
+					{{ (education.startDate ? education.startDate|date('d/m/Y') : '') ~ 
+								' - ' ~ 
+								(education.endDate ? education.endDate|date('d/m/Y') : '')}}</p>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row mt-1">
+		<div class="row">
+			<p class="font-subtitle mb-1 col-lg-4">Établissement</p>
+			<p class="col-lg-8">{{ education.school }}</p>
+		</div>
+
+		<hr>
+
+		<div class="row mb-5">
+			<p class="font-subtitle  mb-1 col-lg-4">Description</p>
+			<p class="col-lg-8">{{ education.description|nl2br }}</p>
+		</div>
+
+	</div>
+{% else %}
+	<div>
+		<p>Aucune formation</p>
+	</div>
+{% endfor %}
