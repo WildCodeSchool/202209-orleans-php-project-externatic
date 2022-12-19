@@ -23,10 +23,18 @@
  $gradient-content-color-secondary:rgba(47, 106, 119, 0);
  $dashboard-side-nav-gradient: linear-gradient(180.27deg, $gradient-sidenav-color-primary 0.19%, $gradient-sidenav-color-secondary 99.72%);
  $dashboard-content-gradient: linear-gradient(195.77deg, $gradient-content-color-primary 0.11%, $gradient-content-color-secondary 81.67%);
+ $font-size-card: 2rem;
+ 
+ @import "~bootstrap/scss/bootstrap";
 
- body {
-     font-family: $font-body;
-     font-size: 1.4rem;
+
+ footer {
+   .container{
+      padding-block: 2vw;
+   }
+   ul {
+      list-style-type: none;
+   }
  }
  .dashboard-side-gradient{
    background: $dashboard-side-nav-gradient;
@@ -48,4 +56,9 @@
     border-radius: $border-radius;
  }
 
- @import "~bootstrap/scss/bootstrap";
+
+ body {
+   font-family: $font-body;
+   font-size: 1.3rem;
+   font-weight: 300;
+}
