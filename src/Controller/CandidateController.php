@@ -5,7 +5,6 @@ namespace App\Controller;
 use App\Entity\Candidate;
 use App\Form\CandidateType;
 use App\Repository\CandidateRepository;
-use App\Repository\ExperienceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,7 +22,7 @@ class CandidateController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_candidate_show', methods: ['GET'])]
-    public function show(Candidate $candidate, ExperienceRepository $experienceRepository,): Response
+    public function show(Candidate $candidate,): Response
     {
         return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,
