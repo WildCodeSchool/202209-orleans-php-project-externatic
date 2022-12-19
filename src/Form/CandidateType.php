@@ -47,7 +47,7 @@ class CandidateType extends AbstractType
                 'help' => 'Renseignez vos centres d\'intérêts',
             ])
             ->add('about_me', TextareaType::class, [
-                'label' => 'À propose de moi',
+                'label' => 'À propos de moi',
                 'required' => true,
                 'attr' => ['class' => 'tinymce', "rows" => "3"]
             ])

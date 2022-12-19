@@ -31,7 +31,7 @@ class CandidateController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $candidateRepository->save($candidate, true);
 
-            $this->addFlash('success', 'Votre mise à jour à été prise en compte.');
+            $this->addFlash('success', 'Votre mise à jour a été prise en compte.');
 
             return $this->redirectToRoute(
                 'app_candidate_edit',
