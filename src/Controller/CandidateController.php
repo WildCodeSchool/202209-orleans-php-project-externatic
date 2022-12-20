@@ -10,17 +10,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/candidate')]
+#[Route('/candidat')]
 class CandidateController extends AbstractController
 {
-    #[Route('/', name: 'app_candidate_index', methods: ['GET'])]
-    public function index(CandidateRepository $candidateRepository): Response
-    {
-        return $this->render('candidate/index.html.twig', [
-            'candidates' => $candidateRepository->findAll(),
-        ]);
-    }
-
     #[Route('/{id}', name: 'app_candidate_show', methods: ['GET'])]
     public function show(Candidate $candidate): Response
     {
@@ -30,7 +22,7 @@ class CandidateController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_candidate_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/modifier', name: 'app_candidate_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Candidate $candidate, CandidateRepository $candidateRepository): Response
     {
         $form = $this->createForm(CandidateType::class, $candidate);
@@ -39,7 +31,13 @@ class CandidateController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $candidateRepository->save($candidate, true);
 
-            return $this->redirectToRoute('app_candidate_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Votre mise à jour a été prise en compte.');
+
+            return $this->redirectToRoute(
+                'app_candidate_edit',
+                ['id' => $candidate->getId()],
+                Response::HTTP_SEE_OTHER
+            );
         }
 
         return $this->renderForm('candidate/edit.html.twig', [

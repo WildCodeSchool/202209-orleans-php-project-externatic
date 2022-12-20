@@ -11,6 +11,7 @@
 		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
 		{% block stylesheets %}
 			{{ encore_entry_link_tags('app') }}
+			{{ encore_entry_link_tags('dashboard') }}
 		{% endblock %}
 
 		{% block javascripts %}
@@ -18,11 +19,26 @@
 		{% endblock %}
 	</head>
 	<body>
-	    {% block navbar %}
-            {% include './component/_navigation_bar.html.twig' %}
-        {% endblock %}
-		{% block body %}
-			{% block content %}{% endblock %}
-        {% endblock %}
+
+		{% block navbar %}
+			{% include './component/_navigation_bar.html.twig' %}
+		{% endblock %}
+			{% include "_flashes.html.twig" %}
+		<main class="p-4 container-xxl">
+
+			<div class="row">
+				{% block body %}
+					<div class="col-3 dashboard-nav dashboard-side-gradient rounded">
+					{% block sideNav %}{% endblock %}
+					</div>
+					<div class="col-9 dashboard-content my-3 rounded">
+					{% block content %}{% endblock %}
+					</div>
+				
+				{% endblock %}
+			</div>
+
+		</main>
+		
 	</body>
 </html>
