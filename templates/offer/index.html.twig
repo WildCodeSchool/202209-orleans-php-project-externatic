@@ -19,7 +19,7 @@
       </button>
     </div>
     {{ form_end(form) }}
-    <h1 class="mt-2">{{ offers|length }} offres selectionnées</h1>
+    <h1 class="mt-2">{{ offers|length }} offres sélectionnées</h1>
     <div class="row justify-content-center g-4">
       {% for offer in offers %}
         {% include 'component/_card.html.twig' with { offer: offer } only %}
