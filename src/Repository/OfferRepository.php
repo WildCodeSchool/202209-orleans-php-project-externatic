@@ -39,7 +39,7 @@ class OfferRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByKeyWord($value): array
+    public function findByKeyWord(string $value): array
     {
 
         $query = $this->createQueryBuilder('o')
