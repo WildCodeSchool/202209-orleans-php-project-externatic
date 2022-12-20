@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class CandidateController extends AbstractController
 {
     #[Route('/{id}', name: 'app_candidate_show', methods: ['GET'])]
-    public function show(Candidate $candidate): Response
+    public function show(Candidate $candidate,): Response
     {
         return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,
