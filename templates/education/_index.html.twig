@@ -11,7 +11,7 @@
 			<h2 class="font-title m-0">{{ education.title }}</h2>
 			<a class="btn btn-primary btn-sm" href="{{ path('app_education_edit', {'id': education.id}) }}">Modifier</a>
 		</div>
-		<div class="row">
+		<div>
 			<div class="row">
 				<p class="font-subtitle experiencePeriode mb-2 col-lg-4">
 					{{ (education.startDate ? education.startDate|date('d/m/Y') : '') ~ 
