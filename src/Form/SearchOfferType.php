@@ -12,6 +12,7 @@ class SearchOfferType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->setMethod('GET')
             ->add('search', SearchType::class)
         ;
     }
@@ -19,7 +20,13 @@ class SearchOfferType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'csrf_protection' => false,
         ]);
+    }
+
+
+    public function getBlockPrefix()
+    {
+        return '';
     }
 }

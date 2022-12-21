@@ -4,12 +4,12 @@ namespace App\Controller;
 
 use App\Entity\Offer;
 use App\Form\OfferType;
+use App\Form\SearchOfferType;
 use App\Repository\OfferRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SearchType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/offer', name: 'app_offer_')]
 class OfferController extends AbstractController
@@ -17,11 +17,11 @@ class OfferController extends AbstractController
     #[Route('/', name: 'index', methods: ['GET','POST'])]
     public function index(Request $request, OfferRepository $offerRepository): Response
     {
-        $form = $this->createForm(SearchType::class);
+        $form = $this->createForm(SearchOfferType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $keyWord = $form->getData();
+            $keyWord = $form->getData()['search'];
             $offers = $offerRepository->findByKeyWord($keyWord);
         } else {
             $offers = $offerRepository->findAll();
