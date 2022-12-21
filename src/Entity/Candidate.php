@@ -79,15 +79,18 @@ class Candidate
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Education::class)]
+    private Collection $education;
+
     #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Experience::class)]
     #[ORM\OrderBy(["endDate" => "DESC"])]
     private Collection $experiences;
 
     public function __construct()
     {
+        $this->education = new ArrayCollection();
         $this->experiences = new ArrayCollection();
     }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -222,6 +225,22 @@ class Candidate
     }
 
     /**
+     * @return Collection<int, Education>
+     */
+    public function getEducation(): Collection
+    {
+        return $this->education;
+    }
+
+    public function addEducation(Education $education): self
+    {
+        if (!$this->education->contains($education)) {
+            $this->education->add($education);
+            $education->setCandidate($this);
+        }
+        return $this;
+    }
+    /**
      * @return Collection<int, Experience>
      */
     public function getExperiences(): Collection
@@ -238,6 +257,19 @@ class Candidate
 
         return $this;
     }
+
+    public function removeEducation(Education $education): self
+    {
+        if ($this->education->removeElement($education)) {
+            // set the owning side to null (unless already changed)
+            if ($education->getCandidate() === $this) {
+                $education->setCandidate(null);
+            }
+        }
+
+        return $this;
+    }
+
 
     public function removeExperience(Experience $experience): self
     {
