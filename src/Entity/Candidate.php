@@ -3,8 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\CandidateRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CandidateRepository::class)]
 class Candidate
@@ -15,15 +18,34 @@ class Candidate
     private ?int $id = null;
 
     #[ORM\Column(length: 3)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(
+        max: 3,
+    )]
     private ?string $nationality = null;
 
     #[ORM\Column(length: 5)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(
+        max: 5,
+    )]
+    #[Assert\Regex(
+        pattern: '/^([0-9]{5})$/',
+        match: true,
+    )]
     private ?string $postalCode = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(
+        max: 255,
+    )]
     private ?string $city = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(
+        max: 255,
+    )]
     private ?string $address = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -33,17 +55,38 @@ class Candidate
     private ?string $aboutMe = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(
+        max: 255,
+    )]
+    #[Assert\Url()]
     private ?string $github = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(
+        max: 255,
+    )]
+    #[Assert\Url()]
     private ?string $linkedin = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Length(
+        max: 255,
+    )]
+    #[Assert\Url()]
     private ?string $portfolio = null;
 
     #[ORM\OneToOne(inversedBy: 'candidate', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
+
+    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Experience::class)]
+    #[ORM\OrderBy(["endDate" => "DESC"])]
+    private Collection $experiences;
+
+    public function __construct()
+    {
+        $this->experiences = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -174,6 +217,36 @@ class Candidate
     public function setPostalCode(?string $postalCode): self
     {
         $this->postalCode = $postalCode;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Experience>
+     */
+    public function getExperiences(): Collection
+    {
+        return $this->experiences;
+    }
+
+    public function addExperience(Experience $experience): self
+    {
+        if (!$this->experiences->contains($experience)) {
+            $this->experiences->add($experience);
+            $experience->setCandidate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeExperience(Experience $experience): self
+    {
+        if ($this->experiences->removeElement($experience)) {
+            // set the owning side to null (unless already changed)
+            if ($experience->getCandidate() === $this) {
+                $experience->setCandidate(null);
+            }
+        }
 
         return $this;
     }

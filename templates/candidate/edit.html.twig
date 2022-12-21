@@ -1,13 +1,22 @@
-{% extends 'base.html.twig' %}
+{% extends 'dashboard_layout.html.twig' %}
 
-{% block title %}Edit Candidate{% endblock %}
+{% block title %}
+	{{ parent() ~ ' | Edition profil' }}
+{% endblock %}
 
-{% block body %}
-    <h1>Edit Candidate</h1>
+{% block content %}
 
-    {{ include('candidate/_form.html.twig', {'button_label': 'Update'}) }}
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-10">
+				<h1>Edition du profil</h1>
 
-    <a href="{{ path('app_candidate_index') }}">back to list</a>
 
+				{{ include('candidate/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+
+			</div>
+		</div>
+	</div>
 
 {% endblock %}
