@@ -25,6 +25,7 @@ class CandidateFixtures extends Fixture implements DependentFixtureInterface
         $candidate->setGithub('https://fakerphp.github.io/formatters/');
         $candidate->setLinkedin('https://fakerphp.github.io/formatters/');
         $candidate->setPortfolio('https://fakerphp.github.io/formatters/');
+        $this->addReference('Candidate_1', $candidate);
 
         $manager->persist($candidate);
         $manager->flush();

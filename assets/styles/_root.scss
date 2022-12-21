@@ -58,6 +58,10 @@
     border-radius: $border-radius;
  }
 
+ label {
+   font-family: $font-subtitle;
+ }
+ 
 
  body {
    font-family: $font-body;
