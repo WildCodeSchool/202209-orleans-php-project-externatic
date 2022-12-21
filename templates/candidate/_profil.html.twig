@@ -1,6 +1,6 @@
 				<div class="row justify-content-between align-items-center">
 					<div class="col-md-1 text-center">
-						<img class="profilPicture rounded-circle border my-3" src="{{ user.avatar is empty ? asset ('build/images/default_avatar.png') : asset ('build/images/' ~ user.avatar ) }}" alt="Image de profil">
+						<img class="profilPicture rounded-circle border my-3" src="{{ user.avatar is empty ? asset ('build/images/default_avatar.png') :  vich_uploader_asset(user) }}" alt="Image de profil">
 					</div>
 					<div class="col-md-8 d-flex justify-content-between align-items-center">
 						<h1 class="font-title">Mon profil</h1>
