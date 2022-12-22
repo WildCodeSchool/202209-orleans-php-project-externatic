@@ -7,11 +7,27 @@
     <h1 class="font-title my-4">Inscription</h1>
     <div class="w-50">
     {{ form_start(registrationForm)}}
+<div class="d-flex flex-column align-items-center mb-3">
+	<img class="profilPicture rounded-circle border mt-3" src="{{ asset ('build/images/default_avatar.png') }}" alt="Image de profil" id="thumb">
+</div>
+<div class="my-2">
+{{ form_label(registrationForm.avatarFile) }}
+{{ form_widget(registrationForm.avatarFile) }}
+</div>
+
     {{ form_widget(registrationForm) }}
         <button type="submit" class="btn btn-primary">S'inscrire</button>
     {{ form_end(registrationForm) }}
     </div>
     
 </div>
-   
+   	{% block javascript %}
+		<script type="text/javascript">
+			function preview() {
+thumb.src = URL.createObjectURL(event.target.files[0]);
+}
+		</script>
+	{% endblock %}
+
+
 {% endblock %}
