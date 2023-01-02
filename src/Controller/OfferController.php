@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Repository\OfferRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/offer', name: 'app_offer_')]
 class OfferController extends AbstractController
@@ -29,9 +30,13 @@ class OfferController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $date = new DateTime('now');
+            $offer->setCreatedAt($date);
+            $offer->setIsImportant(false);
+
             $offerRepository->save($offer, true);
 
-            return $this->redirectToRoute('app_offer_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_offer_index');
         }
 
         return $this->renderForm('offer/new.html.twig', [

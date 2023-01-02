@@ -35,12 +35,10 @@ class Offer
 
     #[ORM\Column]
     #[Assert\NotBlank()]
-    #[Assert\DateTime]
-    private DateTimeImmutable $createdAt;
+    private ?DateTime $createdAt;
 
     #[ORM\Column(nullable: true)]
-    #[Assert\DateTime]
-    private ?DateTimeImmutable $targetDate = null;
+    private ?DateTime $targetDate = null;
 
     #[ORM\Column(nullable: true)]
     #[Assert\Type(type: Types::INTEGER)]
@@ -56,7 +54,7 @@ class Offer
 
     public function __construct()
     {
-        $this->setCreatedAt(new DateTimeImmutable('now'));
+        $this->setCreatedAt(new DateTime('now'));
     }
 
     public function getId(): ?int
@@ -112,24 +110,24 @@ class Offer
         return $this;
     }
 
-    public function getCreatedAt(): ?DateTimeImmutable
+    public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTimeImmutable $createdAt): self
+    public function setCreatedAt(DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getTargetDate(): ?DateTimeImmutable
+    public function getTargetDate(): ?DateTime
     {
         return $this->targetDate;
     }
 
-    public function setTargetDate(?DateTimeImmutable $targetDate): self
+    public function setTargetDate(?DateTime $targetDate): self
     {
         $this->targetDate = $targetDate;
 
