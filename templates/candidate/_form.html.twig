@@ -1,12 +1,12 @@
-{{ form_start(form, {'attr': {'runat':'server'}}) }}
+{{ form_start(form) }}
 
 <div class="d-flex flex-column align-items-center mb-3">
-	<img class="profilPicture rounded-circle border mt-3" src="{{ user.avatar is empty ? asset ('build/images/default_avatar.png') : vich_uploader_asset(user) }}" alt="Image de profil" id="thumb">
+	<img id="avatar" class="profilPicture rounded-circle border mt-3" src="{{ user.avatar is empty ? asset ('build/images/default_avatar.png') : vich_uploader_asset(user) }}" alt="Image de profil">
 	<a class="text-decoration-none download-avatar" href="{{ user.avatar is empty ? asset ('build/images/default_avatar.png') : vich_uploader_asset(user) }}" download="">Télécharger</a>
 </div>
 <div class="my-2">
-{{ form_label(form.user.avatarFile) }}
-{{ form_widget(form.user.avatarFile) }}
+	{{ form_label(form.user.avatarFile) }}
+	{{ form_widget(form.user.avatarFile) }}
 </div>
 
 {{ form_widget(form) }}

@@ -3,6 +3,10 @@
 {% block title %}
 	{{ parent() ~ ' | Edition profil' }}
 {% endblock %}
+	{% block javascripts %}
+		{{ parent() }}
+		{{ encore_entry_script_tags('previewAvatar') }}
+	{% endblock %}
 
 {% block content %}
 
@@ -19,11 +23,4 @@
 		</div>
 	</div>
 
-	{% block javascript %}
-		<script type="text/javascript">
-			function preview() {
-thumb.src = URL.createObjectURL(event.target.files[0]);
-}
-		</script>
-	{% endblock %}
 {% endblock %}

@@ -57,7 +57,7 @@ class RegistrationFormType extends AbstractType
                 'allow_delete' => true,
                 'delete_label' => 'Cochez pour supprimer',
                 'download_uri' => false,
-                'attr' => ['onchange' => 'preview()'],
+                /* 'attr' => ['id' => 'thumb'] */
             ]);
     }
 
