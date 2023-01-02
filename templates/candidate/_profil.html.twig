@@ -14,42 +14,42 @@
 </div>
 
 <div class="row">
-	<div class="row mb-1">
-		<p class="font-title align-self-baseline mb-1 col-lg-4  ">Prénom</p>
-		<p class="col-lg-8 align-self-baseline">{{ user.firstname }}</p>
-	</div>
-	<div class="row ">
-		<p class="font-title align-self-baseline mb-1 col-lg-4 ">Nom</p>
-		<p class="col-lg-8 align-self-baseline">{{ user.lastname }}</p>
-	</div>
-	<div class="row">
-		<p class="font-title align-self-baseline mb-1 col-lg-4 ">Nationalité</p>
-		<p class="col-lg-8 align-self-baseline">{{ candidate.nationality|country_name }}</p>
-	</div>
+	<dl class="row mb-1">
+		<dt class="font-title align-self-baseline mb-1 col-lg-4  ">Prénom</dt>
+		<dd class="col-lg-8 align-self-baseline">{{ user.firstname }}</dd>
+	</dl>
+	<dl class="row ">
+		<dt class="font-title align-self-baseline mb-1 col-lg-4 ">Nom</dt>
+		<dd class="col-lg-8 align-self-baseline">{{ user.lastname }}</dd>
+	</dl>
+	<dl class="row">
+		<dt class="font-title align-self-baseline mb-1 col-lg-4 ">Nationalité</dt>
+		<dd class="col-lg-8 align-self-baseline">{{ candidate.nationality|country_name }}</dd>
+	</dl>
 
 	<hr>
 
-	<div class="row">
-		<p class="font-title align-self-baseline mb-1 col-lg-4 ">Addresse</p>
-		<p class="col-lg-8 align-self-baseline">{{ candidate.address|nl2br }}</p>
-	</div>
-	<div class="row">
-		<p class="font-title align-self-baseline mb-1 col-lg-4 ">Code postal</p>
-		<p class="col-lg-8 align-self-baseline">{{ candidate.postalCode }}</p>
-	</div>
-	<div class="row">
-		<p class="font-title align-self-baseline mb-1 col-lg-4 ">Ville</p>
-		<p class="col-lg-8 align-self-baseline">{{ candidate.city }}</p>
-	</div>
-	<div class="row">
-		<p class="font-title align-self-baseline mb-1 col-lg-4 ">Email</p>
-		<p class="col-lg-8 align-self-baseline">{{ user.email }}</p>
-	</div>
+	<dl class="row">
+		<dt class="font-title align-self-baseline mb-1 col-lg-4 ">Addresse</dt>
+		<dd class="col-lg-8 align-self-baseline">{{ candidate.address|nl2br }}</dd>
+	</dl>
+	<dl class="row">
+		<dt class="font-title align-self-baseline mb-1 col-lg-4 ">Code postal</dt>
+		<dd class="col-lg-8 align-self-baseline">{{ candidate.postalCode }}</dd>
+	</dl>
+	<dl class="row">
+		<dt class="font-title align-self-baseline mb-1 col-lg-4 ">Ville</dt>
+		<dd class="col-lg-8 align-self-baseline">{{ candidate.city }}</dd>
+	</dl>
+	<dl class="row">
+		<dt class="font-title align-self-baseline mb-1 col-lg-4 ">Email</dt>
+		<dd class="col-lg-8 align-self-baseline">{{ user.email }}</dd>
+	</dl>
 
 	<hr>
 
-	<div class="row">
-		<p class="font-title  mb-1 col-lg-4 ">Réseaux sociaux</p>
+	<dl class="row">
+		<dt class="font-title  mb-1 col-lg-4 ">Réseaux sociaux</dt>
 		<div class="col-lg-8 mb-3">
 			<div class="d-flex gap-3 ">
 				<a aria-label="github" class="nav-link" href="{{ candidate.github }}">
@@ -69,20 +69,20 @@
 				</a>
 			</div>
 		</div>
-	</div>
+	</dl>
 
 	<hr>
 
-	<div class="row">
-		<p class="font-title align-self-baseline mb-1 col-lg-4 ">Centre d'intérêts</p>
-		<p class="col-lg-8 align-self-baseline">{{ candidate.hobby }}</p>
-	</div>
+	<dl class="row">
+		<dt class="font-title align-self-baseline mb-1 col-lg-4 ">Centre d'intérêts</dt>
+		<dd class="col-lg-8 align-self-baseline">{{ candidate.hobby }}</dd>
+	</dl>
 
 	<hr>
 
-	<div class="row">
-		<p class="font-title  mb-1 mb-1 col-lg-4 ">À propos de moi</p>
-		<p class="col-lg-8 ">{{ candidate.aboutMe|nl2br }}</p>
-	</div>
+	<dl class="row">
+		<dt class="font-title  mb-1 mb-1 col-lg-4 ">À propos de moi</dt>
+		<dd class="col-lg-8 ">{{ candidate.aboutMe|nl2br }}</dd>
+	</dl>
 
 </div>

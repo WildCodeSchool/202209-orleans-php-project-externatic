@@ -25,17 +25,17 @@
 	</div>
 
 	<div class="row mt-1">
-		<div class="row">
-			<p class="font-title mb-1 col-lg-4">Établissement</p>
-			<p class="col-lg-8">{{ education.school }}</p>
+		<dl class="row">
+			<dt class="font-title mb-1 col-lg-4">Établissement</dt>
+			<dd class="col-lg-8">{{ education.school }}</dd>
 		</div>
 
 		<hr>
 
-		<div class="row mb-5">
-			<p class="font-title  mb-1 col-lg-4">Description</p>
-			<p class="col-lg-8">{{ education.description|nl2br }}</p>
-		</div>
+		<dl class="row mb-5">
+			<dt class="font-title  mb-1 col-lg-4">Description</dt>
+			<dd class="col-lg-8">{{ education.description|nl2br }}</dd>
+		</dl>
 
 	</div>
 {% else %}
