@@ -1,8 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LoginController!
-{% endblock %}
-
 {% block body %}
 	{% if error %}
 		<div class="d-flex justify-content-center bg-danger text-light py-3">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
