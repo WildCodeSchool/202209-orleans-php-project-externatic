@@ -30,10 +30,6 @@ class OfferController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $date = new DateTime('now');
-            $offer->setCreatedAt($date);
-            $offer->setIsImportant(false);
-
             $offerRepository->save($offer, true);
 
             return $this->redirectToRoute('app_offer_index');

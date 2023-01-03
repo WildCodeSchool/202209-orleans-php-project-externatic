@@ -10,6 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class OfferType extends AbstractType implements FormTypeInterface
@@ -35,7 +36,7 @@ class OfferType extends AbstractType implements FormTypeInterface
             ->add('description', TextareaType::class, [
                 'attr' => ["rows" => "10"]
             ])
-            ->add('annualWage', IntegerType::class, [
+            ->add('annualWage', MoneyType::class, [
                 'label' => 'Salaire',
             ]);
     }

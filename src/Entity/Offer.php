@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use DateTime;
-use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OfferRepository;
@@ -47,7 +46,7 @@ class Offer
 
     #[ORM\Column]
     #[Assert\Type(type: Types::BOOLEAN)]
-    private ?bool $isImportant = null;
+    private ?bool $isImportant = false;
 
     #[ORM\ManyToOne(inversedBy: 'offers')]
     private ?Company $company = null;
