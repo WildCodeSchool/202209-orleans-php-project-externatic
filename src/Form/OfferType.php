@@ -33,7 +33,7 @@ class OfferType extends AbstractType implements FormTypeInterface
                 'help' => 'Jour/Mois/Année'
                 ])
             ->add('description', TextareaType::class, [
-                'attr' => ['class' => 'tinymce', "rows" => "10"]
+                'attr' => ["rows" => "10"]
             ])
             ->add('annualWage', IntegerType::class, [
                 'label' => 'Salaire',
