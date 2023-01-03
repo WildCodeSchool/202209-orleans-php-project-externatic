@@ -52,10 +52,11 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('avatarFile', VichFileType::class, [
                 'label' => 'Photo de Profil',
-                'label_attr' => ['class' => 'font-subtitle mt-2'],
+                'label_attr' => ['class' => 'font-subtitle mt-2 text-decoration-none'],
                 'required' => false,
                 'allow_delete' => true,
-                'download_uri' => true,
+                'delete_label' => 'Cochez pour supprimer',
+                'download_uri' => false,
             ]);
     }
 
