@@ -1,10 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-  Offres
+  {{ parent() ~ ' | Offres' }}
 {% endblock %}
 {% block stylesheets %}
-  {{ parent() }}
   {{ encore_entry_link_tags('card') }}
 {% endblock %}
 {% block body %}
