@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/offer', name: 'app_offer_')]
 class OfferController extends AbstractController
 {
-    #[Route('/', name: 'index', methods: ['GET','POST'])]
+    #[Route('/', name: 'index', methods: ['GET'])]
     public function index(Request $request, OfferRepository $offerRepository): Response
     {
         $form = $this->createForm(SearchOfferType::class);

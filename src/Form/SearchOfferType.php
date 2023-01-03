@@ -13,7 +13,10 @@ class SearchOfferType extends AbstractType
     {
         $builder
             ->setMethod('GET')
-            ->add('search', SearchType::class)
+            ->add('search', SearchType::class, [
+                'label' => 'Votre recherche',
+                'label_attr' => ['class' => 'col-form-label'],
+            ])
         ;
     }
 
