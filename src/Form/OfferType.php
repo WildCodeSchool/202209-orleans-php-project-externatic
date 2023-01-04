@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Offer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,6 +22,7 @@ class OfferType extends AbstractType implements FormTypeInterface
             ->add('title', TextType::class, [
                 'label' => 'Titre de l\'offre',
             ])
+
             ->add('city', TextType::class, [
                 'label' => 'Ville',
             ])
@@ -32,12 +34,17 @@ class OfferType extends AbstractType implements FormTypeInterface
                 'label_attr' => ['class' => 'font-subtitle'],
                 'format' => 'dd-MM-yyyy',
                 'help' => 'Jour/Mois/Année'
-                ])
+            ])
             ->add('description', TextareaType::class, [
                 'attr' => ["rows" => "10"]
             ])
             ->add('annualWage', MoneyType::class, [
                 'label' => 'Salaire',
+            ])
+            ->add('isImportant', CheckboxType::class, [
+                'label' => 'Important',
+                'label_attr' => ['class' => 'font-subtitle fs-5'],
+                'required' => false,
             ]);
     }
 
