@@ -24,7 +24,7 @@ class OfferController extends AbstractController
     public function showAll(OfferRepository $offerRepository): Response
     {
         return $this->render('offer/showAll.html.twig', [
-            'offers' => $offerRepository->findAll(),
+            'offers' => $offerRepository->findBy([], ['createdAt' => 'DESC']),
         ]);
     }
 

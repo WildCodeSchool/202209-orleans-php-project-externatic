@@ -12,7 +12,7 @@
 			<div class="d-flex justify-content-between m-2">
 				<h3 class="fs-4">{{ offer.annualWage / 1000 }}K€/ an
 				</h3>
-				<a href="#" class="btn btn-primary px-6 py-1">Voir</a>
+				<a href="{{ path('app_offer_show', {id : offer.id}) }}" class="btn btn-primary px-6 py-1">Voir</a>
 			</div>
 		</div>
 
