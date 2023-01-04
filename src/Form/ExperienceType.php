@@ -22,10 +22,12 @@ class ExperienceType extends AbstractType
             ])
             ->add('startDate', DateType::class, [
                 'label' => 'Date de début',
+                'years' => range(date('Y') - 50, date('Y')),
             ])
             ->add('endDate', DateType::class, [
                 'label' => 'Date de fin',
                 'required' => false,
+                'years' => range(date('Y') - 50, date('Y')),
             ])
             ->add('isCurrentPosition', CheckboxType::class, [
                 'label' => 'Poste actuel',

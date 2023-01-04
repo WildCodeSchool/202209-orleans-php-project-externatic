@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use DateTime;
-use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OfferRepository;
@@ -35,12 +34,10 @@ class Offer
 
     #[ORM\Column]
     #[Assert\NotBlank()]
-    #[Assert\DateTime]
-    private DateTimeImmutable $createdAt;
+    private ?DateTime $createdAt;
 
     #[ORM\Column(nullable: true)]
-    #[Assert\DateTime]
-    private ?DateTimeImmutable $targetDate = null;
+    private ?DateTime $targetDate = null;
 
     #[ORM\Column(nullable: true)]
     #[Assert\Type(type: Types::INTEGER)]
@@ -49,14 +46,14 @@ class Offer
 
     #[ORM\Column]
     #[Assert\Type(type: Types::BOOLEAN)]
-    private ?bool $isImportant = null;
+    private ?bool $isImportant = false;
 
     #[ORM\ManyToOne(inversedBy: 'offers')]
     private ?Company $company = null;
 
     public function __construct()
     {
-        $this->setCreatedAt(new DateTimeImmutable('now'));
+        $this->setCreatedAt(new DateTime('now'));
     }
 
     public function getId(): ?int
@@ -112,24 +109,24 @@ class Offer
         return $this;
     }
 
-    public function getCreatedAt(): ?DateTimeImmutable
+    public function getCreatedAt(): ?DateTime
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(DateTimeImmutable $createdAt): self
+    public function setCreatedAt(DateTime $createdAt): self
     {
         $this->createdAt = $createdAt;
 
         return $this;
     }
 
-    public function getTargetDate(): ?DateTimeImmutable
+    public function getTargetDate(): ?DateTime
     {
         return $this->targetDate;
     }
 
-    public function setTargetDate(?DateTimeImmutable $targetDate): self
+    public function setTargetDate(?DateTime $targetDate): self
     {
         $this->targetDate = $targetDate;
 
