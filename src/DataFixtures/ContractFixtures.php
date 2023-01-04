@@ -9,10 +9,10 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 class ContractFixtures extends Fixture
 {
     public const CONTRACTS = [
-        0 => 'CDI',
-        1 => 'CDD',
-        2 => 'STAGE',
-        3 => 'ALTERNANCE',
+        'CDI',
+        'CDD',
+        'STAGE',
+        'ALTERNANCE',
     ];
 
     public function load(ObjectManager $manager): void
