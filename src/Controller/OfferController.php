@@ -33,6 +33,13 @@ class OfferController extends AbstractController
             'form' => $form,
         ]);
     }
+    #[Route('/toutes-les-offres', name: 'app_show_all', methods: ['GET'])]
+    public function showAll(OfferRepository $offerRepository): Response
+    {
+        return $this->render('offer/showAll.html.twig', [
+            'offers' => $offerRepository->findBy([], ['createdAt' => 'DESC']),
+        ]);
+    }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
     public function new(Request $request, OfferRepository $offerRepository): Response
