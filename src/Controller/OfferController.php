@@ -5,6 +5,7 @@ namespace App\Controller;
 use DateTime;
 use App\Entity\Offer;
 use App\Form\OfferType;
+use App\Form\SearchOfferType;
 use App\Repository\OfferRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,10 +16,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class OfferController extends AbstractController
 {
     #[Route('/', name: 'index', methods: ['GET'])]
-    public function index(OfferRepository $offerRepository): Response
+    public function index(Request $request, OfferRepository $offerRepository): Response
     {
-        return $this->render('offer/index.html.twig', [
-            'offers' => $offerRepository->findAll(),
+        $form = $this->createForm(SearchOfferType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $keyWord = $form->getData()['search'];
+            $offers = $offerRepository->findByKeyWord($keyWord);
+        } else {
+            $offers = $offerRepository->findAll();
+        }
+
+        return $this->renderForm('offer/index.html.twig', [
+            'offers' => $offers,
+            'form' => $form,
         ]);
     }
 
