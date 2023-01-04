@@ -64,6 +64,8 @@ class ExperienceController extends AbstractController
             $experienceRepository->remove($experience, true);
         }
 
+        $this->addFlash('success', 'La suppression a été effectuée avec succès.');
+
         return $this->redirectToRoute('app_candidate_show', [
             'id' => $experience->getCandidate()->getId()
         ], Response::HTTP_SEE_OTHER);
