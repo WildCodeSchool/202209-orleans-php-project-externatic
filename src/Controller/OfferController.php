@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Form\SearchOfferType;
@@ -43,7 +44,7 @@ class OfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $offerRepository->save($offer, true);
 
-            return $this->redirectToRoute('app_offer_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_offer_index');
         }
 
         return $this->renderForm('offer/new.html.twig', [
