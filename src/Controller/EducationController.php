@@ -69,6 +69,10 @@ class EducationController extends AbstractController
             $educationRepository->remove($education, true);
         }
 
-        return $this->redirectToRoute('app_education_index', [], Response::HTTP_SEE_OTHER);
+        $this->addFlash('success', 'La suppression a été effectuée avec succès.');
+
+        return $this->redirectToRoute('app_candidate_show', [
+            'id' => $education->getCandidate()->getId()
+        ], Response::HTTP_SEE_OTHER);
     }
 }
