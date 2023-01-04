@@ -33,7 +33,7 @@ class OfferController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Route('/toutes-les-offres', name: 'app_show_all', methods: ['GET'])]
+    #[Route('/toutes-les-offres', name: 'showAll', methods: ['GET'])]
     public function showAll(OfferRepository $offerRepository): Response
     {
         return $this->render('offer/showAll.html.twig', [
@@ -93,6 +93,6 @@ class OfferController extends AbstractController
             $offerRepository->remove($offer, true);
         }
 
-        return $this->redirectToRoute('app_offer_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_offer_showAll', [], Response::HTTP_SEE_OTHER);
     }
 }
