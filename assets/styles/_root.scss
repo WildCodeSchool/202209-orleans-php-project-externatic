@@ -3,6 +3,7 @@
  $font-title: 'Montserrat', sans-serif;
  $font-subtitle: 'Comfortaa', cursive;
  $font-body: 'Poppins', sans-serif;
+ $font-size-label : 0.8rem;
 
  $primary: #851342;
  $secondary: #CA2262;
@@ -57,6 +58,23 @@
  .rounded {
     border-radius: $border-radius;
  }
+
+%pill{
+   align-self: center;
+   text-align: center;
+   margin-inline: 0.5rem;
+   padding-inline: 0.5rem;
+   padding-block: 0.2rem;
+   font-weight: bolder;
+   border-radius: $border-radius;
+   font-size: $font-size-label;
+ }
+
+ .contractType {
+   @extend %pill;
+   background-color: $terciary;
+   color: $light;
+}
 
  label {
    font-family: $font-subtitle;
