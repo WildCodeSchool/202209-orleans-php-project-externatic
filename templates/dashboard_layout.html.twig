@@ -30,13 +30,13 @@
 				{% block body %}
 
 					<div class="col-md-2 dashboard-nav dashboard-side-gradient rounded">
-					{% block sideNav %}{% endblock %}
+						{% block sideNav %}{% endblock %}
 					</div>
 
-					<div class="col-12 col-md-10 dashboard-content">
-					<div class="dashboard-content-gradient my-3 py-2 py-lg-5 px-3 rounded">
-						{% block content %}{% endblock %}
-					</div>
+					<div class="col-md-10 dashboard-content">
+						<div class="dashboard-content-gradient my-3 py-2 py-lg-5 px-3 rounded">
+							{% block content %}{% endblock %}
+						</div>
 					</div>
 
 				{% endblock %}
@@ -44,7 +44,7 @@
 			</div>
 
 		</main>
-    
+
 		{% block footer %}
 			{% include 'component/_footer.html.twig' %}
 		{% endblock %}
