@@ -24,16 +24,19 @@
 			{% include './component/_navigation_bar.html.twig' %}
 		{% endblock %}
 		{% include "_flashes.html.twig" %}
-		<main class="p-4 container-xxl">
+		<main class="py-4 container-xxl">
 
 			<div class="row">
 				{% block body %}
 
-					<div class="col-md-3 dashboard-nav dashboard-side-gradient rounded">
+					<div class="col-md-2 dashboard-nav dashboard-side-gradient rounded">
 					{% block sideNav %}{% endblock %}
 					</div>
-					<div class="col-12 col-md-9 dashboard-content dashboard-content-gradient my-3 py-2 py-lg-5 rounded">
-					{% block content %}{% endblock %}
+
+					<div class="col-12 col-md-10 dashboard-content">
+					<div class="dashboard-content-gradient my-3 py-2 py-lg-5 px-3 rounded">
+						{% block content %}{% endblock %}
+					</div>
 					</div>
 
 				{% endblock %}
