@@ -1,5 +1,7 @@
 {% extends 'dashboard_layout.html.twig' %}
-
+{% block sideNav %}
+	{% include './component/_sideBar_dashboard.html.twig' %}
+{% endblock %}
 {% block title %}
 	{{ parent() ~ ' | Edition profil' }}
 {% endblock %}
