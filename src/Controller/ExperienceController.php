@@ -32,7 +32,7 @@ class ExperienceController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_experience_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/modifier', name: 'app_experience_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Experience $experience, ExperienceRepository $experienceRepository): Response
     {
         $form = $this->createForm(ExperienceType::class, $experience);
@@ -41,7 +41,11 @@ class ExperienceController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $experienceRepository->save($experience, true);
 
-            return $this->redirectToRoute('app_experience_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Votre mise à jour a été prise en compte.');
+
+            return $this->redirectToRoute('app_candidate_show', [
+                'id' => $experience->getCandidate()->getId(),
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('experience/edit.html.twig', [
@@ -60,6 +64,8 @@ class ExperienceController extends AbstractController
             $experienceRepository->remove($experience, true);
         }
 
-        return $this->redirectToRoute('app_experience_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_candidate_show', [
+            'id' => $experience->getCandidate()->getId()
+        ], Response::HTTP_SEE_OTHER);
     }
 }
