@@ -1,0 +1,51 @@
+<div class="row mt-5 ">
+
+	<div class="d-flex justify-content-between align-items-center">
+		<h1 class="font-title title-profil display-5">Expériences professionnelles</h1>
+	</div>
+</div>
+
+{% for experience in candidate.experiences %}
+	<div class="d-flex flex-column">
+		<div class="d-flex justify-content-between align-items-center mt-2">
+			<h2 class="font-title m-0">{{ experience.jobTitle }}</h2>
+			<div class="d-flex align-items-center">
+				<a class="btn btn-outline-primary btn-sm ms-2 align-items-center" href="{{ path('app_experience_edit', {'id': experience.id}) }}">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewbox="0 0 16 16">
+						<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
+					</svg>
+					<span class="d-none d-md-inline ms-2">Modifier</span>
+				</a>
+				{{ include('experience/_delete_form.html.twig') }}
+			</div>
+		</div>
+		<div class="row">
+			<div class="row">
+				<p class="font-title experiencePeriode mb-2 col-lg-4">
+					{{ (experience.startDate ? experience.startDate|date('d/m/Y') : '') ~ 
+								' - ' ~ 
+								(experience.isCurrentPosition ? 'Poste actuel' : (experience.endDate ? experience.endDate|date('d/m/Y') : '')) }}</p>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row mt-1">
+		<dl class="row">
+			<dt class="font-title align-self-baseline mb-1 col-lg-4 ">Entreprise</dt>
+			<dd class="col-lg-8 align-self-baseline">{{ experience.company }}</dd>
+		</dl>
+
+		<hr>
+
+		<dl class="row mb-5">
+			<dt class="font-title align-self-baseline mb-1 col-lg-4 ">Description du poste</dt>
+			<dd class="col-lg-8 align-self-baseline">{{ experience.jobDescription|nl2br }}</dd>
+		</dl>
+
+	</div>
+{% else %}
+	<div>
+		<p>Aucune expérience</p>
+	</div>
+{% endfor %}

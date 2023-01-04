@@ -1,0 +1,11 @@
+@import 'root';
+
+.dashboard-content{
+    height: 75vh;
+    overflow-y: scroll;
+    scrollbar-color: $primary;
+    min-height: $dashboard-min-height
+}
+.dashboard-nav{
+    overflow-y: scroll;
+    }

@@ -1,13 +1,28 @@
-{% extends 'base.html.twig' %}
+{% extends 'dashboard_layout.html.twig' %}
+{% block sideNav %}
+	{% include './component/_sideBar_dashboard.html.twig' %}
+{% endblock %}
+{% block title %}
+	{{ parent() ~ ' | Edition profil' }}
+{% endblock %}
+	{% block javascripts %}
+		{{ parent() }}
+		{{ encore_entry_script_tags('previewAvatar') }}
+	{% endblock %}
 
-{% block title %}Edit Candidate{% endblock %}
+{% block content %}
 
-{% block body %}
-    <h1>Edit Candidate</h1>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-10">
+				<h1>Edition du profil</h1>
 
-    {{ include('candidate/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_candidate_index') }}">back to list</a>
+				{{ include('candidate/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
+
+			</div>
+		</div>
+	</div>
 
 {% endblock %}

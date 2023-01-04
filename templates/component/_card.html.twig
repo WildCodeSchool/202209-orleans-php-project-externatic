@@ -3,6 +3,13 @@
 	<div class=" card card-background p-2">
 
 		<div class=" m-2">
+			<div class="d-flex justify-content-end">
+				<div>
+				{% if offer.isImportant %}
+				<span class="badge badge-pill bg-danger fw-normal">Important</span>	
+				{% endif %}
+				</div>
+			</div>
 			<div class="fs-6">{{ offer.city }}
 				({{ offer.postalCode }})
 			</div>
@@ -12,7 +19,7 @@
 			<div class="d-flex justify-content-between m-2">
 				<h3 class="fs-4">{{ offer.annualWage / 1000 }}K€/ an
 				</h3>
-				<a href="#" class="btn btn-primary px-6 py-1">Voir</a>
+				<a href="{{ path('app_offer_show', {id : offer.id}) }}" class="btn btn-primary px-6 py-1">Voir</a>
 			</div>
 		</div>
 

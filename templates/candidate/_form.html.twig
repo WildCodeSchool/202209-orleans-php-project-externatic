@@ -1,4 +1,30 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+
+<div class="d-flex flex-column align-items-center mb-3">
+	<img id="avatar" class="profilPicture rounded-circle border mt-3" src="{{ user.avatar is empty ? asset ('build/images/default_avatar.png') : vich_uploader_asset(user) }}" alt="Image de profil">
+	<a class="text-decoration-none download-avatar" href="{{ user.avatar is empty ? asset ('build/images/default_avatar.png') : vich_uploader_asset(user) }}" download="">Télécharger</a>
+</div>
+<div class="my-2">
+	{{ form_label(form.user.avatarFile) }}
+	{{ form_widget(form.user.avatarFile) }}
+</div>
+
+{{ form_widget(form) }}
+
+<div class="d-flex justify-content-between ">
+	<a class="btn btn-outline-secondary d-flex align-items-center" href="{{ path('app_candidate_show', {'id': candidate.id}) }}">
+		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class=" bi bi-arrow-left mx-1" viewbox="0 0 16 16">
+			<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+		</svg>
+		<span class="d-none d-lg-block">Retour</span>
+	</a>
+	<button class="btn btn-primary d-flex align-items-center">
+		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class=" bi bi-send mx-2" viewbox="0 0 16 16">
+			<path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"/>
+		</svg>
+		<span class="d-none d-lg-block">
+			{{ button_label|default('Sauvegarder') }}</span>
+	</button>
+</div>
+
 {{ form_end(form) }}

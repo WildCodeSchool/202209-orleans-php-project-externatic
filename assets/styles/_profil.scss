@@ -1,7 +1,19 @@
-$profilPictureDiameter: 80px;
+$profilPictureDiameter: 100px;
 
 .profilPicture {
     height: $profilPictureDiameter;
     width: $profilPictureDiameter;
     object-fit: cover;
 }
+
+.experiencePeriode {
+    font-size: smaller;
+}
+
+.title-profil {
+    color: $primary;
+}
+.download-avatar, .form-check-label {
+    font-size: 0.8rem;
+}
+

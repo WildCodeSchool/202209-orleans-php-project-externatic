@@ -1,0 +1,23 @@
+{% extends 'dashboard_layout.html.twig' %}
+
+{% block title %}
+{{ parent() ~ ' | Edition d\'une expérience' }}
+{% endblock %}
+
+{% block sideNav %}
+	{% include './component/_sideBar_dashboard.html.twig' %}
+{% endblock %}
+
+{% block content %}
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-10">
+			
+					<h1>Edition de l'expérience</h1>
+
+				{{ include('experience/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,21 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ parent() ~ ' | Incription' }}{% endblock %}
-
-{% block navbar %}
-    {% include './component/_navigation_bar.html.twig' %}
+{% block title %}
+	{{ parent() ~ ' | Incription' }}
 {% endblock %}
 
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('previewAvatar') }}
+{% endblock %}
 {% block body %}
-<div class="container">
-    <h1 class="font-title my-4">Inscription</h1>
-    <div class="w-50">
-    {{ form_start(registrationForm)}}
-    {{ form_widget(registrationForm) }}
-        <button type="submit" class="btn btn-primary">S'inscrire</button>
-    {{ form_end(registrationForm) }}
-    </div>
-    
-</div>
-   
+	<div class="container">
+		<h1 class="font-title my-4">Inscription</h1>
+		<div class="w-50">
+			{{ form_start(registrationForm)}}
+			<div class="d-flex flex-column align-items-center mb-3">
+				<img class="profilPicture rounded-circle border mt-3" src="{{ asset ('build/images/default_avatar.png') }}" alt="Image de profil" id="thumb">
+			</div>
+			<div class="my-2">
+				{{ form_label(registrationForm.avatarFile) }}
+				{{ form_widget(registrationForm.avatarFile) }}
+			</div>
+
+			{{ form_widget(registrationForm) }}
+			<button type="submit" class="btn btn-primary">S'inscrire</button>
+			{{ form_end(registrationForm) }}
+		</div>
+
+	</div>
+
+
 {% endblock %}

@@ -39,6 +39,20 @@ class OfferRepository extends ServiceEntityRepository
         }
     }
 
+    public function findByKeyWord(string $value): array
+    {
+
+        $query = $this->createQueryBuilder('o')
+            ->Where('o.title LIKE :val')
+            ->orWhere('o.description LIKE :val')
+            ->orWhere('o.postalCode LIKE :val')
+            ->orWhere("o.city LIKE :val")
+            ->setParameter('val', '%' . $value . '%')
+            ->getQuery();
+
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Offer[] Returns an array of Offer objects
 //     */
