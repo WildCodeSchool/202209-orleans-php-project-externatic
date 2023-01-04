@@ -64,6 +64,8 @@ class ExperienceController extends AbstractController
             $experienceRepository->remove($experience, true);
         }
 
-        return $this->redirectToRoute('app_experience_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_candidate_show', [
+            'id' => $experience->getCandidate()->getId()
+        ], Response::HTTP_SEE_OTHER);
     }
 }
