@@ -11,8 +11,6 @@ use Faker\Factory;
 
 class CandidateFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const NB_CANDIDATE = UserFixtures::NB_USER_CANDIDATE;
-
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
