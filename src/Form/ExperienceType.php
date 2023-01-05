@@ -23,11 +23,13 @@ class ExperienceType extends AbstractType
             ->add('startDate', DateType::class, [
                 'label' => 'Date de début',
                 'years' => range(date('Y') - 50, date('Y')),
+                'widget' => 'single_text',
             ])
             ->add('endDate', DateType::class, [
                 'label' => 'Date de fin',
                 'required' => false,
                 'years' => range(date('Y') - 50, date('Y')),
+                'widget' => 'single_text',
             ])
             ->add('isCurrentPosition', CheckboxType::class, [
                 'label' => 'Poste actuel',
@@ -36,7 +38,7 @@ class ExperienceType extends AbstractType
             ])
             ->add('jobTitle', TextType::class, [
                 'label' => 'Intitulé du poste',
-                'help' => 'Renseignez le nom de l\'entreprise',
+                'help' => 'Renseignez le nom du poste occupé',
             ])
             ->add('jobDescription', TextareaType::class, [
                 'label' => 'Description',
