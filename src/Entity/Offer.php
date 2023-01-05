@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use DateTime;
+use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OfferRepository;
@@ -51,9 +54,13 @@ class Offer
     #[ORM\ManyToOne(inversedBy: 'offers')]
     private ?Company $company = null;
 
+    #[ORM\ManyToMany(targetEntity: Candidate::class, mappedBy: 'offers')]
+    private Collection $candidates;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
+        $this->candidates = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -165,6 +172,33 @@ class Offer
     public function setCompany(?Company $company): self
     {
         $this->company = $company;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Candidate>
+     */
+    public function getCandidates(): Collection
+    {
+        return $this->candidates;
+    }
+
+    public function addCandidate(Candidate $candidate): self
+    {
+        if (!$this->candidates->contains($candidate)) {
+            $this->candidates->add($candidate);
+            $candidate->addOffer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCandidate(Candidate $candidate): self
+    {
+        if ($this->candidates->removeElement($candidate)) {
+            $candidate->removeOffer($this);
+        }
 
         return $this;
     }

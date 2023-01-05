@@ -86,10 +86,14 @@ class Candidate
     #[ORM\OrderBy(["endDate" => "DESC"])]
     private Collection $experiences;
 
+    #[ORM\ManyToMany(targetEntity: Offer::class, inversedBy: 'candidates')]
+    private Collection $offers;
+
     public function __construct()
     {
         $this->education = new ArrayCollection();
         $this->experiences = new ArrayCollection();
+        $this->offers = new ArrayCollection();
     }
     public function getId(): ?int
     {
@@ -279,6 +283,30 @@ class Candidate
                 $experience->setCandidate(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Offer>
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers->add($offer);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): self
+    {
+        $this->offers->removeElement($offer);
 
         return $this;
     }
