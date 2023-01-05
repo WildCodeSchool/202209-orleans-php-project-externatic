@@ -2,19 +2,22 @@
 
 namespace App\Form;
 
+use App\Entity\Contract;
 use App\Entity\Experience;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class ExperienceType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
+
         $builder
             ->add('company', TextType::class, [
                 'label' => 'Entreprise',
@@ -33,6 +36,15 @@ class ExperienceType extends AbstractType
                 'label' => 'Poste actuel',
                 'required' => false,
                 'label_attr' => ["class" => "fs-5"]
+            ])
+            ->add('contract', EntityType::class, [
+                'class' => Contract::class,
+                'choice_label' => 'name',
+                'label' => 'Type de contrat',
+                'multiple' => false,
+                'expanded' => false,
+                'attr' => ['class' => 'form-select my-2 '],
+                'help' => 'Sélectionnez le type de contrat',
             ])
             ->add('jobTitle', TextType::class, [
                 'label' => 'Intitulé du poste',
