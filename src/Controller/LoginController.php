@@ -2,9 +2,9 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class LoginController extends AbstractController
@@ -19,5 +19,15 @@ class LoginController extends AbstractController
             'last_username' => $lastUsername,
             'error'         => $error,
         ]);
+    }
+
+    #[Route('/connexion_defaut', name: 'app_default_login')]
+    public function defaultLog(): Response
+    {
+    /**
+    * @var \App\Entity\User
+    */
+        $user = $this->getUser();
+        return $this->redirectToRoute('app_candidate_show', ['id' => $user->getId()]);
     }
 }
