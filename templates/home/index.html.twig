@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Home{% endblock %}
+{% block title %}
+ {{ parent() ~ '| Accueil' }}
+{% endblock %}
 
 {% block stylesheets %}
     {{ parent() }}
@@ -8,9 +10,101 @@
 {% endblock %}
 
 {% block body %}
-<section class="container">
-    <div class="d-flex justify-content-center">
-        <iframe class="youtube-video" src="https://www.youtube.com/embed/BYmNVsS5J58" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    </div>
-</section>
+	<section class="container">
+		<h1>Présentation</h1>
+		<article class="mt-4">
+			<h2 class="text-subtitle d-flex align-items-center my-2">
+				<span class="svg-ellipse">{% include './svg/_ellipse.svg.twig' %}</span>
+				<span>Qui sommes-nous ?</span>
+			</h2>
+			<p>
+				Externatic, c’est avant tout une équipe d’experts IT, tous animés par la même passion des relations humaines. 
+							    L’intelligence émotionnelle et l’éducation cognitive ne peuvent être remplacées par des algorithmes.
+			</p>
+
+			<p>
+				Notre cabinet de recrutement s’appuie sur des méthodes authentiques, 
+							    où l’humain est tout simplement indispensable.
+			</p>
+
+			<p>
+				Depuis 10 ans, externatic a développé un savoir-faire sur le recrutement de profils pénuriques. 
+							    Ces compétences nous permettent d’intervenir sur d’autres secteurs que l’IT. 
+							    Notamment l’industrie avec
+				<a aria-label="Lien vers le site Induseo" href="https://induseo.fr/" class="text-secondary">Induseo</a>
+				et la cybersécurité avec
+				<a aria-label="Lien vers le site Underguard" href="https://underguard.fr/" class="text-secondary">Underguard</a>.
+			</p>
+
+		</article>
+		<div class="row">
+			<article class="mt-4 col-lg-6">
+				<h2 class="text-subtitle d-flex align-items-center my-2">
+					<span class="svg-ellipse">{% include './svg/_ellipse.svg.twig' %}</span>
+					<span>Bienveillance, Professionnalisme, Durabilité</span>
+				</h2>
+				<p>Notre mission de connecter les bonnes personnes, commence avec des rencontres.</p>
+				<p>Notre professionnalisme nous permet de construire de vraies relations.</p>
+				<p>Nous mettons en place des équipes qui représentent les valeurs des entreprises sur le long-terme.</p>
+
+			</article>
+
+			<article class="mt-4 col-lg-6">
+				<h2 class="text-subtitle d-flex align-items-center my-2">
+					<span class="svg-ellipse">{% include './svg/_ellipse.svg.twig' %}</span>
+					<span>Un cabinet ancré dans l’IT & l’écosystème local</span>
+				</h2>
+				<p>L’idée de renforcer le dynamisme territorial d’une région est une démarche engagée. Nous aimons rendre nos clients attractifs et compétitifs.</p>
+
+				<p>Nous agissons aussi au quotidien en pratiquant la RSE.</p>
+
+				<p>Cette responsabilité nous concerne tous.</p>
+			</article>
+		</div>
+	</section>
+	<section class="container mt-5">
+		<h2 class="text-subtitle d-flex align-items-center my-2">La réussite d’un recrutement Externatic repose sur :</h2>
+		<div class="row mt-3">
+			<article class="col-lg-4">
+				<div class="d-flex justify-content-center p-4">
+					<img src="{{ asset ('build/images/hello.png') }}" alt="Hello" width="50px" height="50px">
+				</div>
+				<h3>Notre proximité</h3>
+				<p>
+                    L’expérience professionnelle est une chose. L’expérience de vie en est une autre.
+                    Alors nos consultants prennent le temps de faire connaissance avec chaque personne, pour comprendre le contexte, le parcours, les envies et les projets.
+                </p>
+			</article>
+
+			<article class="col-lg-4">
+				<div class="d-flex justify-content-center p-4">
+					<img src="{{ asset ('build/images/fusee.png') }}" alt="fusee" width="50px" height="50px">
+				</div>
+				<h3>Notre performance</h3>
+				<p>
+                    Notre réseau est une force et nous y travaillons sans relâche. 
+                    Notre expérience nous permet d’identifier les vrais besoins d’une entreprise et de ceux qui la rejoignent.
+                </p>
+			</article>
+
+            <article class="col-lg-4">
+				<div class="d-flex justify-content-center p-4">
+					<img src="{{ asset ('build/images/sablier.png') }}" alt="sablier" width="35px" height="50px">
+				</div>
+				<h3>Notre durabilité</h3>
+				<p>
+                    Notre challenge est de trouver l’équipe qui fonctionnera ensemble de manière professionnelle et personnelle, 
+                    pour aller jusqu’au bout d’un projet commun. Notre responsabilité vis-à-vis des impacts de nos décisions et nos actions sur le long-terme correspondent également à notre politique RSE.
+                </p>
+			</article>
+
+		</div>
+	</section>
+  
+  <section class="container">
+      <div class="d-flex justify-content-center">
+          <iframe class="youtube-video" src="https://www.youtube.com/embed/BYmNVsS5J58" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+  </section>
+  
 {% endblock %}
