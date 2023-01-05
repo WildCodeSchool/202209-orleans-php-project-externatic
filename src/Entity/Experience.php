@@ -35,6 +35,9 @@ class Experience
     #[ORM\ManyToOne(inversedBy: 'experiences')]
     private ?Candidate $candidate = null;
 
+    #[ORM\ManyToOne]
+    private ?Contract $contract = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -120,6 +123,18 @@ class Experience
     public function setCandidate(?Candidate $candidate): self
     {
         $this->candidate = $candidate;
+
+        return $this;
+    }
+
+    public function getContract(): ?Contract
+    {
+        return $this->contract;
+    }
+
+    public function setContract(?Contract $contract): self
+    {
+        $this->contract = $contract;
 
         return $this;
     }

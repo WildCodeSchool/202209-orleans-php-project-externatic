@@ -1,4 +1,5 @@
 $profilPictureDiameter: 100px;
+$intermediate: grey;
 
 .profilPicture {
     height: $profilPictureDiameter;
@@ -8,6 +9,7 @@ $profilPictureDiameter: 100px;
 
 .experiencePeriode {
     font-size: smaller;
+    color: $intermediate;
 }
 
 .title-profil {
