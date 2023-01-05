@@ -14,7 +14,7 @@ class ExperienceFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create();
 
-        for ($j = 0; $j < CandidateFixtures::NB_CANDIDATE; $j++) {
+        for ($j = 0; $j < UserFixtures::NB_USER_CANDIDATE; $j++) {
             $randomJobCount = rand(1, 5);
 
             for ($i = 1; $i <= $randomJobCount; $i++) {

@@ -17,7 +17,7 @@ class CandidateFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create();
 
-        for ($i = 0; $i < self::NB_CANDIDATE; $i++) {
+        for ($i = 0; $i < UserFixtures::NB_USER_CANDIDATE; $i++) {
             $candidate = new Candidate();
             $candidate->setUser($this->getReference('UserCandidate_' . $i));
             $candidate->setNationality($faker->countryCode());

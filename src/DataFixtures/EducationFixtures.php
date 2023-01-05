@@ -14,7 +14,7 @@ class EducationFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Factory::create();
 
-        for ($j = 0; $j < CandidateFixtures::NB_CANDIDATE; $j++) {
+        for ($j = 0; $j < UserFixtures::NB_USER_CANDIDATE; $j++) {
             $randomEducationCount = rand(1, 5);
 
             for ($i = 0; $i < $randomEducationCount; $i++) {
@@ -26,7 +26,7 @@ class EducationFixtures extends Fixture implements DependentFixtureInterface
                 $education->setTitle($faker->sentence(random_int(3, 6)));
                 $education->setLevel($faker->numberBetween(0, 12));
                 $education->setDescription($faker->realTextBetween());
-                $targetedCandidate = $this->getReference('Candidate_' . rand(0, CandidateFixtures::NB_CANDIDATE - 1));
+                $targetedCandidate = $this->getReference('Candidate_' . rand(0, UserFixtures::NB_USER_CANDIDATE - 1));
                 $education->setCandidate($targetedCandidate);
 
                 $manager->persist($education);
