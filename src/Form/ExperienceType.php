@@ -36,7 +36,7 @@ class ExperienceType extends AbstractType
             ])
             ->add('jobTitle', TextType::class, [
                 'label' => 'Intitulé du poste',
-                'help' => 'Renseignez le nom de l\'entreprise',
+                'help' => 'Renseignez le nom du poste occupé',
             ])
             ->add('jobDescription', TextareaType::class, [
                 'label' => 'Description',
