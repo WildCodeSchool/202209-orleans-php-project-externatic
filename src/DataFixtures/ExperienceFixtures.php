@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use Faker\Factory;
 use App\Entity\Experience;
+use App\DataFixtures\ContractFixtures;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -37,6 +38,7 @@ class ExperienceFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             CandidateFixtures::class,
+            ContractFixtures::class,
         ];
     }
 }

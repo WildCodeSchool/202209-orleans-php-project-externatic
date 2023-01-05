@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ExperienceRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ExperienceRepository::class)]
 class Experience
@@ -15,11 +16,22 @@ class Experience
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
     private ?string $company = null;
 
+    #[Assert\Expression(
+        "!this.getEndDate() ?: this.getEndDate() > this.getStartDate()",
+        message: 'La date de début doit être inférieure à la date de fin.',
+    )]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\NotBlank()]
     private ?\DateTimeInterface $startDate = null;
 
+    #[Assert\LessThan('today')]
+    #[Assert\Expression(
+        "this.getEndDate() ?: this.isIsCurrentPosition() === true",
+        message: 'Vous devez choisir une date de fin ou cocher la case \'Poste actuel\'.'
+    )]
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $endDate = null;
 
@@ -27,13 +39,18 @@ class Experience
     private ?bool $isCurrentPosition = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
     private ?string $jobTitle = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\NotBlank()]
     private ?string $jobDescription = null;
 
     #[ORM\ManyToOne(inversedBy: 'experiences')]
     private ?Candidate $candidate = null;
+
+    #[ORM\ManyToOne]
+    private ?Contract $contract = null;
 
     public function getId(): ?int
     {
@@ -120,6 +137,18 @@ class Experience
     public function setCandidate(?Candidate $candidate): self
     {
         $this->candidate = $candidate;
+
+        return $this;
+    }
+
+    public function getContract(): ?Contract
+    {
+        return $this->contract;
+    }
+
+    public function setContract(?Contract $contract): self
+    {
+        $this->contract = $contract;
 
         return $this;
     }

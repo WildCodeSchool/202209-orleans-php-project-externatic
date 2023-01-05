@@ -13,14 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/education')]
 class EducationController extends AbstractController
 {
-    #[Route('/', name: 'app_education_index', methods: ['GET'])]
-    public function index(EducationRepository $educationRepository): Response
-    {
-        return $this->render('education/index.html.twig', [
-            'education' => $educationRepository->findAll(),
-        ]);
-    }
-
     #[Route('/new', name: 'app_education_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EducationRepository $educationRepository): Response
     {
@@ -48,7 +40,7 @@ class EducationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_education_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/modifier', name: 'app_education_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Education $education, EducationRepository $educationRepository): Response
     {
         $form = $this->createForm(EducationType::class, $education);
@@ -57,7 +49,11 @@ class EducationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $educationRepository->save($education, true);
 
-            return $this->redirectToRoute('app_education_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Votre mise à jour a été prise en compte.');
+
+            return $this->redirectToRoute('app_candidate_show', [
+                'id' => $education->getCandidate()->getId(),
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('education/edit.html.twig', [
@@ -73,6 +69,10 @@ class EducationController extends AbstractController
             $educationRepository->remove($education, true);
         }
 
-        return $this->redirectToRoute('app_education_index', [], Response::HTTP_SEE_OTHER);
+        $this->addFlash('success', 'La suppression a été effectuée avec succès.');
+
+        return $this->redirectToRoute('app_candidate_show', [
+            'id' => $education->getCandidate()->getId()
+        ], Response::HTTP_SEE_OTHER);
     }
 }
