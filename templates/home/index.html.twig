@@ -4,9 +4,26 @@
  {{ parent() ~ '| Accueil' }}
 {% endblock %}
 
+{% block stylesheets %}
+			{{ parent() }}
+			{{ encore_entry_link_tags('home') }}
+{% endblock %}
+
 {% block body %}
-	<section class="container">
-		<h1>Présentation</h1>
+	<section class="position-relative home-search-section container-fluid p-0">
+
+		<div class="position-absolute top-50 start-50 translate-middle">
+			<div class="bg-light p-5 rounded">
+				{% include './component/_searchBar.html.twig' %}
+			</div>
+		</div>
+				
+		{% include './svg/_rounded.svg.twig' %}
+		
+	</section>
+
+	<section class="container pt-5 mt-5">
+		<h1 class="pt-5">Présentation</h1>
 		<article class="mt-4">
 			<h2 class="text-subtitle d-flex align-items-center my-2">
 				<span class="svg-ellipse">{% include './svg/_ellipse.svg.twig' %}</span>
@@ -14,18 +31,18 @@
 			</h2>
 			<p>
 				Externatic, c’est avant tout une équipe d’experts IT, tous animés par la même passion des relations humaines. 
-							    L’intelligence émotionnelle et l’éducation cognitive ne peuvent être remplacées par des algorithmes.
+				L’intelligence émotionnelle et l’éducation cognitive ne peuvent être remplacées par des algorithmes.
 			</p>
 
 			<p>
 				Notre cabinet de recrutement s’appuie sur des méthodes authentiques, 
-							    où l’humain est tout simplement indispensable.
+				où l’humain est tout simplement indispensable.
 			</p>
 
 			<p>
 				Depuis 10 ans, externatic a développé un savoir-faire sur le recrutement de profils pénuriques. 
-							    Ces compétences nous permettent d’intervenir sur d’autres secteurs que l’IT. 
-							    Notamment l’industrie avec
+				Ces compétences nous permettent d’intervenir sur d’autres secteurs que l’IT. 
+				Notamment l’industrie avec
 				<a aria-label="Lien vers le site Induseo" href="https://induseo.fr/" class="text-secondary">Induseo</a>
 				et la cybersécurité avec
 				<a aria-label="Lien vers le site Underguard" href="https://underguard.fr/" class="text-secondary">Underguard</a>.
