@@ -59,10 +59,8 @@ class Offer
 
     public function __construct()
     {
-
         $this->setCreatedAt(new DateTimeImmutable('now'));
         $this->candidates = new ArrayCollection();
-
     }
 
     public function getId(): ?int
