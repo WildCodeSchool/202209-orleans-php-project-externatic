@@ -33,6 +33,7 @@ Encore
      */
     .addEntry('app', './assets/app.js')
     .addEntry('previewAvatar', './assets/preview.js')
+    .addEntry('previewAvatarRegistration', './assets/previewRegistration.js')
 
     .addStyleEntry('dashboard', './assets/styles/dashboard.scss')
     .addStyleEntry('card', './assets/styles/card.scss')
