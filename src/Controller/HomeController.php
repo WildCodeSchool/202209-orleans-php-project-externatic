@@ -2,15 +2,33 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Form\SearchOfferType;
+use App\Repository\OfferRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
-    public function index(): Response
+    public function index(Request $request, OfferRepository $offerRepository): Response
     {
-        return $this->render('home/index.html.twig');
+        $form = $this->createForm(SearchOfferType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $keyWord = $form->getData()['search'];
+            $offers = $offerRepository->findByKeyWord($keyWord);
+
+            return $this->renderForm('offer/index.html.twig', [
+                'form' => $form,
+                'offers' => $offers
+            ]);
+        }
+
+        return $this->renderForm('home/index.html.twig', [
+            'form' => $form,
+        ]);
     }
 }
