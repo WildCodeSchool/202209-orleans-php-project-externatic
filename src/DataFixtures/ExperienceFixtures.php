@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use Faker\Factory;
+use App\Entity\Contract;
 use App\Entity\Experience;
 use App\DataFixtures\ContractFixtures;
 use Doctrine\Persistence\ObjectManager;
@@ -25,6 +26,7 @@ class ExperienceFixtures extends Fixture implements DependentFixtureInterface
                 $experience->setEndDate($faker->dateTime());
                 $experience->setIsCurrentPosition(false);
                 $experience->setJobTitle($faker->jobTitle());
+                $experience->setContract($this->getReference(ContractFixtures::CONTRACTS[$faker->numberBetween(0, 3)]));
                 $experience->setJobDescription($faker->realTextBetween());
                 $experience->setCandidate($this->getReference('Candidate_' . $j));
                 $manager->persist($experience);
