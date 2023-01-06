@@ -8,6 +8,11 @@
 	{% include './component/_sideBar_dashboard.html.twig' %}
 {% endblock %}
 
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('endDate') }}
+{% endblock %}
+
 {% block content %}
 	<div class="container">
 		<div class="row justify-content-center">
