@@ -2,9 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\ExperienceRepository;
+use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ExperienceRepository;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ExperienceRepository::class)]
 class Experience
@@ -15,21 +17,34 @@ class Experience
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
     private ?string $company = null;
 
+    #[Assert\Expression(
+        "!this.getEndDate() ?: this.getEndDate() > this.getStartDate()",
+        message: 'La date de début doit être inférieure à la date de fin.',
+    )]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $startDate = null;
+    #[Assert\NotBlank()]
+    private ?DateTimeInterface $startDate = null;
 
+    #[Assert\LessThan('today')]
+    #[Assert\Expression(
+        "this.getEndDate() ?: this.isIsCurrentPosition() === true",
+        message: 'Vous devez choisir une date de fin ou cocher la case \'Poste actuel\'.'
+    )]
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $endDate = null;
+    private ?DateTimeInterface $endDate = null;
 
     #[ORM\Column]
     private ?bool $isCurrentPosition = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
     private ?string $jobTitle = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Assert\NotBlank()]
     private ?string $jobDescription = null;
 
     #[ORM\ManyToOne(inversedBy: 'experiences')]
@@ -55,24 +70,24 @@ class Experience
         return $this;
     }
 
-    public function getStartDate(): ?\DateTimeInterface
+    public function getStartDate(): ?DateTimeInterface
     {
         return $this->startDate;
     }
 
-    public function setStartDate(\DateTimeInterface $startDate): self
+    public function setStartDate(?DateTimeInterface $startDate): self
     {
         $this->startDate = $startDate;
 
         return $this;
     }
 
-    public function getEndDate(): ?\DateTimeInterface
+    public function getEndDate(): ?DateTimeInterface
     {
         return $this->endDate;
     }
 
-    public function setEndDate(?\DateTimeInterface $endDate): self
+    public function setEndDate(?DateTimeInterface $endDate): self
     {
         $this->endDate = $endDate;
 

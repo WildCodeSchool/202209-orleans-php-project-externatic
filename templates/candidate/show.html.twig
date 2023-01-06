@@ -10,11 +10,14 @@
 
 
 {% block content %}
-
-				{% include "candidate/_profil.html.twig" %}
-
-				{% include "experience/_index.html.twig" %}
-
-				{% include "education/_index.html.twig" %}
+	<section>
+		{% include "candidate/_profil.html.twig" %}
+	</section>
+	<section class="mt-4">
+		{% include "experience/_index.html.twig" %}
+	</section>
+	<section class="mt-4">
+		{% include "education/_index.html.twig" %}
+	</section>
 
 {% endblock %}
