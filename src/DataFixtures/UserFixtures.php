@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use Faker\Factory;
 use App\Entity\User;
 use DateTimeImmutable;
 use Doctrine\Persistence\ObjectManager;
@@ -12,27 +13,30 @@ class UserFixtures extends Fixture
 {
     private UserPasswordHasherInterface $passwordHasher;
 
+    public const NB_USER_CANDIDATE = 20;
+
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
         $this->passwordHasher = $passwordHasher;
     }
     public function load(ObjectManager $manager): void
     {
+        $faker = Factory::create();
+
         $date = new DateTimeImmutable('now');
 
-        $candidate = new User();
-        $candidate->setEmail('candidate@exemple.com');
-        $candidate->setRoles(['ROLE_CANDIDATE']);
-        $hashedPassword = $this->passwordHasher->hashPassword(
-            $candidate,
-            'candidate'
-        );
-        $candidate->setPassword($hashedPassword);
-        $candidate->setFirstname('John');
-        $candidate->setLastname('Doe');
-        $candidate->setPhoneNumber('0622222222');
-        $candidate->setUpdatedAt($date);
-        $this->addReference('UserCandidate', $candidate);
+        for ($i = 0; $i < self::NB_USER_CANDIDATE; $i++) {
+            $candidate = new User();
+            $candidate->setEmail('candidate_' . $i . '@exemple.com');
+            $candidate->setRoles(['ROLE_CANDIDATE']);
+            $hashedPassword = $this->passwordHasher->hashPassword($candidate, 'candidate_' . $i);
+            $candidate->setPassword($hashedPassword);
+            $candidate->setFirstname($faker->firstName());
+            $candidate->setLastname($faker->lastName());
+            $candidate->setPhoneNumber('0622222222');
+            $candidate->setUpdatedAt($date);
+            $this->addReference('UserCandidate_' . $i, $candidate);
+        }
 
         $manager->persist($candidate);
 

@@ -53,6 +53,9 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
             $offer->setCompany($this->getReference('company_' . rand(1, CompanyFixtures::COMPANY_NUMBER)));
             $offer->setIsImportant($faker->boolean());
 
+            $this->addReference('offer_' . $i, $offer);
+
+
             $manager->persist($offer);
         }
 

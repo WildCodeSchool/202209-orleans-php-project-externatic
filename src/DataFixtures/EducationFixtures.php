@@ -10,25 +10,27 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class EducationFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const NUMBER_OF_EDUCATION = 3;
-
     public function load(ObjectManager $manager): void
     {
         $faker = Factory::create();
 
+        for ($j = 0; $j < UserFixtures::NB_USER_CANDIDATE; $j++) {
+            $randomEducationCount = rand(1, 5);
 
-        for ($i = 0; $i < self::NUMBER_OF_EDUCATION; $i++) {
-            $education = new Education();
+            for ($i = 0; $i < $randomEducationCount; $i++) {
+                $education = new Education();
 
-            $education->setSchool($faker->company());
-            $education->setStartDate($faker->dateTime());
-            $education->setEndDate($faker->dateTime());
-            $education->setTitle($faker->sentence(random_int(3, 6)));
-            $education->setLevel($faker->numberBetween(0, 12));
-            $education->setDescription($faker->realTextBetween());
-            $education->setCandidate($this->getReference('Candidate_1'));
+                $education->setSchool($faker->company());
+                $education->setStartDate($faker->dateTime());
+                $education->setEndDate($faker->dateTime());
+                $education->setTitle($faker->sentence(random_int(3, 6)));
+                $education->setLevel($faker->numberBetween(0, 12));
+                $education->setDescription($faker->realTextBetween());
+                $targetedCandidate = $this->getReference('Candidate_' . rand(0, UserFixtures::NB_USER_CANDIDATE - 1));
+                $education->setCandidate($targetedCandidate);
 
-            $manager->persist($education);
+                $manager->persist($education);
+            }
         }
         $manager->flush();
     }

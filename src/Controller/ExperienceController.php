@@ -2,33 +2,47 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Entity\Candidate;
 use App\Entity\Experience;
 use App\Form\ExperienceType;
 use App\Repository\ExperienceRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/experience')]
 class ExperienceController extends AbstractController
 {
-    #[Route('/new', name: 'app_experience_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ExperienceRepository $experienceRepository): Response
+    #[Route('/ajouter', name: 'app_experience_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, ExperienceRepository $experienceRepository,): Response
     {
+
         $experience = new Experience();
         $form = $this->createForm(ExperienceType::class, $experience);
         $form->handleRequest($request);
 
+        /** @var User */
+        $user = $this->getUser();
+
+        $candidate = $user->getCandidate();
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $experience->setCandidate($candidate);
             $experienceRepository->save($experience, true);
 
-            return $this->redirectToRoute('app_experience_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Votre expérience a été ajoutée.');
+
+            return $this->redirectToRoute('app_candidate_show', [
+                'id' => $candidate->getId(),
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('experience/new.html.twig', [
             'experience' => $experience,
             'form' => $form,
+
         ]);
     }
 

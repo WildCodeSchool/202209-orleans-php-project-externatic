@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
-use App\Repository\ContractRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ContractRepository;
 
 #[ORM\Entity(repositoryClass: ContractRepository::class)]
 class Contract
