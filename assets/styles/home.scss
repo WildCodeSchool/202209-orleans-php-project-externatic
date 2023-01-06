@@ -1,3 +1,11 @@
+@import 'root';
+
+.home-search-section {
+    height: calc(100vh - $navbar-height);
+    background-image: url(../images/home-bg.jpg);
+    background-size: cover;
+    min-height: 500px;
+}
 .youtube-video {
     width: 80%;
     aspect-ratio: 16/9;

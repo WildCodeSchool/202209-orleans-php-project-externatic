@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\ExperienceRepository;
+use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ExperienceRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ExperienceRepository::class)]
@@ -25,7 +26,7 @@ class Experience
     )]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\NotBlank()]
-    private ?\DateTimeInterface $startDate = null;
+    private ?DateTimeInterface $startDate = null;
 
     #[Assert\LessThan('today')]
     #[Assert\Expression(
@@ -33,7 +34,7 @@ class Experience
         message: 'Vous devez choisir une date de fin ou cocher la case \'Poste actuel\'.'
     )]
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $endDate = null;
+    private ?DateTimeInterface $endDate = null;
 
     #[ORM\Column]
     private ?bool $isCurrentPosition = null;
@@ -69,24 +70,24 @@ class Experience
         return $this;
     }
 
-    public function getStartDate(): ?\DateTimeInterface
+    public function getStartDate(): ?DateTimeInterface
     {
         return $this->startDate;
     }
 
-    public function setStartDate(\DateTimeInterface $startDate): self
+    public function setStartDate(?DateTimeInterface $startDate): self
     {
         $this->startDate = $startDate;
 
         return $this;
     }
 
-    public function getEndDate(): ?\DateTimeInterface
+    public function getEndDate(): ?DateTimeInterface
     {
         return $this->endDate;
     }
 
-    public function setEndDate(?\DateTimeInterface $endDate): self
+    public function setEndDate(?DateTimeInterface $endDate): self
     {
         $this->endDate = $endDate;
 
