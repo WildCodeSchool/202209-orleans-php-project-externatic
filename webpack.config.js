@@ -34,7 +34,7 @@ Encore
     .addEntry('app', './assets/app.js')
     .addEntry('previewAvatar', './assets/preview.js')
     .addEntry('previewAvatarRegistration', './assets/previewRegistration.js')
-    .addStyleEntry('endDate', './assets/endDate.js')
+    .addEntry('endDate', './assets/endDate.js')
     
     .addStyleEntry('home', './assets/styles/home.scss')
     .addStyleEntry('dashboard', './assets/styles/dashboard.scss')
