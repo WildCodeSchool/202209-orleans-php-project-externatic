@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Offer;
 use App\Entity\Candidate;
 use App\Form\CandidateType;
+use App\Repository\OfferRepository;
 use App\Repository\CandidateRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,6 +15,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/candidat')]
 class CandidateController extends AbstractController
 {
+    #[Route('/{id}/mes-candidatures', name: 'showOfferAppliedByCandidate', methods: ['GET'])]
+    public function showAll(Candidate $candidate): Response
+    {
+        return $this->render('candidate/showMyApplications.html.twig', [
+            'candidate' => $candidate
+        ]);
+    }
+
     #[Route('/{id}', name: 'app_candidate_show', methods: ['GET'])]
     public function show(Candidate $candidate,): Response
     {

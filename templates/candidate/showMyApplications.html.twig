@@ -1,0 +1,21 @@
+{% extends 'dashboard_layout.html.twig' %}
+
+{% block title %}
+	{{ parent() ~ ' | Profil' }}
+{% endblock %}
+
+{% block sideNav %}
+	{# {% include './component/_sideBar_dashboard.html.twig' %} #}
+{% endblock %}
+
+
+{% block content %}
+	<div class="container p-4">
+		<h1>Toutes mes offres candidatées</h1>
+		<div class="row justify-content-center g-4">
+			{% for offer in app.user.candidate.offers %}
+				{% include "component/_card.html.twig" with {offer:offer} only %}
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
