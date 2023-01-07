@@ -29,7 +29,7 @@ class UserFixtures extends Fixture
             $candidate = new User();
             $candidate->setEmail('candidate_' . $i . '@exemple.com');
             $candidate->setRoles(['ROLE_CANDIDATE']);
-            $hashedPassword = $this->passwordHasher->hashPassword($candidate, 't' . $i);
+            $hashedPassword = $this->passwordHasher->hashPassword($candidate, 'candidate_' . $i);
             $candidate->setPassword($hashedPassword);
             $candidate->setFirstname($faker->firstName());
             $candidate->setLastname($faker->lastName());
