@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
@@ -69,6 +71,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         mimeTypes: ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif']
     )]
     private ?File $avatarFile = null;
+
+    #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
+    private ?Recruiter $recruiter = null;
 
     public function getId(): ?int
     {
@@ -227,6 +232,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if (null !== $avatarFile) {
             $this->updatedAt = new DateTimeImmutable();
         }
+        return $this;
+    }
+
+    public function getRecruiter(): ?Recruiter
+    {
+        return $this->recruiter;
+    }
+
+    public function setRecruiter(Recruiter $recruiter): self
+    {
+        // set the owning side of the relation if necessary
+        if ($recruiter->getUser() !== $this) {
+            $recruiter->setUser($this);
+        }
+
+        $this->recruiter = $recruiter;
+
         return $this;
     }
 }
