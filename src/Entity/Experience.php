@@ -28,7 +28,7 @@ class Experience
     #[Assert\NotBlank()]
     private ?DateTimeInterface $startDate = null;
 
-    #[Assert\LessThan('today')]
+    #[Assert\LessThan('tomorrow')]
     #[Assert\Expression(
         "this.getEndDate() ?: this.isIsCurrentPosition() === true",
         message: 'Vous devez choisir une date de fin ou cocher la case \'Poste actuel\'.'
