@@ -37,6 +37,7 @@ class Experience
     private ?DateTimeInterface $endDate = null;
 
     #[ORM\Column]
+    #[Assert\Expression("this.isIsCurrentPosition() === false ?: this.setEndDate(null)")]
     private ?bool $isCurrentPosition = null;
 
     #[ORM\Column(length: 255)]
