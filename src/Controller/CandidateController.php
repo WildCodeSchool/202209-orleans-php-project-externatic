@@ -15,7 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/candidat')]
 class CandidateController extends AbstractController
 {
-    #[Route('/{id}/mes-candidatures', name: 'showOfferAppliedByCandidate', methods: ['GET'])]
+    #[Route('/{id}/mes-candidatures', name: 'app_candidate_show_Offers_Applied', methods: ['GET'])]
     public function showAll(Candidate $candidate): Response
     {
         return $this->render('candidate/showMyApplications.html.twig', [
