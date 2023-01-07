@@ -1,0 +1,37 @@
+<div class="d-flex align-items-center">
+	<div>
+        {% if offer.isImportant and is_granted('ROLE_RECRUITER') %}
+            <span class="badge badge-pill bg-danger fw-normal fs-5 me-3">Important</span>
+        {% endif %}
+	</div>
+	<h2>{{ offer.title }}</h2>
+</div>
+
+<div class="mt-4">
+	<h2 class="font-subtitle fs-3">Ville</h2>
+	<div>{{ offer.postalCode }}
+		-
+		{{ offer.city }}</div>
+</div>
+
+<div class="mt-4">
+	<h2 class="font-subtitle fs-3">Dates clés</h2>
+	<div>
+		<span>Crée le :
+		</span>
+		{{ offer.createdAt|date('d/m/Y') }}</div>
+	<div>
+		<span>Pour le :
+		</span>
+		{{ offer.targetDate ? offer.targetDate|date('d/m/Y') : 'Non renseigné' }}</div>
+</div>
+
+<div class="mt-4">
+	<h2 class="font-subtitle fs-3">Description</h2>
+	<div>{{ offer.description }}</div>
+</div>
+
+<div class="mt-4">
+	<h2 class="font-subtitle fs-3">Salaire</h2>
+	<div>{{ offer.annualWage ~ '€ / an' }}</div>
+</div>
