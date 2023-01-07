@@ -21,7 +21,7 @@ class Experience
     private ?string $company = null;
 
     #[Assert\Expression(
-        "!this.getEndDate() ?: this.getEndDate() > this.getStartDate()",
+        "( !this.getEndDate() or this.isIsCurrentPosition() === true )?: this.getEndDate() > this.getStartDate()",
         message: 'La date de début doit être inférieure à la date de fin.',
     )]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
