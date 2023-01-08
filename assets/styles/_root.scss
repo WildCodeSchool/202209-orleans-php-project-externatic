@@ -30,7 +30,9 @@
  $background-gradient:linear-gradient(180deg, $color-background-start 0%, $color-background-end 100%);
  @import "~bootstrap/scss/bootstrap";
 
-
+html, body{
+   overscroll-behavior-x: none;
+}
  footer {
    .container{
       padding-block: 2vw;
