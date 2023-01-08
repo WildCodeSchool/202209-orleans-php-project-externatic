@@ -23,11 +23,13 @@ class EducationType extends AbstractType
             ->add('startDate', DateType::class, [
                 'label' => 'Date de début',
                 'years' => range(date('Y') - 50, date('Y')),
+                'widget' => 'single_text',
             ])
             ->add('endDate', DateType::class, [
                 'label' => 'Date de fin',
                 'required' => false,
                 'years' => range(date('Y') - 50, date('Y')),
+                'widget' => 'single_text',
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
