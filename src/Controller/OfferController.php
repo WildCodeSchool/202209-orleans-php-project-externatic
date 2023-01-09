@@ -23,7 +23,9 @@ class OfferController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $keyWord = $form->getData()['search'];
-            $offers = $offerRepository->findByKeyWord($keyWord);
+            $keyWord = trim($keyWord);
+
+            $keyWord ? $offers = $offerRepository->findByKeyWord($keyWord) : $offers = $offerRepository->findAll();
         } else {
             $offers = $offerRepository->findAll();
         }
