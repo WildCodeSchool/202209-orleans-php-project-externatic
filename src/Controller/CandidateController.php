@@ -35,7 +35,7 @@ class CandidateController extends AbstractController
             $this->addFlash('success', 'Votre mise à jour a été prise en compte.');
 
             return $this->redirectToRoute(
-                'app_candidate_edit',
+                'app_candidate_show',
                 ['id' => $candidate->getId()],
                 Response::HTTP_SEE_OTHER
             );
