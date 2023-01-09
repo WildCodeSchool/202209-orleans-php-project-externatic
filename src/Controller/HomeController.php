@@ -19,7 +19,9 @@ class HomeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $keyWord = $form->getData()['search'];
-            $offers = $offerRepository->findByKeyWord($keyWord);
+            $keyWord = trim($keyWord);
+
+            $keyWord ? $offers = $offerRepository->findByKeyWord($keyWord) : $offers = $offerRepository->findAll();
 
             return $this->renderForm('offer/index.html.twig', [
                 'form' => $form,
