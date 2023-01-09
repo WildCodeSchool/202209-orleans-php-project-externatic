@@ -93,7 +93,7 @@ class Candidate
     #[ORM\ManyToMany(targetEntity: Offer::class, inversedBy: 'candidates')]
     private Collection $offers;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $curriculumVitae = null;
 
     #[Vich\UploadableField(mapping: 'cv_file', fileNameProperty: 'curriculumVitae')]
@@ -332,12 +332,12 @@ class Candidate
         return $this;
     }
 
-    public function getCurriculumVitae(): string
+    public function getCurriculumVitae(): ?string
     {
         return $this->curriculumVitae;
     }
 
-    public function setCurriculumVitae(string $curriculumVitae = null): self
+    public function setCurriculumVitae(?string $curriculumVitae): self
     {
         $this->curriculumVitae = $curriculumVitae;
 

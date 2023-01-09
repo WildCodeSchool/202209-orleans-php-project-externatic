@@ -2,13 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Offer;
 use App\Entity\Candidate;
 use App\Form\CandidateType;
 use App\Repository\CandidateRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/candidat')]
@@ -48,7 +52,7 @@ class CandidateController extends AbstractController
         ]);
     }
 
-    #[Route('/{candidate}/{offer}/candidater', name: 'app_candidate_applyToJob', methods: ['GET','POST'])]
+    #[Route('/{candidate}/{offer}/candidater', name: 'app_candidate_applyToJob', methods: ['GET', 'POST'])]
     public function applyToJob(
         Request $request,
         Candidate $candidate,

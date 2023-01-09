@@ -11,6 +11,6 @@ vich_uploader:
 
         cv_file:
             uri_prefix: /uploads/files/cv
-            upload_destination: '%upload_directory_files'
+            upload_destination: '%upload_directory_files%'
             namer: Vich\UploaderBundle\Naming\SmartUniqueNamer    
 
