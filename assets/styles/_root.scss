@@ -1,74 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Montserrat:ital,wght@0,500;0,700;0,900;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;500;600;700&family=Montserrat:ital,wght@0,500;0,700;0,900;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
- $font-title: 'Montserrat', sans-serif;
- $font-subtitle: 'Comfortaa', cursive;
- $font-body: 'Poppins', sans-serif;
+$font-title: "Montserrat", sans-serif;
+$font-subtitle: "Comfortaa", cursive;
+$font-body: "Poppins", sans-serif;
 
- $primary: #851342;
- $secondary: #CA2262;
- $terciary: #0EA7C9;
- $light: #FFF;
- $dark: #333;
+$primary: #851342;
+$secondary: #ca2262;
+$terciary: #0ea7c9;
+$light: #fff;
+$dark: #333;
 
- $border-radius: 16px;
- $btn-border-radius: $border-radius;
- $btn-padding-y: 0.7rem;
- $btn-padding-x: 2rem;
+$border-radius: 16px;
+$btn-border-radius: $border-radius;
+$btn-padding-y: 0.7rem;
+$btn-padding-x: 2rem;
 
- $dashboard-min-height: 500px;
- $navbar-height: 5rem;
+$dashboard-min-height: 500px;
+$navbar-height: 5rem;
 
- $gradient-sidenav-color-primary: rgba(203, 238, 244, 0.81);
- $gradient-sidenav-color-secondary: rgba(14, 167, 201, 0);
- $gradient-content-color-primary: rgba(148, 224, 238, 0.2);
- $gradient-content-color-secondary:rgba(47, 106, 119, 0);
- $dashboard-side-nav-gradient: linear-gradient(180.27deg, $gradient-sidenav-color-primary 0.19%, $gradient-sidenav-color-secondary 99.72%);
- $dashboard-content-gradient: linear-gradient(195.77deg, $gradient-content-color-primary 0.11%, $gradient-content-color-secondary 81.67%);
- $font-size-card: 2rem;
- $color-background-start:#E9EEF3; 
- $color-background-end:rgba(227, 233, 239, 0); 
- $background-gradient:linear-gradient(180deg, $color-background-start 0%, $color-background-end 100%);
- @import "~bootstrap/scss/bootstrap";
-
-
- footer {
-   .container{
-      padding-block: 2vw;
-   }
-   ul {
-      list-style-type: none;
-   }
- }
- .dashboard-side-gradient{
-   background: $dashboard-side-nav-gradient;
- }
- .dashboard-content-gradient{
-   background: $dashboard-content-gradient;
- }
- .font-title {
-    font-family: $font-title;
- }
- .font-subtitle {
-    font-family: $font-subtitle;
- }
- .font-body {
-    font-family: $font-body;
- }
-
- .rounded {
-    border-radius: $border-radius;
- }
- .badge {
-   font-size: 0.8rem;
- }
-
- label {
-   font-family: $font-subtitle;
- }
- 
-
- body {
-   font-family: $font-body;
-   font-size: 1.2rem;
-   font-weight: 300;
-}
+$font-size-card: 2rem;
+$color-background-start: #e9eef3;
+$color-background-end: rgba(227, 233, 239, 0);
+$background-gradient: linear-gradient(
+    180deg,
+    $color-background-start 0%,
+    $color-background-end 100%
+);

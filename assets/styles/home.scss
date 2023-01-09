@@ -1,7 +1,7 @@
-@import 'root';
+@use 'root' as r;
 
 .home-search-section {
-    height: calc(100vh - $navbar-height);
+    height: calc(100vh - r.$navbar-height);
     background-image: url(../images/home-bg.jpg);
     background-size: cover;
     min-height: 500px;
