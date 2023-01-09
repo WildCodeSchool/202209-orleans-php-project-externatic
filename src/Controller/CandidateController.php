@@ -24,7 +24,7 @@ class CandidateController extends AbstractController
     }
 
     #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Candidate $candidate,): Response
+    public function show(Candidate $candidate): Response
     {
         return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,
@@ -57,7 +57,7 @@ class CandidateController extends AbstractController
         ]);
     }
 
-    #[Route('/{candidate}/{offer}/candidater', name: 'apply_to_job', methods: ['GET','POST'])]
+    #[Route('/{candidate}/{offer}/candidater', name: 'apply_to_job', methods: ['GET', 'POST'])]
     public function applyToJob(
         Request $request,
         Candidate $candidate,

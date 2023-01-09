@@ -73,5 +73,23 @@ class UserFixtures extends Fixture
         $manager->persist($recruiter);
 
         $manager->flush();
+
+        $recruiter = new User();
+        $recruiter->setEmail('bilbo@externatic.com');
+        $recruiter->setRoles(['ROLE_RECRUITER']);
+        $recruiter->setFirstname('Bilbo');
+        $recruiter->setLastname('Baggins');
+        $hashedPassword = $this->passwordHasher->hashPassword(
+            $recruiter,
+            'hobbit'
+        );
+        $recruiter->setPassword($hashedPassword);
+        $recruiter->setPhoneNumber('0633333333');
+        $recruiter->setUpdatedAt($date);
+        $this->addReference('UserRecruter', $recruiter);
+
+        $manager->persist($recruiter);
+
+        $manager->flush();
     }
 }
