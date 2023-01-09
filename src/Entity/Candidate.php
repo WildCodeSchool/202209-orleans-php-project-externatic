@@ -80,6 +80,7 @@ class Candidate
     private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Education::class)]
+    #[ORM\OrderBy(["startDate" => "DESC"])]
     private Collection $education;
 
     #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Experience::class)]

@@ -6,7 +6,6 @@ use App\Entity\Offer;
 use App\Entity\Candidate;
 use App\Form\CandidateType;
 use App\Repository\CandidateRepository;
-use App\Repository\EducationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,12 +15,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CandidateController extends AbstractController
 {
     #[Route('/{id}', name: 'app_candidate_show', methods: ['GET'])]
-    public function show(Candidate $candidate, EducationRepository $educationRepository): Response
+    public function show(Candidate $candidate,): Response
     {
         return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,
             'user' => $candidate->getUser(),
-            'educations' => $educationRepository->findBy([], ['startDate' => 'DESC']),
         ]);
     }
 
