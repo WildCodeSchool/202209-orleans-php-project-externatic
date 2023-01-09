@@ -8,6 +8,11 @@
 	{% include './component/_sideBar_dashboard.html.twig' %}
 {% endblock %}
 
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('endDate') }}
+{% endblock %}
+
 {% block content %}
 	<div class="container">
 		<div class="row justify-content-center">
@@ -16,9 +21,6 @@
 					<h1>Ajout d'une expérience</h1>
             
                     {{ include('experience/_form.html.twig') }}
-           
-            
-            </div>
-        </div>
-    </div>
-{% endblock %}
+
+
+</div></div></div>{% endblock %}
