@@ -5,7 +5,7 @@
 	</div>
 </div>
 
-{% for experience in app.user.candidate.experiences|sort((a, b) => a.startDate <=> b.startDate)|reverse  %}
+{% for experience in app.user.candidate.experiences %}
 	<div class="d-flex flex-column">
 		<div class="d-flex justify-content-between align-items-center mt-2">
 				<div class="d-flex align-items-center me-2">
