@@ -40,7 +40,7 @@ class Education
     #[Assert\Length(max: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(length: 10, nullable: true)]
+    #[ORM\Column(nullable: true)]
     private ?int $level = null;
 
     #[ORM\ManyToOne(inversedBy: 'education')]
