@@ -24,7 +24,7 @@ class EducationFixtures extends Fixture implements DependentFixtureInterface
                 $education->setStartDate($faker->dateTime());
                 $education->setEndDate($faker->dateTime());
                 $education->setTitle($faker->sentence(random_int(3, 6)));
-                $education->setLevel($faker->numberBetween(0, 12));
+                $education->setLevel('BAC+12');
                 $education->setDescription($faker->realTextBetween());
                 $targetedCandidate = $this->getReference('Candidate_' . rand(0, UserFixtures::NB_USER_CANDIDATE - 1));
                 $education->setCandidate($targetedCandidate);

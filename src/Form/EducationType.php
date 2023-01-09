@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -40,14 +41,19 @@ class EducationType extends AbstractType
                 'label' => 'Intitulé de la formation',
                 'help' => 'Renseignez le nom de la formation',
             ])
-            ->add('level', IntegerType::class, [
-                'label' => 'Bac+ ...',
-                'help' => 'Renseignez le nombre d\'année après le baccalauréat',
-                'attr' => [
-                    'min' => 0,
-                    'max' => 12,
+            ->add('level', ChoiceType::class, [
+                'label' => 'Diplôme',
+                'choices'  => [
+                    'BEP' => 'BEP',
+                    'CAP' => 'CAP',
+                    'BAC' => 'BAC',
+                    'BAC+2' => 'BAC+2',
+                    'BAC+4' => 'BAC+4',
+                    'BAC+5' => 'BAC+5',
+                    'BAC+8' => 'BAC+8',
+                    'BAC+10' => 'BAC+10',
+                    'BAC+12' => 'BAC+12',
                 ],
-
             ]);
     }
 

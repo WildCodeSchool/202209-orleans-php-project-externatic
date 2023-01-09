@@ -17,6 +17,7 @@ class Education
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank()]
+    #[Assert\Length(max: 255)]
     private ?string $school = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
@@ -29,7 +30,6 @@ class Education
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\LessThan('tomorrow')]
-    #[Assert\NotBlank()]
     private ?\DateTimeInterface $endDate = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -37,15 +37,12 @@ class Education
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank()]
+    #[Assert\Length(max: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(nullable: true)]
-    #[Assert\Range(
-        min: 0,
-        max: 12,
-        notInRangeMessage: 'Vous devez être dans la tranche bac à bac+{{ max }}.',
-    )]
-    private ?int $level = null;
+    #[ORM\Column(length: 10, nullable: true)]
+    #[Assert\Length(max: 10)]
+    private ?string $level = null;
 
     #[ORM\ManyToOne(inversedBy: 'education')]
     private ?Candidate $candidate = null;
@@ -115,12 +112,12 @@ class Education
         return $this;
     }
 
-    public function getLevel(): ?int
+    public function getLevel(): ?string
     {
         return $this->level;
     }
 
-    public function setLevel(?int $level): self
+    public function setLevel(?string $level): self
     {
         $this->level = $level;
 
