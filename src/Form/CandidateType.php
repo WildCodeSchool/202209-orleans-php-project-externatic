@@ -71,8 +71,8 @@ class CandidateType extends AbstractType
                 'label' => 'Curriculum Vitae',
                 'required'      => false,
                 'allow_delete'  => true,
-                'download_uri' => true,
-
+                'delete_label' => 'Cochez pour supprimer le CV existant.',
+                'download_uri' => false,
             ]);
     }
 
