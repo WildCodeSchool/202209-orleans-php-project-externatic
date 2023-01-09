@@ -13,6 +13,7 @@ toggleMenuButton.addEventListener('click', () => {
     dashboardNavlinks.forEach(links => links.classList.toggle('d-block'))
     dashboardNavButtons.forEach(links => links.classList.toggle('menu-link-close'))
     dashboardNavButtons.forEach(links => links.classList.toggle('menu-link-open'))
+    dashboardNavButtons.forEach(links => links.classList.toggle('py-3'))
     dashboardContent.classList.toggle('d-none')
     
 })
