@@ -36,9 +36,9 @@ class UserFixtures extends Fixture
             $candidate->setPhoneNumber('0622222222');
             $candidate->setUpdatedAt($date);
             $this->addReference('UserCandidate_' . $i, $candidate);
+            $manager->persist($candidate);
         }
 
-        $manager->persist($candidate);
 
         $admin = new User();
         $admin->setEmail('admin@exemple.com');
@@ -55,6 +55,22 @@ class UserFixtures extends Fixture
         $this->addReference('UserAdmin', $admin);
 
         $manager->persist($admin);
+
+        $recruiter = new User();
+        $recruiter->setEmail('recruiter@exemple.com');
+        $recruiter->setRoles(['ROLE_RECRUITER']);
+        $hashedPassword = $this->passwordHasher->hashPassword(
+            $recruiter,
+            'recruiter'
+        );
+        $recruiter->setPassword($hashedPassword);
+        $recruiter->setFirstname('Tom');
+        $recruiter->setLastname('Jerry');
+        $recruiter->setPhoneNumber('0633333333');
+        $recruiter->setUpdatedAt($date);
+        $this->addReference('UserRecruiter', $recruiter);
+
+        $manager->persist($recruiter);
 
         $manager->flush();
 
