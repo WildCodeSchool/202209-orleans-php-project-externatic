@@ -12,10 +12,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/candidat')]
+#[Route('/candidat', name: 'app_candidate_')]
 class CandidateController extends AbstractController
 {
-    #[Route('/{id}/mes-candidatures', name: 'app_candidate_show_Offers_Applied', methods: ['GET'])]
+    #[Route('/{id}/mes-candidatures', name: 'show_offers_applied', methods: ['GET'])]
     public function showAll(Candidate $candidate): Response
     {
         return $this->render('candidate/showMyApplications.html.twig', [
@@ -23,7 +23,7 @@ class CandidateController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_candidate_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'show', methods: ['GET'])]
     public function show(Candidate $candidate,): Response
     {
         return $this->render('candidate/show.html.twig', [
@@ -32,7 +32,7 @@ class CandidateController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/modifier', name: 'app_candidate_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/modifier', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Candidate $candidate, CandidateRepository $candidateRepository): Response
     {
         $form = $this->createForm(CandidateType::class, $candidate);
@@ -57,7 +57,7 @@ class CandidateController extends AbstractController
         ]);
     }
 
-    #[Route('/{candidate}/{offer}/candidater', name: 'app_candidate_applyToJob', methods: ['GET','POST'])]
+    #[Route('/{candidate}/{offer}/candidater', name: 'apply_to_job', methods: ['GET','POST'])]
     public function applyToJob(
         Request $request,
         Candidate $candidate,
