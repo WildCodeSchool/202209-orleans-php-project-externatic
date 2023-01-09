@@ -23,7 +23,7 @@ class CandidateController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/modifier', name: 'app_candidate_edit', methods: ['GET', 'POST'])]
+    #[Route('/{id}/modifier', name: 'app_candidate_edit', methods: ['GET','POST'])]
     public function edit(Request $request, Candidate $candidate, CandidateRepository $candidateRepository): Response
     {
         $form = $this->createForm(CandidateType::class, $candidate);
