@@ -42,18 +42,15 @@ class EducationType extends AbstractType
                 'help' => 'Renseignez le nom de la formation',
             ])
             ->add('level', ChoiceType::class, [
-                'label' => 'Diplôme',
-                'choices'  => [
-                    'BEP' => 'BEP',
-                    'CAP' => 'CAP',
-                    'BAC' => 'BAC',
-                    'BAC+2' => 'BAC+2',
-                    'BAC+4' => 'BAC+4',
-                    'BAC+5' => 'BAC+5',
-                    'BAC+8' => 'BAC+8',
-                    'BAC+10' => 'BAC+10',
-                    'BAC+12' => 'BAC+12',
+                'required' => false,
+                'label' => 'Diplôme ou niveau équivalent',
+                'placeholder' => 'Post-bac',
+                'choices' => [
+                    'Bac ou niveau équivalent ' => range(0, 8)
                 ],
+                'choice_label' => function ($choice) {
+                    return 'Bac' . ($choice > 0 ? '+' . $choice : '');
+                }
             ]);
     }
 

@@ -41,8 +41,7 @@ class Education
     private ?string $title = null;
 
     #[ORM\Column(length: 10, nullable: true)]
-    #[Assert\Length(max: 10)]
-    private ?string $level = null;
+    private ?int $level = null;
 
     #[ORM\ManyToOne(inversedBy: 'education')]
     private ?Candidate $candidate = null;
@@ -112,12 +111,12 @@ class Education
         return $this;
     }
 
-    public function getLevel(): ?string
+    public function getLevel(): ?int
     {
         return $this->level;
     }
 
-    public function setLevel(?string $level): self
+    public function setLevel(?int $level): self
     {
         $this->level = $level;
 
