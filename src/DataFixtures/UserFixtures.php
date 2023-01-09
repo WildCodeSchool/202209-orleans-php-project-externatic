@@ -36,9 +36,9 @@ class UserFixtures extends Fixture
             $candidate->setPhoneNumber('0622222222');
             $candidate->setUpdatedAt($date);
             $this->addReference('UserCandidate_' . $i, $candidate);
+            $manager->persist($candidate);
         }
 
-        $manager->persist($candidate);
 
         $admin = new User();
         $admin->setEmail('admin@exemple.com');
