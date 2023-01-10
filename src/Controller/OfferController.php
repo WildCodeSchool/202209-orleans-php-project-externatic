@@ -49,7 +49,6 @@ class OfferController extends AbstractController
         } else {
             $offers = $offerRepository->findAll();
         }
-        
         return $this->renderForm('offer/showAll.html.twig', [
             'offers' => $offers,
             'form' => $form,
