@@ -1,15 +1,15 @@
-@import 'root';
+@use 'root' as r;
 
 
 .card-background {
-    background: $background-gradient ;
-    border-radius: $border-radius;
+    background: r.$background-gradient ;
+    border-radius: r.$border-radius;
     min-width: 200px;
 }
 
 .card-offer-title {     
-    font-family: $font-body;
+    font-family: r.$font-body;
     font-style: normal;
     font-weight: 700;
-    font-size: $font-size-card;
+    font-size: r.$font-size-card;
 }

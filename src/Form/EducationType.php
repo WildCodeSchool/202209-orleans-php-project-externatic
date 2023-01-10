@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -23,11 +24,13 @@ class EducationType extends AbstractType
             ->add('startDate', DateType::class, [
                 'label' => 'Date de début',
                 'years' => range(date('Y') - 50, date('Y')),
+                'widget' => 'single_text',
             ])
             ->add('endDate', DateType::class, [
                 'label' => 'Date de fin',
                 'required' => false,
                 'years' => range(date('Y') - 50, date('Y')),
+                'widget' => 'single_text',
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
@@ -38,14 +41,16 @@ class EducationType extends AbstractType
                 'label' => 'Intitulé de la formation',
                 'help' => 'Renseignez le nom de la formation',
             ])
-            ->add('level', IntegerType::class, [
-                'label' => 'Bac+ ...',
-                'help' => 'Renseignez le nombre d\'année après le baccalauréat',
-                'attr' => [
-                    'min' => 0,
-                    'max' => 12,
+            ->add('level', ChoiceType::class, [
+                'required' => false,
+                'label' => 'Diplôme ou niveau équivalent',
+                'placeholder' => 'Post-bac',
+                'choices' => [
+                    'Bac ou niveau équivalent ' => range(0, 8)
                 ],
-
+                'choice_label' => function ($choice) {
+                    return 'Bac' . ($choice > 0 ? '+' . $choice : '');
+                }
             ]);
     }
 

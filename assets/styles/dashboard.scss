@@ -1,4 +1,4 @@
-@import 'root';
+@use 'root' as r;
 
 $dashboard-padding: 2rem;
 
@@ -57,6 +57,8 @@ $dashboard-padding: 2rem;
 .dashboard-content {
     height: 100vh;
     overflow-y: scroll;
+    scrollbar-color: r.$primary;
+    min-height: r.$dashboard-min-height
 }
 .dashboard-nav {
     height: 100vh;
