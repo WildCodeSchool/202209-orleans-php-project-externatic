@@ -36,10 +36,23 @@ class OfferController extends AbstractController
         ]);
     }
     #[Route('/toutes-les-offres', name: 'showAll', methods: ['GET'])]
-    public function showAll(OfferRepository $offerRepository): Response
+    public function showAll(Request $request, OfferRepository $offerRepository): Response
     {
-        return $this->render('offer/showAll.html.twig', [
-            'offers' => $offerRepository->findBy([], ['createdAt' => 'DESC']),
+        $form = $this->createForm(SearchOfferType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $keyWord = $form->getData()['search'];
+            $keyWord = trim($keyWord);
+
+            $keyWord ? $offers = $offerRepository->findByKeyWord($keyWord) : $offers = $offerRepository->findAll();
+        } else {
+            $offers = $offerRepository->findAll();
+        }
+        
+        return $this->renderForm('offer/showAll.html.twig', [
+            'offers' => $offers,
+            'form' => $form,
         ]);
     }
 
