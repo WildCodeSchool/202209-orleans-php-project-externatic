@@ -1,11 +1,24 @@
-{% extends 'base.html.twig' %}
+{% extends 'dashboard_layout.html.twig' %}
 
-{% block title %}New Education{% endblock %}
 
-{% block body %}
-    <h1>Create new Education</h1>
+{% block title %}
+{{ parent() ~ ' | Ajout d\'une formation' }}
+{% endblock %}
 
-    {{ include('education/_form.html.twig') }}
+{% block sideNav %}
+	{% include './component/_sideBar_dashboard.html.twig' %}
+{% endblock %}
 
-    <a href="{{ path('app_education_index') }}">back to list</a>
+{% block content %}
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-10">
+
+					<h1>Ajout d'une formation</h1>
+
+                    {{ include('education/_form.html.twig') }}
+
+            </div>
+        </div>
+    </div>
 {% endblock %}
