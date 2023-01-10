@@ -16,8 +16,8 @@ $dashboard-padding: 2rem;
     position: relative;
 
     .dashboard-nav-wrapper {
-        background-color: $secondary;
-        border-radius: 0 $border-radius $border-radius 0;
+        background-color: r.$secondary;
+        border-radius: 0 r.$border-radius r.$border-radius 0;
         height: 100%;
         width: 100%;
         overflow-y: scroll;
@@ -40,7 +40,7 @@ $dashboard-padding: 2rem;
     right: 0;
     transform: translateX(30%);
 
-    background-color: $primary;
+    background-color: r.$primary;
     border-radius: 50%;
 
     display: flex;
@@ -69,21 +69,21 @@ $dashboard-padding: 2rem;
     height: 60px;
     border-radius: 50%;
 
-    font-family: $font-subtitle;
+    font-family: r.$font-subtitle;
 }
 .menu-link-open {
     width: 100%;
     max-width: 260px;
-    border-radius: $border-radius;
+    border-radius: r.$border-radius;
 }
 
 .dashboard-mini-link {
     font-size: 0.5rem;
     text-decoration: none;
-    color: $light;
+    color: r.$light;
 
     &:hover {
-        color: $dark;
+        color: r.$dark;
     }
 }
 .dashboard-link-title {
@@ -104,7 +104,7 @@ $dashboard-padding: 2rem;
     .menu-link-close {
         width: 100%;
         max-width: 260px;
-        border-radius: $border-radius;
+        border-radius: r.$border-radius;
     }
     .links-title {
         font-size: 1.2rem;
