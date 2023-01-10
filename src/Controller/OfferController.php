@@ -65,7 +65,7 @@ class OfferController extends AbstractController
     #[Route('/{id}', name: 'show_loggedin', methods: ['GET'])]
     public function isLogShow(Offer $offer): Response
     {
-        return $this->render('offer/islogShow.html.twig', [
+        return $this->render('offer/isLogShow.html.twig', [
             'offer' => $offer,
         ]);
     }
