@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Offer;
 use App\Entity\Candidate;
 use App\Form\CandidateType;
@@ -57,13 +58,15 @@ class CandidateController extends AbstractController
         ]);
     }
 
-    #[Route('/{candidate}/{offer}/candidater', name: 'apply_to_job', methods: ['GET', 'POST'])]
+    #[Route('/{offer}/candidater', name: 'apply_to_job', methods: ['GET', 'POST'])]
     public function applyToJob(
         Request $request,
-        Candidate $candidate,
         Offer $offer,
         CandidateRepository $candidateRepository
     ): Response {
+        /** @var User $user */
+        $user = $this->getUser();
+        $candidate = $user->getCandidate();
         $submittedToken = $request->request->get('token');
 
         if ($this->isCsrfTokenValid('apply-offer', $submittedToken)) {
