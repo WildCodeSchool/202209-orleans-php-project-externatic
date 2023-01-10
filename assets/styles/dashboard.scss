@@ -1,11 +1,112 @@
 @use 'root' as r;
 
-.dashboard-content{
-    height: 75vh;
+$dashboard-padding: 2rem;
+
+.dashboard-wrapper {
+    display: grid;
+    grid-template-columns: 90px 6fr;
+    grid-template-rows: 1fr;
+    height: 100vh;
+    min-height: 400px;
+}
+.dashboard-nav-container {
+    padding: $dashboard-padding 0 $dashboard-padding 0;
+    height: 100%;
+    z-index: 2;
+    position: relative;
+
+    .dashboard-nav-wrapper {
+        background-color: $secondary;
+        border-radius: 0 $border-radius $border-radius 0;
+        height: 100%;
+        width: 100%;
+        overflow-y: scroll;
+
+        .links-title {
+            font-size: 0.7rem;
+        }
+    }
+
+    .dashboard-nav-open {
+        width: 95vw;
+    }
+}
+
+.dashboard-mobile {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: calc($dashboard-padding + 0.5rem);
+    right: 0;
+    transform: translateX(30%);
+
+    background-color: $primary;
+    border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.dashboard-mobile-open {
+    left:95vw;
+    transform: rotate(180deg) translateX(70%);
+    transform: transform 0.3s ease-in;
+}
+
+.dashboard-content {
+    height: 100vh;
     overflow-y: scroll;
     scrollbar-color: r.$primary;
     min-height: r.$dashboard-min-height
 }
-.dashboard-nav{
+.dashboard-nav {
+    height: 100vh;
     overflow-y: scroll;
+}
+.menu-link-close {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+
+    font-family: $font-subtitle;
+}
+.menu-link-open {
+    width: 100%;
+    max-width: 260px;
+    border-radius: $border-radius;
+}
+
+.dashboard-mini-link {
+    font-size: 0.5rem;
+    text-decoration: none;
+    color: $light;
+
+    &:hover {
+        color: $dark;
     }
+}
+.dashboard-link-title {
+    display: none;
+    font-size: 0.8rem;
+}
+
+@media screen and (min-width: 768px) {
+    .dashboard-wrapper {
+        grid-template-columns: 1fr 5fr;
+    }
+    .dashboard-link-title {
+        display: block;
+    }
+    .dashboard-mobile {
+        display: none;
+    }
+    .menu-link-close {
+        width: 100%;
+        max-width: 260px;
+        border-radius: $border-radius;
+    }
+    .links-title {
+        font-size: 1.2rem;
+    }
+}
