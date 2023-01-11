@@ -1,8 +1,8 @@
 <nav class="navbar navbar-expand-lg bg-light">
-  <div class="container">
-    <a class="navbar-brand py-2 px-md-3 ms-md-2" href="{{ path('app_home')}}">
-        {% include './svg/_logo.svg.twig' %}    
-    </a>
+	<div class="container">
+		<a class="navbar-brand py-2 px-md-3 ms-md-2" href="{{ path('app_home')}}">
+			{% include './svg/_logo.svg.twig' %}
+		</a>
 
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -13,18 +13,36 @@
 					<a class="nav-link" aria-current="page" href="{{ path('app_home') }}">Accueil</a>
 				</li>
 				<li class="nav-item font-subtitle fs-4 px-2">
-					<a aria-label="Page des offres" class="nav-link" href="{{ path('app_offer_index') }}">Offres</a>
+					<a aria-label="Page des offres" class="nav-link" href="{{ app.user ? path('app_offer_showAll') : path('app_offer_index') }}">Offres</a>
 				</li>
 				{% if app.user %}
 					<li class="nav-item font-subtitle fs-4 px-2">
-						<a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+						<div class="account-container d-flex align-items-center gap-2">
+							<a aria-label="Mon compte" href="{{ path('app_candidate_show', {'id': app.user.candidate.id}) }}">
+								<img class="nav-bar-avatar" width="45px" height="45px" src="{{ app.user.avatar is empty ? asset ('build/images/default_avatar.png') : vich_uploader_asset(app.user) }}" alt="Image de profil">
+							</a>
+							<div class="d-flex flex-column align-items-start gap-1">
+								<a aria-label="Mon compte" href="{{ path('app_candidate_show', {'id': app.user.candidate.id}) }}">
+									<div>{{ app.user.firstname }}
+										{{ app.user.lastname }}</div>
+								</a>
+								<a class="nav-link p-0 m-0 d-flex align-items-center gap-1" href="{{ path('app_logout') }}">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewbox="0 0 16 16">
+										<path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+										<path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+									</svg>
+									<span>Déconnexion<span></a>
+									</div>
+								</div>
+							</li>
+						{% else %}
+							<li class="nav-item font-subtitle fs-4 px-2">
+								<a class="nav-link" href="{{ path("app_login") }}" aria-label="Connexion">Connexion</a>
+							</li>
+						{% endif %}
 					</li>
-				{% else %}
-					<li class="nav-item font-subtitle fs-4 px-2">
-						<a class="nav-link" href="{{ path("app_login") }}">Connexion</a>
-					</li>
-				{% endif %}
-			</ul>
+				</ul>
+			</div>
 		</div>
 	</div>
 </nav>

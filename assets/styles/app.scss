@@ -1,3 +1,46 @@
-//start coding by removing this file and adding yours ;)
+@use "profil";
 @import "root";
-@import "profil";
+@import "~bootstrap/scss/bootstrap";
+
+footer {
+    .container {
+        padding-block: 2vw;
+    }
+    ul {
+        list-style-type: none;
+    }
+}
+
+.font-title {
+    font-family: $font-title;
+}
+.font-subtitle {
+    font-family: $font-subtitle;
+}
+.font-body {
+    font-family: $font-body;
+}
+
+.rounded {
+    border-radius: $border-radius;
+}
+.badge {
+    font-size: 0.8rem;
+}
+
+label {
+    font-family: $font-subtitle;
+}
+
+body {
+    font-family: $font-body;
+    font-size: 1.2rem;
+    font-weight: 300;
+}
+.nav-bar-avatar {
+    object-fit: cover;
+    border-radius: 50%;
+}
+.account-container {
+    font-size: 1rem;
+}

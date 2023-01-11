@@ -9,24 +9,41 @@
 	{{ encore_entry_script_tags('previewAvatarRegistration') }}
 {% endblock %}
 {% block body %}
+
 	<div class="container">
-		<h1 class="font-title my-4">Inscription</h1>
-		<div class="w-50">
-			{{ form_start(registrationForm)}}
-			<div class="d-flex flex-column align-items-center mb-3">
-				<img class="profilPicture rounded-circle border mt-3" src="{{ asset ('build/images/default_avatar.png') }}" alt="Image de profil" id="avatar">
-			</div>
-			<div class="my-2">
-				{{ form_label(registrationForm.avatarFile) }}
-				{{ form_widget(registrationForm.avatarFile) }}
-			</div>
+		<div class="col-6 justify-content-center">
+			<div class="d-flex flex-column">
 
-			{{ form_widget(registrationForm) }}
-			<button type="submit" class="btn btn-primary">S'inscrire</button>
-			{{ form_end(registrationForm) }}
+				<div class="d-flex justify-content-around align-items-center">
+					<h1 class="font-title my-4">Inscription</h1>
+					<img class="profilPicture rounded-circle border mt-3" src="{{ asset ('build/images/default_avatar.png') }}" alt="Image de profil" id="avatar">
+				</div>
+
+				{{ form_start(registrationForm)}}
+
+				<div class="my-3">
+					{{ form_label(registrationForm.avatarFile) }}
+					{{ form_widget(registrationForm.avatarFile) }}
+				</div>
+
+				{{ form_widget(registrationForm) }}
+
+				<div class="d-flex justify-content-between">
+					<a class="btn btn-outline-secondary d-flex align-items-center" href="{{ path('app_login') }}">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class=" bi bi-arrow-left mx-1" viewbox="0 0 16 16">
+							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+						</svg>
+						<span class="d-none d-lg-block">Retour</span>
+					</a>
+					<button type="submit" class="btn btn-primary">
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg me-2" viewbox="0 0 16 16">
+							<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+						</svg>S'inscrire</button>
+				</div>
+
+				{{ form_end(registrationForm) }}
+
+			</div>
 		</div>
-
 	</div>
-
-
 {% endblock %}

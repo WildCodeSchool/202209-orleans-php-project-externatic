@@ -24,10 +24,16 @@ class LoginController extends AbstractController
     #[Route('/connexion_defaut', name: 'app_default_login')]
     public function defaultLog(): Response
     {
-    /**
-    * @var \App\Entity\User
-    */
+        /**
+         * @var \App\Entity\User
+         */
         $user = $this->getUser();
-        return $this->redirectToRoute('app_candidate_show', ['id' => $user->getId()]);
+
+        if (in_array('ROLE_CANDIDATE', $user->getRoles())) {
+            $userId = $user->getCandidate()->getId();
+            return $this->redirectToRoute('app_candidate_show', ['id' => $userId]);
+        } else {
+            return $this->redirectToRoute('app_home');
+        }
     }
 }

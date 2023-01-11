@@ -2,14 +2,18 @@
 
 namespace App\Entity;
 
+use DateTimeImmutable;
 use App\Repository\CandidateRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: CandidateRepository::class)]
+#[Vich\Uploadable]
 class Candidate
 {
     #[ORM\Id]
@@ -17,14 +21,14 @@ class Candidate
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 3)]
+    #[ORM\Column(length: 3, nullable: true)]
     #[Assert\NotBlank()]
     #[Assert\Length(
         max: 3,
     )]
     private ?string $nationality = null;
 
-    #[ORM\Column(length: 5)]
+    #[ORM\Column(length: 5, nullable: true)]
     #[Assert\NotBlank()]
     #[Assert\Length(
         max: 5,
@@ -35,7 +39,7 @@ class Candidate
     )]
     private ?string $postalCode = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank()]
     #[Assert\Length(
         max: 255,
@@ -80,14 +84,32 @@ class Candidate
     private ?User $user = null;
 
     #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Education::class)]
+    #[ORM\OrderBy(["startDate" => "DESC"])]
     private Collection $education;
 
     #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Experience::class)]
-    #[ORM\OrderBy(["endDate" => "DESC"])]
+    #[ORM\OrderBy(["startDate" => "DESC"])]
     private Collection $experiences;
 
     #[ORM\ManyToMany(targetEntity: Offer::class, inversedBy: 'candidates')]
     private Collection $offers;
+
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $curriculumVitae = null;
+
+    #[Vich\UploadableField(mapping: 'cv_file', fileNameProperty: 'curriculumVitae')]
+    #[Assert\File(
+        maxSize: '1M',
+        mimeTypes: [
+            'application/pdf',
+            'application/msword',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+        ],
+    )]
+    private ?File $cvFile = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    private ?\DatetimeInterface $updatedAt = null;
 
     public function __construct()
     {
@@ -307,6 +329,34 @@ class Candidate
     public function removeOffer(Offer $offer): self
     {
         $this->offers->removeElement($offer);
+
+        return $this;
+    }
+
+    public function getCurriculumVitae(): ?string
+    {
+        return $this->curriculumVitae;
+    }
+
+    public function setCurriculumVitae(?string $curriculumVitae): self
+    {
+        $this->curriculumVitae = $curriculumVitae;
+
+        return $this;
+    }
+
+    public function getCvFile(): ?File
+    {
+        return $this->cvFile;
+    }
+
+    public function setCvFile(File $cvFile): self
+    {
+        $this->cvFile = $cvFile;
+
+        if (null !== $cvFile) {
+            $this->updatedAt = new DateTimeImmutable('now');
+        }
 
         return $this;
     }

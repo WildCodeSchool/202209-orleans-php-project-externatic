@@ -21,22 +21,23 @@ class Experience
     private ?string $company = null;
 
     #[Assert\Expression(
-        "!this.getEndDate() ?: this.getEndDate() > this.getStartDate()",
+        "( !this.getEndDate() or this.isIsCurrentPosition() )?: this.getEndDate() > this.getStartDate()",
         message: 'La date de début doit être inférieure à la date de fin.',
     )]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Assert\NotBlank()]
     private ?DateTimeInterface $startDate = null;
 
-    #[Assert\LessThan('today')]
+    #[Assert\LessThan('tomorrow')]
     #[Assert\Expression(
-        "this.getEndDate() ?: this.isIsCurrentPosition() === true",
+        "this.getEndDate() ?: this.isIsCurrentPosition()",
         message: 'Vous devez choisir une date de fin ou cocher la case \'Poste actuel\'.'
     )]
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?DateTimeInterface $endDate = null;
 
     #[ORM\Column]
+    #[Assert\Expression("!this.isIsCurrentPosition() ?: this.setEndDate(null)")]
     private ?bool $isCurrentPosition = null;
 
     #[ORM\Column(length: 255)]

@@ -55,7 +55,7 @@
 					</svg>
 					<span class="d-none d-lg-block">Modifier</span>
 				</a>
-				<form class="d-flex align-items-center" method="post" action="{{ path('app_candidate_applyToJob', {candidate: app.user.candidate.id, offer: offer.id}) }}" onsubmit="return confirm('Confirmer la candidature ?');">
+				<form class="d-flex align-items-center" method="post" action="{{ path('app_candidate_apply_to_job', {offer: offer.id}) }}" onsubmit="return confirm('Confirmer la candidature ?');">
 					<input type="hidden" name="token" value="{{ csrf_token('apply-offer') }}">
 					<button class="btn btn-outline-primary">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen me-2" viewbox="0 0 16 16">
