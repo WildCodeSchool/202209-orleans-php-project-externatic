@@ -21,14 +21,14 @@ class Candidate
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 3)]
+    #[ORM\Column(length: 3, nullable: true)]
     #[Assert\NotBlank()]
     #[Assert\Length(
         max: 3,
     )]
     private ?string $nationality = null;
 
-    #[ORM\Column(length: 5)]
+    #[ORM\Column(length: 5, nullable: true)]
     #[Assert\NotBlank()]
     #[Assert\Length(
         max: 5,
@@ -39,7 +39,7 @@ class Candidate
     )]
     private ?string $postalCode = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Assert\NotBlank()]
     #[Assert\Length(
         max: 255,
