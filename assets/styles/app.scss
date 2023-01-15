@@ -44,3 +44,25 @@ body {
 .account-container {
     font-size: 1rem;
 }
+
+.bg-dark-background {
+    background-color: $dark-background;
+}
+.outline-custom {
+    border: 2px solid $grey-dark;
+}
+.primary-container {
+    background-color: $primary-container;
+    border-radius: $border-radius;
+}
+.tertiary-container {
+    background-color: $tertiary-container;
+    border-radius: $border-radius;
+}
+.quaternary-container {
+    background-color: $queternary-container;
+    border-radius: $border-radius;
+}
+.background-light {
+    background-color: $background;
+}
