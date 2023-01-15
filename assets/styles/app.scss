@@ -32,6 +32,10 @@ label {
     font-family: $font-subtitle;
 }
 
+.form-control, .form-select {
+    border-radius: $border-radius-input;
+}
+
 body {
     font-family: $font-body;
     font-size: 1.2rem;
