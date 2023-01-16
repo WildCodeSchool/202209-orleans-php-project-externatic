@@ -57,13 +57,9 @@ class Offer
     #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Application::class)]
     private Collection $applications;
 
-    // #[ORM\ManyToMany(targetEntity: Candidate::class, mappedBy: 'offers')]
-    // private Collection $candidates;
-
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
-        // $this->candidates = new ArrayCollection();
         $this->applications = new ArrayCollection();
     }
 
@@ -179,33 +175,6 @@ class Offer
 
         return $this;
     }
-
-    // /**
-    //  * @return Collection<int, Candidate>
-    //  */
-    // public function getCandidates(): Collection
-    // {
-    //     return $this->candidates;
-    // }
-
-    // public function addCandidate(Candidate $candidate): self
-    // {
-    //     if (!$this->candidates->contains($candidate)) {
-    //         $this->candidates->add($candidate);
-    //         $candidate->addOffer($this);
-    //     }
-
-    //     return $this;
-    // }
-
-    // public function removeCandidate(Candidate $candidate): self
-    // {
-    //     if ($this->candidates->removeElement($candidate)) {
-    //         $candidate->removeOffer($this);
-    //     }
-
-    //     return $this;
-    // }
 
     /**
      * @return Collection<int, Application>

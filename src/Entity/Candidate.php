@@ -91,9 +91,6 @@ class Candidate
     #[ORM\OrderBy(["startDate" => "DESC"])]
     private Collection $experiences;
 
-    // #[ORM\ManyToMany(targetEntity: Offer::class, inversedBy: 'candidates')]
-    // private Collection $offers;
-
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $curriculumVitae = null;
 
@@ -118,7 +115,6 @@ class Candidate
     {
         $this->education = new ArrayCollection();
         $this->experiences = new ArrayCollection();
-        // $this->offers = new ArrayCollection();
         $this->applications = new ArrayCollection();
     }
     public function getId(): ?int
@@ -312,30 +308,6 @@ class Candidate
 
         return $this;
     }
-
-    // /**
-    //  * @return Collection<int, Offer>
-    //  */
-    // public function getOffers(): Collection
-    // {
-    //     return $this->offers;
-    // }
-
-    // public function addOffer(Offer $offer): self
-    // {
-    //     if (!$this->offers->contains($offer)) {
-    //         $this->offers->add($offer);
-    //     }
-
-    //     return $this;
-    // }
-
-    // public function removeOffer(Offer $offer): self
-    // {
-    //     $this->offers->removeElement($offer);
-
-    //     return $this;
-    // }
 
     public function getCurriculumVitae(): ?string
     {
