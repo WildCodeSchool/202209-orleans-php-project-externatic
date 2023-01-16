@@ -6,11 +6,32 @@ $font-body: "Poppins", sans-serif;
 
 $primary: #851342;
 $secondary: #ca2262;
-$terciary: #0ea7c9;
+
 $light: #fff;
 $dark: #333;
+$danger: #ba1a1a;
+
+$tertiary: #8b92e9;
+$quaternary: #ffdbc8;
+$background-light: #fffbff;
+$background-dark: #201a1b;
+$container-primary: #ffd9e1;
+$container-secondary: #cce5ff;
+$container-tertiary: #ffdbc8;
+$grey-dark: #847376;
+
+$custom-colors: (
+    "tertiary" : $tertiary,
+    "quaternary" : $quaternary,
+    "background-light" : $background-light,
+    "background-dark" : $background-dark,
+    "container-primary" : $container-primary,
+    "container-secondary" : $container-secondary,
+    "container-tertiary" : $container-tertiary
+);
 
 $border-radius: 16px;
+$border-radius-input: 6px;
 $btn-border-radius: $border-radius;
 $btn-padding-y: 0.7rem;
 $btn-padding-x: 2rem;

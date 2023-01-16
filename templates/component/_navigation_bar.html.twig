@@ -21,6 +21,8 @@
 							<a aria-label="Mon compte" href="{{ path('app_candidate_show') }}">
 								<img class="nav-bar-avatar" width="45px" height="45px" src="{{ app.user.avatar is empty ? asset ('build/images/default_avatar.png') : vich_uploader_asset(app.user) }}" alt="Image de profil">
 							</a>
+
+
 							<div class="d-flex flex-column align-items-start gap-1">
 								<a aria-label="Mon compte" href="{{ path('app_candidate_show') }}">
 									<div>{{ app.user.firstname }}
@@ -33,13 +35,13 @@
 									</svg>
 									<span>Déconnexion<span></a>
 									</div>
-								</div>
-							</li>
-						{% else %}
-							<li class="nav-item font-subtitle fs-4 px-2">
-								<a class="nav-link" href="{{ path("app_login") }}" aria-label="Connexion">Connexion</a>
-							</li>
-						{% endif %}
+								</li>
+							{% else %}
+								<li class="nav-item font-subtitle fs-4 px-2">
+									<a class="nav-link" href="{{ path("app_login") }}" aria-label="Connexion">Connexion</a>
+								</li>
+							{% endif %}
+						</li>
 					</li>
 				</ul>
 			</div>

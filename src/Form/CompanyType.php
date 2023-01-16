@@ -4,18 +4,30 @@ namespace App\Form;
 
 use App\Entity\Company;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class CompanyType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('description')
-            ->add('postalCode')
-            ->add('city')
+            ->add('name', TextType::class, [
+                'label' => 'Nom de l\'entreprise',
+
+            ])
+            ->add('description', TextareaType::class, [
+                'label' => 'Description',
+                'attr' => [ "rows" => 30]
+            ])
+            ->add('postalCode', TextType::class, [
+                'label' => 'Code postal',
+            ])
+            ->add('city', TextType::class, [
+                'label' => 'Ville',
+            ])
         ;
     }
 
