@@ -25,7 +25,6 @@ class CandidateController extends AbstractController
 
         return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,
-            'user' => $user,
         ]);
     }
 
@@ -55,7 +54,6 @@ class CandidateController extends AbstractController
         return $this->renderForm('candidate/edit.html.twig', [
             'candidate' => $candidate,
             'form' => $form,
-            'user' => $user,
         ]);
     }
 

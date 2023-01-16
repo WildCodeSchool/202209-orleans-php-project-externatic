@@ -1,6 +1,6 @@
 <div class="row justify-content-between align-items-center">
 	<div class="col-md-1 text-center">
-		<img class="profilPicture rounded-circle border my-3" src="{{ user.avatar is empty ? asset ('build/images/default_avatar.png') : vich_uploader_asset(user) }}" alt="Image de profil">
+		<img class="profilPicture rounded-circle border my-3" src="{{ app.user.avatar is empty ? asset ('build/images/default_avatar.png') : vich_uploader_asset(app.user) }}" alt="Image de profil">
 	</div>
 	<div class="col-md-8 d-flex justify-content-between align-items-center">
 		<h1 class="font-title title-profil display-5">Profil</h1>
@@ -16,11 +16,11 @@
 <div class="row">
 	<dl class="row mb-1">
 		<dt class="font-title mb-1 col-lg-4  ">Prénom</dt>
-		<dd class="col-lg-8">{{ user.firstname }}</dd>
+		<dd class="col-lg-8">{{ app.user.firstname }}</dd>
 	</dl>
 	<dl class="row ">
 		<dt class="font-title mb-1 col-lg-4 ">Nom</dt>
-		<dd class="col-lg-8">{{ user.lastname }}</dd>
+		<dd class="col-lg-8">{{ app.user.lastname }}</dd>
 	</dl>
 	<dl class="row">
 		<dt class="font-title mb-1 col-lg-4 ">Nationalité</dt>
@@ -43,7 +43,7 @@
 	</dl>
 	<dl class="row">
 		<dt class="font-title mb-1 col-lg-4 ">Email</dt>
-		<dd class="col-lg-8">{{ user.email }}</dd>
+		<dd class="col-lg-8">{{ app.user.email }}</dd>
 	</dl>
 
 	<hr>

@@ -1,8 +1,8 @@
 {{ form_start(form) }}
 
 <div class="d-flex flex-column align-items-center mb-3">
-	<img id="avatar" class="profilPicture rounded-circle border mt-3" src="{{ user.avatar is empty ? asset ('build/images/default_avatar.png') : vich_uploader_asset(user) }}" alt="Image de profil">
-	<a class="text-decoration-none download-avatar" href="{{ user.avatar is empty ? asset ('build/images/default_avatar.png') : vich_uploader_asset(user) }}" download="">Télécharger</a>
+	<img id="avatar" class="profilPicture rounded-circle border mt-3" src="{{ app.user.avatar is empty ? asset ('build/images/default_avatar.png') : vich_uploader_asset(app.user) }}" alt="Image de profil">
+	<a class="text-decoration-none download-avatar" href="{{ app.user.avatar is empty ? asset ('build/images/default_avatar.png') : vich_uploader_asset(app.user) }}" download="">Télécharger</a>
 </div>
 <div class="my-2">
 	{{ form_label(form.user.avatarFile) }}
