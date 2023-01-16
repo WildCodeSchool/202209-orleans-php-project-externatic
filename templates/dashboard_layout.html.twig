@@ -22,10 +22,10 @@
 	<body class="background">
 
 
-		{% include "_flashes.html.twig" %}
+		
 		<main>
 
-			<div>
+			<div class="bg-background-light">
 				{% block body %}
 					<div class="dashboard-wrapper">
 
@@ -48,6 +48,9 @@
 
 						<div id="dashboard-content" class="dashboard-content p-2 p-lg-4">
 							<div class="container p-2 p-lg-5 mt-5">
+
+								{% include "_flashes.html.twig" %}
+								
 								{% block content %}{% endblock %}
 							</div>
 						</div>

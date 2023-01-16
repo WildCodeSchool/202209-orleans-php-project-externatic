@@ -32,6 +32,10 @@ label {
     font-family: $font-subtitle;
 }
 
+.form-control, .form-select {
+    border-radius: $border-radius-input;
+}
+
 body {
     font-family: $font-body;
     font-size: 1.2rem;
@@ -48,3 +52,8 @@ body {
     max-width: 650px;
     margin: auto;
 }
+.outline-custom {
+    border: 2px solid $grey-dark;
+}
+
+
