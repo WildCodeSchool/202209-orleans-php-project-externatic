@@ -54,13 +54,17 @@ class Offer
     #[ORM\ManyToOne(inversedBy: 'offers')]
     private ?Company $company = null;
 
-    #[ORM\ManyToMany(targetEntity: Candidate::class, mappedBy: 'offers')]
-    private Collection $candidates;
+    #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Application::class)]
+    private Collection $applications;
+
+    // #[ORM\ManyToMany(targetEntity: Candidate::class, mappedBy: 'offers')]
+    // private Collection $candidates;
 
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
-        $this->candidates = new ArrayCollection();
+        // $this->candidates = new ArrayCollection();
+        $this->applications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -176,28 +180,58 @@ class Offer
         return $this;
     }
 
+    // /**
+    //  * @return Collection<int, Candidate>
+    //  */
+    // public function getCandidates(): Collection
+    // {
+    //     return $this->candidates;
+    // }
+
+    // public function addCandidate(Candidate $candidate): self
+    // {
+    //     if (!$this->candidates->contains($candidate)) {
+    //         $this->candidates->add($candidate);
+    //         $candidate->addOffer($this);
+    //     }
+
+    //     return $this;
+    // }
+
+    // public function removeCandidate(Candidate $candidate): self
+    // {
+    //     if ($this->candidates->removeElement($candidate)) {
+    //         $candidate->removeOffer($this);
+    //     }
+
+    //     return $this;
+    // }
+
     /**
-     * @return Collection<int, Candidate>
+     * @return Collection<int, Application>
      */
-    public function getCandidates(): Collection
+    public function getApplications(): Collection
     {
-        return $this->candidates;
+        return $this->applications;
     }
 
-    public function addCandidate(Candidate $candidate): self
+    public function addApplication(Application $application): self
     {
-        if (!$this->candidates->contains($candidate)) {
-            $this->candidates->add($candidate);
-            $candidate->addOffer($this);
+        if (!$this->applications->contains($application)) {
+            $this->applications->add($application);
+            $application->setOffer($this);
         }
 
         return $this;
     }
 
-    public function removeCandidate(Candidate $candidate): self
+    public function removeApplication(Application $application): self
     {
-        if ($this->candidates->removeElement($candidate)) {
-            $candidate->removeOffer($this);
+        if ($this->applications->removeElement($application)) {
+            // set the owning side to null (unless already changed)
+            if ($application->getOffer() === $this) {
+                $application->setOffer(null);
+            }
         }
 
         return $this;

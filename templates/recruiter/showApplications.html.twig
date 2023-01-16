@@ -14,8 +14,23 @@
     <div class="row justify-content-center g-4">
       {% include 'component/_card.html.twig' with { offer: offer } only %}
       <h3>Candidat(s)</h3>
-      {% for candidate in offer.candidates %}
-        {% include 'component/_card_candidate.html.twig' with { candidate: candidate } only %}
+      {% for application in offer.applications %}
+        {# {% include 'component/_card_candidate.html.twig' with { candidate: application.candidate } only %} #}
+        <div class="col-lg-6">
+          <pre>{{ dump(application.candidate.id) }}</pre>
+
+          <div class="card card-background p-2">
+            <div class="m-2">
+              <div class="card-body">
+                <h2 class="fs-4 card-title card-offer-title">{{ application.candidate.user.firstname }} {{ application.candidate.user.lastname }}</h2>
+              </div>
+              <div class="d-flex justify-content-between m-2">
+                <h3 class="fs-6">{{ application.candidate.user.email }}</h3>
+                <a href="{{ path('app_recruiter_application_decision', { id: application.id }) }}" class="btn btn-primary px-6 py-1">Voir</a>
+              </div>
+            </div>
+          </div>
+        </div>
       {% endfor %}
       <div class="d-flex">
         <a aria-label="Retour à l'index" class="btn btn-outline-secondary d-flex align-items-center" href="{{ path('app_recruiter') }}">

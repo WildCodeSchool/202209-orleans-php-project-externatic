@@ -5,9 +5,11 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Offer;
 use App\Entity\Candidate;
+use App\Entity\Application;
 use App\Form\CandidateType;
 use App\Repository\OfferRepository;
 use App\Repository\CandidateRepository;
+use App\Repository\ApplicationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -62,7 +64,8 @@ class CandidateController extends AbstractController
     public function applyToJob(
         Request $request,
         Offer $offer,
-        CandidateRepository $candidateRepository
+        CandidateRepository $candidateRepository,
+        ApplicationRepository $applicationRepo
     ): Response {
         /** @var User $user */
         $user = $this->getUser();
@@ -70,7 +73,11 @@ class CandidateController extends AbstractController
         $submittedToken = $request->request->get('token');
 
         if ($this->isCsrfTokenValid('apply-offer', $submittedToken)) {
-            $candidate->addOffer($offer);
+            $application = new Application();
+            $application->setApplicationStatus('in-progress');
+            $application->setOffer($offer);
+            $candidate->addApplication($application);
+            $applicationRepo->save($application, true);
             $candidateRepository->save($candidate, true);
         }
 

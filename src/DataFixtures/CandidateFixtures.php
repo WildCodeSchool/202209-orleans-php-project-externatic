@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Application;
 use App\Entity\Candidate;
 use App\Entity\Offer;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -27,9 +28,14 @@ class CandidateFixtures extends Fixture implements DependentFixtureInterface
             $candidate->setGithub('https://fakerphp.github.io/formatters/');
             $candidate->setLinkedin('https://fakerphp.github.io/formatters/');
             $candidate->setPortfolio('https://fakerphp.github.io/formatters/');
-            $candidate->addOffer($this->getReference('offer_' . rand(0, OfferFixtures::NB_OFFER - 1)));
-            $this->addReference('Candidate_' . $i, $candidate);
 
+            $application = new Application();
+            $application->setApplicationStatus('in-progress');
+            $application->setOffer($this->getReference('offer_' . rand(0, OfferFixtures::NB_OFFER - 1)));
+            $candidate->addApplication($application);
+
+            $this->addReference('Candidate_' . $i, $candidate);
+            $manager->persist($application);
             $manager->persist($candidate);
         }
 
