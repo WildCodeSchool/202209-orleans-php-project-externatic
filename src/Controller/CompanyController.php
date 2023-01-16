@@ -57,6 +57,8 @@ class CompanyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $companyRepository->save($company, true);
 
+            $this->addFlash('success', 'La mise à jour de l\'entreprise à bien été prise en compte.');
+
             return $this->redirectToRoute('app_company_index', [], Response::HTTP_SEE_OTHER);
         }
 
