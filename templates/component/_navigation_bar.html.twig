@@ -25,7 +25,6 @@
 
 
 							<div class="d-flex flex-column align-items-start gap-1">
-								{% if  %}
 									<a aria-label="Mon compte" href="{{ app.user.candidate ? path('app_candidate_show', {'id': app.user.candidate.id }) : path('app_recruiter_application') }}">
 
 										<div>{{ app.user.firstname }}
