@@ -24,7 +24,9 @@ class OfferController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $keyWord = $form->getData()['search'];
-            $offers = $offerRepository->findByKeyWord($keyWord);
+            $keyWord = trim($keyWord);
+
+            $keyWord ? $offers = $offerRepository->findByKeyWord($keyWord) : $offers = $offerRepository->findAll();
         } else {
             $offers = $offerRepository->findAll();
         }
@@ -35,10 +37,22 @@ class OfferController extends AbstractController
         ]);
     }
     #[Route('/toutes-les-offres', name: 'showAll', methods: ['GET'])]
-    public function showAll(OfferRepository $offerRepository): Response
+    public function showAll(Request $request, OfferRepository $offerRepository): Response
     {
-        return $this->render('offer/showAll.html.twig', [
-            'offers' => $offerRepository->findBy([], ['createdAt' => 'DESC']),
+        $form = $this->createForm(SearchOfferType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $keyWord = $form->getData()['search'];
+            $keyWord = trim($keyWord);
+
+            $keyWord ? $offers = $offerRepository->findByKeyWord($keyWord) : $offers = $offerRepository->findAll();
+        } else {
+            $offers = $offerRepository->findAll();
+        }
+        return $this->renderForm('offer/showAll.html.twig', [
+            'offers' => $offers,
+            'form' => $form,
         ]);
     }
 
@@ -60,11 +74,20 @@ class OfferController extends AbstractController
             'form' => $form,
         ]);
     }
+    
     #[IsGranted("ROLE_CANDIDATE")]
-    #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Offer $offer): Response
+    #[Route('/{id}', name: 'show_loggedin', methods: ['GET'])]
+    public function isLogShow(Offer $offer): Response
     {
-        return $this->render('offer/show.html.twig', [
+        return $this->render('offer/isLogShow.html.twig', [
+            'offer' => $offer,
+        ]);
+    }
+    
+    #[Route('/loggedout/{id}', name: 'show_loggedout', methods: ['GET'])]
+    public function isNotLogShow(Offer $offer): Response
+    {
+        return $this->render('offer/isNotLogShow.html.twig', [
             'offer' => $offer,
         ]);
     }

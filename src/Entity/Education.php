@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\EducationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EducationRepository::class)]
 class Education
@@ -15,18 +16,28 @@ class Education
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(max: 255)]
     private ?string $school = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\Expression(
+        "!this.getEndDate() ?: this.getEndDate() > this.getStartDate()",
+        message: 'La date de début doit être inférieure à la date de fin.',
+    )]
+    #[Assert\NotBlank()]
     private ?\DateTimeInterface $startDate = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Assert\LessThan('tomorrow')]
     private ?\DateTimeInterface $endDate = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank()]
+    #[Assert\Length(max: 255)]
     private ?string $title = null;
 
     #[ORM\Column(nullable: true)]

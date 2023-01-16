@@ -1,0 +1,37 @@
+{% extends 'dashboard_layout.html.twig' %}
+
+{% block title %}
+  {{ parent() ~ ' | Candidatures' }}
+{% endblock %}
+
+{% block content %}
+  <div class="container p-4">
+    <h1>Toutes les Offres</h1>
+    <table class="table">
+      <thead class="thead-dark align-middle">
+        <tr>
+          <th scope="col" class="text-center">Offre</th>
+          <th scope="col" class="text-center">Ville</th>
+          <th scope="col" class="text-center">Date de creation</th>
+          <th scope="col" class="text-center">Nombre de candidats</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for offer in offers %}
+          {% if offer.candidates is not empty %}
+            <tr>
+              <td >{{ offer.title }}</td>
+              <td class="text-center">{{ offer.city }}</td>
+              <td class="text-center">{{ offer.createdAt|format_datetime('short', 'none') }}</td>
+              <td class="text-center">{{ offer.candidates.count }}</td>
+              <td class="text-center">
+                <a href="{{ path('app_recruiter_applications_details', { id: offer.id }) }}" class="btn btn-primary px-6 py-1">Candidatures</a>
+              </td>
+            </tr>
+          {% endif %}
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

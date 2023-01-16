@@ -2,28 +2,40 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Education;
 use App\Form\EducationType;
 use App\Repository\EducationRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/education')]
+#[Route('/formation')]
 class EducationController extends AbstractController
 {
-    #[Route('/new', name: 'app_education_new', methods: ['GET', 'POST'])]
+    #[Route('/ajouter', name: 'app_education_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EducationRepository $educationRepository): Response
     {
         $education = new Education();
         $form = $this->createForm(EducationType::class, $education);
         $form->handleRequest($request);
 
+        /** @var User */
+        $user = $this->getUser();
+
+        $candidate = $user->getCandidate();
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $education->setCandidate($candidate);
             $educationRepository->save($education, true);
 
-            return $this->redirectToRoute('app_education_index', [], Response::HTTP_SEE_OTHER);
+            $this->addFlash('success', 'Votre formation a été ajoutée.');
+
+
+            return $this->redirectToRoute('app_candidate_show', [
+                'id' => $candidate->getId(),
+            ], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('education/new.html.twig', [

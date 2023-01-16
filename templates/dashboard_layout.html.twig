@@ -16,37 +16,49 @@
 
 		{% block javascripts %}
 			{{ encore_entry_script_tags('app') }}
+			{{ encore_entry_script_tags('dashboardScript') }}
 		{% endblock %}
 	</head>
 	<body>
 
-		{% block navbar %}
-			{% include './component/_navigation_bar.html.twig' %}
-		{% endblock %}
-		{% include "_flashes.html.twig" %}
-		<main class="py-4 container-xxl">
 
-			<div class="row">
+		
+		<main>
+
+			<div class="bg-background-light">
 				{% block body %}
+					<div class="dashboard-wrapper">
 
-					<div class="col-md-2 dashboard-nav dashboard-side-gradient rounded">
-						{% block sideNav %}{% endblock %}
-					</div>
+						<div class="dashboard-nav-container">
+							<div id="dashboard-mobile" class="dashboard-mobile text-light">
+								<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-chevron-double-right" viewbox="0 0 16 16">
+									<path fill-rule="evenodd" d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"/>
+									<path fill-rule="evenodd" d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"/>
+								</svg>
+							</div>
 
-					<div class="col-md-10 dashboard-content">
-						<div class="dashboard-content-gradient my-3 py-2 py-lg-5 px-3 rounded">
-							{% block content %}{% endblock %}
+							<div id="dashboard-nav-pannel" class="dashboard-nav-wrapper">
+								<div class="h-100 w-100 d-flex flex-column px-1 pt-5 pb-2 pb-md-3 justify-content-between align-items-center">
+									{% block sideNav %}
+										{% include 'component/_sideBar_dashboard.html.twig' %}
+									{% endblock %}
+								</div>
+							</div>
 						</div>
-					</div>
 
-				{% endblock %}
+						<div id="dashboard-content" class="dashboard-content p-2 p-lg-4">
+							<div class="container p-2 p-lg-5 mt-5">
 
+								{% include "_flashes.html.twig" %}
+								
+								{% block content %}{% endblock %}
+							</div>
+						</div>
+
+					{% endblock %}
+				</div>
 			</div>
 
 		</main>
-
-		{% block footer %}
-			{% include 'component/_footer.html.twig' %}
-		{% endblock %}
 	</body>
-</html>
+</html></body></html>
