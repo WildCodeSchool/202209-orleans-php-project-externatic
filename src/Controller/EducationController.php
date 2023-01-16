@@ -6,10 +6,12 @@ use App\Entity\User;
 use App\Entity\Education;
 use App\Form\EducationType;
 use App\Repository\EducationRepository;
+use App\Service\VerifyEntity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Exception;
 
 #[Route('/formation')]
 class EducationController extends AbstractController
@@ -53,11 +55,19 @@ class EducationController extends AbstractController
     }
 
     #[Route('/{id}/modifier', name: 'app_education_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Education $education, EducationRepository $educationRepository): Response
-    {
+    public function edit(
+        Request $request,
+        Education $education,
+        EducationRepository $educationRepository,
+        VerifyEntity $verifyEntity
+    ): Response {
         /** @var User */
         $user = $this->getUser();
+        $educations = $user->getCandidate()->getEducation();
 
+        if (!$verifyEntity->IsInCollection($education, $educations)) {
+            throw new Exception("Pas d'accès");
+        };
 
         $form = $this->createForm(EducationType::class, $education);
         $form->handleRequest($request);
@@ -75,7 +85,6 @@ class EducationController extends AbstractController
         return $this->renderForm('education/edit.html.twig', [
             'education' => $education,
             'form' => $form,
-            'user' => $user,
         ]);
     }
 
