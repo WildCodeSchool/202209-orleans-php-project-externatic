@@ -18,11 +18,11 @@
 				{% if app.user %}
 					<li class="nav-item font-subtitle fs-4 px-2">
 						<div class="account-container d-flex align-items-center gap-2">
-							<a aria-label="Mon compte" href="{{ path('app_candidate_show', {'id': app.user.candidate.id}) }}">
+							<a aria-label="Mon compte" href="{{ path('app_candidate_show') }}">
 								<img class="nav-bar-avatar" width="45px" height="45px" src="{{ app.user.avatar is empty ? asset ('build/images/default_avatar.png') : vich_uploader_asset(app.user) }}" alt="Image de profil">
 							</a>
 							<div class="d-flex flex-column align-items-start gap-1">
-								<a aria-label="Mon compte" href="{{ path('app_candidate_show', {'id': app.user.candidate.id}) }}">
+								<a aria-label="Mon compte" href="{{ path('app_candidate_show') }}">
 									<div>{{ app.user.firstname }}
 										{{ app.user.lastname }}</div>
 								</a>

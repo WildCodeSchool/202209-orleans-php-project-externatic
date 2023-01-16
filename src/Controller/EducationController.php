@@ -55,6 +55,10 @@ class EducationController extends AbstractController
     #[Route('/{id}/modifier', name: 'app_education_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Education $education, EducationRepository $educationRepository): Response
     {
+        /** @var User */
+        $user = $this->getUser();
+
+
         $form = $this->createForm(EducationType::class, $education);
         $form->handleRequest($request);
 
@@ -71,6 +75,7 @@ class EducationController extends AbstractController
         return $this->renderForm('education/edit.html.twig', [
             'education' => $education,
             'form' => $form,
+            'user' => $user,
         ]);
     }
 
