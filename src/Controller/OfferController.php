@@ -74,7 +74,6 @@ class OfferController extends AbstractController
             'form' => $form,
         ]);
     }
-    
     #[IsGranted("ROLE_CANDIDATE")]
     #[Route('/{id}', name: 'show_loggedin', methods: ['GET'])]
     public function isLogShow(Offer $offer): Response
@@ -83,7 +82,6 @@ class OfferController extends AbstractController
             'offer' => $offer,
         ]);
     }
-    
     #[Route('/loggedout/{id}', name: 'show_loggedout', methods: ['GET'])]
     public function isNotLogShow(Offer $offer): Response
     {
