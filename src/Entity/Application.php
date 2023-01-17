@@ -8,6 +8,12 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ApplicationRepository::class)]
 class Application
 {
+    public const APPLICATION_STATUS = [
+        'IN_PROGRESS' => 'in-progress',
+        'REJECTED' => 'rejected',
+        'ACCEPTED' => 'accepted',
+    ];
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

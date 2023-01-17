@@ -15,9 +15,9 @@ class ApplicationResponseType extends AbstractType
     {
         $builder->add('ApplicationStatus', ChoiceType::class, [
             'choices' => [
-                'En cours' => 'in-progress',
-                'Acceptée' => 'accepted',
-                'Refusée' => 'rejected',
+                'En cours' => Application::APPLICATION_STATUS['IN_PROGRESS'],
+                'Acceptée' => Application::APPLICATION_STATUS['ACCEPTED'],
+                'Refusée' => Application::APPLICATION_STATUS['REJECTED'],
             ],
             'label' => 'Statut',
             'help' => 'Choisir et soumettre',

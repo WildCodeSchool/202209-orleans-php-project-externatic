@@ -30,7 +30,7 @@ class CandidateFixtures extends Fixture implements DependentFixtureInterface
             $candidate->setPortfolio('https://fakerphp.github.io/formatters/');
 
             $application = new Application();
-            $application->setApplicationStatus('in-progress');
+            $application->setApplicationStatus(Application::APPLICATION_STATUS['IN_PROGRESS']);
             $application->setOffer($this->getReference('offer_' . rand(0, OfferFixtures::NB_OFFER - 1)));
             $candidate->addApplication($application);
 

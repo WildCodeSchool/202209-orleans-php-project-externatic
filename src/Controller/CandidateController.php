@@ -74,7 +74,7 @@ class CandidateController extends AbstractController
 
         if ($this->isCsrfTokenValid('apply-offer', $submittedToken)) {
             $application = new Application();
-            $application->setApplicationStatus('in-progress');
+            $application->setApplicationStatus(Application::APPLICATION_STATUS['IN_PROGRESS']);
             $application->setOffer($offer);
             $candidate->addApplication($application);
             $applicationRepo->save($application, true);
