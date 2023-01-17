@@ -31,7 +31,7 @@ class LoginController extends AbstractController
 
         if (in_array('ROLE_CANDIDATE', $user->getRoles())) {
             $userId = $user->getCandidate()->getId();
-            return $this->redirectToRoute('app_candidate_show', ['id' => $userId]);
+            return $this->redirectToRoute('app_candidate_show');
         } else {
             return $this->redirectToRoute('app_home');
         }
