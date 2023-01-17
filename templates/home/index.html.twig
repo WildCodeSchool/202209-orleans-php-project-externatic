@@ -1,12 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
- {{ parent() ~ '| Accueil' }}
+	{{ parent() ~ '| Accueil' }}
 {% endblock %}
 
 {% block stylesheets %}
-			{{ parent() }}
-			{{ encore_entry_link_tags('home') }}
+	{{ parent() }}
+	{{ encore_entry_link_tags('home') }}
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('homeScript') }}
 {% endblock %}
 
 {% block body %}
@@ -14,12 +19,12 @@
 
 		<div class="container w-100 position-absolute top-50 start-50 translate-middle">
 			<div class="bg-light py-4 px-3 p-md-5 rounded">
-					{% include './component/_searchBar.html.twig' %}
+				{% include './component/_searchBar.html.twig' %}
 			</div>
 		</div>
-				
+
 		{% include './svg/_rounded.svg.twig' %}
-		
+
 	</section>
 
 	<section class="container pt-5 mt-5">
@@ -31,18 +36,18 @@
 			</h2>
 			<p>
 				Externatic, c’est avant tout une équipe d’experts IT, tous animés par la même passion des relations humaines. 
-				L’intelligence émotionnelle et l’éducation cognitive ne peuvent être remplacées par des algorithmes.
+												L’intelligence émotionnelle et l’éducation cognitive ne peuvent être remplacées par des algorithmes.
 			</p>
 
 			<p>
 				Notre cabinet de recrutement s’appuie sur des méthodes authentiques, 
-				où l’humain est tout simplement indispensable.
+												où l’humain est tout simplement indispensable.
 			</p>
 
 			<p>
 				Depuis 10 ans, externatic a développé un savoir-faire sur le recrutement de profils pénuriques. 
-				Ces compétences nous permettent d’intervenir sur d’autres secteurs que l’IT. 
-				Notamment l’industrie avec
+												Ces compétences nous permettent d’intervenir sur d’autres secteurs que l’IT. 
+												Notamment l’industrie avec
 				<a aria-label="Lien vers le site Induseo" href="https://induseo.fr/" class="text-secondary">Induseo</a>
 				et la cybersécurité avec
 				<a aria-label="Lien vers le site Underguard" href="https://underguard.fr/" class="text-secondary">Underguard</a>.
@@ -83,9 +88,9 @@
 				</div>
 				<h3>Notre proximité</h3>
 				<p>
-                    L’expérience professionnelle est une chose. L’expérience de vie en est une autre.
-                    Alors nos consultants prennent le temps de faire connaissance avec chaque personne, pour comprendre le contexte, le parcours, les envies et les projets.
-                </p>
+					L’expérience professionnelle est une chose. L’expérience de vie en est une autre.
+										                    Alors nos consultants prennent le temps de faire connaissance avec chaque personne, pour comprendre le contexte, le parcours, les envies et les projets.
+				</p>
 			</article>
 
 			<article class="col-lg-4">
@@ -94,29 +99,33 @@
 				</div>
 				<h3>Notre performance</h3>
 				<p>
-                    Notre réseau est une force et nous y travaillons sans relâche. 
-                    Notre expérience nous permet d’identifier les vrais besoins d’une entreprise et de ceux qui la rejoignent.
-                </p>
+					Notre réseau est une force et nous y travaillons sans relâche. 
+										                    Notre expérience nous permet d’identifier les vrais besoins d’une entreprise et de ceux qui la rejoignent.
+				</p>
 			</article>
 
-            <article class="col-lg-4">
+			<article class="col-lg-4">
 				<div class="d-flex justify-content-center p-4">
 					<img src="{{ asset ('build/images/sablier.png') }}" alt="sablier" width="35px" height="50px">
 				</div>
 				<h3>Notre durabilité</h3>
 				<p>
-                    Notre challenge est de trouver l’équipe qui fonctionnera ensemble de manière professionnelle et personnelle, 
-                    pour aller jusqu’au bout d’un projet commun. Notre responsabilité vis-à-vis des impacts de nos décisions et nos actions sur le long-terme correspondent également à notre politique RSE.
-                </p>
+					Notre challenge est de trouver l’équipe qui fonctionnera ensemble de manière professionnelle et personnelle, 
+										                    pour aller jusqu’au bout d’un projet commun. Notre responsabilité vis-à-vis des impacts de nos décisions et nos actions sur le long-terme correspondent également à notre politique RSE.
+				</p>
 			</article>
 
 		</div>
 	</section>
-  
-  <section class="container py-2 py-lg-5 mt-5">
-      <div class="d-flex justify-content-center">
-          <iframe class="youtube-video" src="https://www.youtube.com/embed/BYmNVsS5J58" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-      </div>
-  </section>
-  
+
+	<section class="container py-2 py-lg-5 mt-5">
+		<div class="d-flex justify-content-center">
+			<iframe class="youtube-video" src="https://www.youtube.com/embed/BYmNVsS5J58" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+		</div>
+	</section>
+
+	<section class="container mt-5">
+		{% include './home/_sponsor.html.twig' %}
+	</section>
+
 {% endblock %}
