@@ -46,31 +46,19 @@ class EducationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_education_show', methods: ['GET'])]
-    public function show(Education $education): Response
-    {
-        return $this->render('education/show.html.twig', [
-            'education' => $education,
-        ]);
-    }
-
     #[Route('/{id}/modifier', name: 'app_education_edit', methods: ['GET', 'POST'])]
     public function edit(
         Request $request,
         Education $education,
         EducationRepository $educationRepository,
-        VerifyEntity $verifyEntity
     ): Response {
-        /** @var User */
-        $user = $this->getUser();
-        $educations = $user->getCandidate()->getEducation();
-
-        if (!$verifyEntity->IsInCollection($education, $educations)) {
-            throw new Exception("Pas d'accès");
-        };
 
         $form = $this->createForm(EducationType::class, $education);
         $form->handleRequest($request);
+
+        if ($education->getCandidate()->getUser() !== $this->getUser()) {
+            return new Response("Vous n'êtes pas authorisé.", 403);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $educationRepository->save($education, true);
