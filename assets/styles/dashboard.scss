@@ -4,7 +4,7 @@ $dashboard-padding: 2rem;
 
 .dashboard-wrapper {
     display: grid;
-    grid-template-columns: 90px 6fr;
+    grid-template-columns: 85px 6fr;
     grid-template-rows: 1fr;
     height: 100vh;
     min-height: 400px;
@@ -65,8 +65,8 @@ $dashboard-padding: 2rem;
     overflow-y: scroll;
 }
 .menu-link-close {
-    width: 60px;
-    height: 60px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
 
     font-family: r.$font-subtitle;
