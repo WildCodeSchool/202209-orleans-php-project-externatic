@@ -5,11 +5,11 @@
         <div class="d-flex justify-content-end">
           <div>
             {% if is_granted('ROLE_CANDIDATE') %}
-              {% if application.applicationStatus == 'in-progress' %}
+              {% if application.applicationStatus == constant("App\\Entity\\Application::APPLICATION_STATUS")['IN_PROGRESS']  %}
                 <span class="badge badge-pill bg-warning fw-normal">En cours</span>
-              {% elseif application.applicationStatus == 'rejected' %}
+              {% elseif application.applicationStatus == constant("App\\Entity\\Application::APPLICATION_STATUS")['REJECTED'] %}
                 <span class="badge badge-pill bg-danger fw-normal">Rejetée</span>
-              {% elseif application.applicationStatus == 'accepted' %}
+              {% elseif application.applicationStatus == constant("App\\Entity\\Application::APPLICATION_STATUS")['ACCEPTED'] %}
                 <span class="badge badge-pill bg-success fw-normal">Acceptée</span>
               {% endif %}
             {% endif %}
