@@ -52,6 +52,11 @@ class ExperienceController extends AbstractController
         $form = $this->createForm(ExperienceType::class, $experience);
         $form->handleRequest($request);
 
+        if ($experience->getCandidate()->getUser() !== $this->getUser()) {
+            return new Response("Vous n'êtes pas authorisé.", 403);
+        }
+
+
         if ($form->isSubmitted() && $form->isValid()) {
             $experienceRepository->save($experience, true);
 
