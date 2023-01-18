@@ -15,7 +15,7 @@
 					({{ offer.postalCode }})
 				</div>
 
-				{% if app.user.candidate %}
+				{% if is_granted('ROLE_CANDIDATE') %}
 					<i class="bi {{app.user.candidate.isInFavorite(offer) ? 'bi-star-fill' : 'bi-star' }}"></i>
 				{% endif %}
 
