@@ -18,26 +18,26 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/candidat', name: 'app_candidate_')]
 class CandidateController extends AbstractController
 {
-    #[Route('/{id}/mes-candidatures', name: 'show_offers_applied', methods: ['GET'])]
-    public function showAll(Candidate $candidate): Response
+    #[Route('/', name: 'show', methods: ['GET'])]
+    public function show(): Response
     {
-        return $this->render('candidate/showMyApplications.html.twig', [
-            'candidate' => $candidate
-        ]);
-    }
+        /** @var User */
+        $user = $this->getUser();
+        $candidate = $user->getCandidate();
 
-    #[Route('/{id}', name: 'show', methods: ['GET'])]
-    public function show(Candidate $candidate): Response
-    {
         return $this->render('candidate/show.html.twig', [
             'candidate' => $candidate,
-            'user' => $candidate->getUser(),
         ]);
     }
 
-    #[Route('/{id}/modifier', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Candidate $candidate, CandidateRepository $candidateRepository): Response
+    #[Route('/modifier', name: 'edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, CandidateRepository $candidateRepository): Response
     {
+        /** @var User */
+        $user = $this->getUser();
+        $candidate = $user->getCandidate();
+
+
         $form = $this->createForm(CandidateType::class, $candidate);
         $form->handleRequest($request);
 
@@ -48,7 +48,7 @@ class CandidateController extends AbstractController
 
             return $this->redirectToRoute(
                 'app_candidate_show',
-                ['id' => $candidate->getId()],
+                ['id' => $user->getCandidate()->getId()],
                 Response::HTTP_SEE_OTHER
             );
         }
@@ -56,9 +56,21 @@ class CandidateController extends AbstractController
         return $this->renderForm('candidate/edit.html.twig', [
             'candidate' => $candidate,
             'form' => $form,
-            'user' => $candidate->getUser(),
         ]);
     }
+
+    #[Route('/mes-candidatures', name: 'show_offers_applied', methods: ['GET'])]
+    public function showAll(Candidate $candidate): Response
+    {
+        /** @var User */
+        $user = $this->getUser();
+        $candidate = $user->getCandidate();
+
+        return $this->render('candidate/showMyApplications.html.twig', [
+            'candidate' => $candidate
+        ]);
+    }
+
 
     #[Route('/{offer}/candidater', name: 'apply_to_job', methods: ['GET', 'POST'])]
     public function applyToJob(

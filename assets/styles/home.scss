@@ -10,3 +10,26 @@
     width: 80%;
     aspect-ratio: 16/9;
 }
+
+#sponsors-wrapper {
+    display: inline-flex;
+    flex-wrap: nowrap;
+    gap: 2rem;
+    flex-basis: fit-content;
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    user-select: none;
+}
+
+#slide-left {
+    cursor: pointer;
+    &:hover {
+        transform: scale(1.2);
+    }
+}
+#slide-right {
+    cursor: pointer;
+    &:hover {
+        transform: scale(1.2);
+    }
+}

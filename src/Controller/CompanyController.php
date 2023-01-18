@@ -10,14 +10,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/company')]
+#[Route('/entreprise')]
 class CompanyController extends AbstractController
 {
     #[Route('/', name: 'app_company_index', methods: ['GET'])]
     public function index(CompanyRepository $companyRepository): Response
     {
         return $this->render('company/index.html.twig', [
-            'companies' => $companyRepository->findAll(),
+            'companies' => $companyRepository->findBy([], ["postalCode" => "ASC", "name" => "ASC"]),
         ]);
     }
 
@@ -56,6 +56,8 @@ class CompanyController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $companyRepository->save($company, true);
+
+            $this->addFlash('success', 'La mise à jour de l\'entreprise à bien été prise en compte.');
 
             return $this->redirectToRoute('app_company_index', [], Response::HTTP_SEE_OTHER);
         }

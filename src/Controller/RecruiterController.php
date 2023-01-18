@@ -12,12 +12,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class RecruiterController extends AbstractController
 {
-    #[Route('/recruiter', name: 'app_recruiter')]
-    public function index(OfferRepository $offerRepository): Response
+    #[Route('/espace-recruteur/candidatures', name: 'app_recruiter_application')]
+    public function showApplications(OfferRepository $offerRepository): Response
     {
         $offers = $offerRepository->findBy([], ['createdAt' => 'DESC']);
 
-        return $this->render('recruiter/index.html.twig', [
+        return $this->render('recruiter/applications.html.twig', [
             'offers' => $offers,
         ]);
     }
