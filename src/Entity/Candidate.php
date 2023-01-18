@@ -91,9 +91,6 @@ class Candidate
     #[ORM\OrderBy(["startDate" => "DESC"])]
     private Collection $experiences;
 
-    #[ORM\ManyToMany(targetEntity: Offer::class, inversedBy: 'candidates')]
-    private Collection $offers;
-
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private ?string $curriculumVitae = null;
 
@@ -111,11 +108,14 @@ class Candidate
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DatetimeInterface $updatedAt = null;
 
+    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Application::class)]
+    private Collection $applications;
+
     public function __construct()
     {
         $this->education = new ArrayCollection();
         $this->experiences = new ArrayCollection();
-        $this->offers = new ArrayCollection();
+        $this->applications = new ArrayCollection();
     }
     public function getId(): ?int
     {
@@ -309,30 +309,6 @@ class Candidate
         return $this;
     }
 
-    /**
-     * @return Collection<int, Offer>
-     */
-    public function getOffers(): Collection
-    {
-        return $this->offers;
-    }
-
-    public function addOffer(Offer $offer): self
-    {
-        if (!$this->offers->contains($offer)) {
-            $this->offers->add($offer);
-        }
-
-        return $this;
-    }
-
-    public function removeOffer(Offer $offer): self
-    {
-        $this->offers->removeElement($offer);
-
-        return $this;
-    }
-
     public function getCurriculumVitae(): ?string
     {
         return $this->curriculumVitae;
@@ -356,6 +332,36 @@ class Candidate
 
         if (null !== $cvFile) {
             $this->updatedAt = new DateTimeImmutable('now');
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Application>
+     */
+    public function getApplications(): Collection
+    {
+        return $this->applications;
+    }
+
+    public function addApplication(Application $application): self
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications->add($application);
+            $application->setCandidate($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Application $application): self
+    {
+        if ($this->applications->removeElement($application)) {
+            // set the owning side to null (unless already changed)
+            if ($application->getCandidate() === $this) {
+                $application->setCandidate(null);
+            }
         }
 
         return $this;

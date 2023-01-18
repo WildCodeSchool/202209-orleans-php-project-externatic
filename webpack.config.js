@@ -32,6 +32,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('app', './assets/app.js')
+    .addEntry('homeScript', './assets/home.js')
     .addEntry('previewAvatar', './assets/preview.js')
     .addEntry('previewAvatarRegistration', './assets/previewRegistration.js')
     .addEntry('endDate', './assets/endDate.js')
