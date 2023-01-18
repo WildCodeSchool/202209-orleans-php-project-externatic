@@ -7,14 +7,15 @@
 		{% if offer.isImportant and is_granted('ROLE_RECRUITER') %}
 			<span class="badge badge-pill bg-danger fw-normal fs-5 me-3">Important</span>
 		{% endif %}
-
+	</div>
+	<h2>{{ offer.title }}
+	
 		{% if is_granted('ROLE_CANDIDATE') %}
-			<a id="favorite" class="text-decoration-none text-dark" href="{{ path('app_candidate_add_favorite', {id: offer.id})}}">
+			<a id="favorite" class="ms-2 text-decoration-none text-dark" href="{{ path('app_candidate_add_favorite', {id: offer.id})}}">
 				<i class="bi {{ app.user.candidate.isInFavorite(offer) ? 'bi-star-fill' : 'bi-star' }}"></i>
 			</a>
 		{% endif %}
-	</div>
-	<h2>{{ offer.title }}</h2>
+		</h2>
 	<div class="d-flex justify-content-center">
 		<div class="mt-4 d-flex align-items-center">
 			<span>
