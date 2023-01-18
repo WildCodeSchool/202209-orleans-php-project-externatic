@@ -1,41 +1,48 @@
-<div class="d-flex justify-content-center align-items-center gap-3 p-5 rounded bg-secondary text-light">
+<div class="d-flex justify-content-center align-items-center gap-3 p-5 rounded text-dark">
 	<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="currentColor" class="bi bi-person-circle" viewbox="0 0 16 16">
 		<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
 		<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
 	</svg>
-	<h1 class="font-title display-5">Mon Profil</h1>
+	<h1 class="font-title fs-1">Mon Profil</h1>
 </div>
 <hr>
 
+
 <div id="contact-main-info" class="row m-0 p-4 py-5 mt-5 rounded box-shadow">
 
-	<div class="col-md-3 text-center">
+	<div class="col-lg-5 col-xl-3 d-flex justify-content-center align-items-center">
 		<img class="profilPicture rounded-circle border my-3" src="{{ app.user.avatar is empty ? asset ('build/images/default_avatar.png') : vich_uploader_asset(app.user) }}" alt="Image de profil">
 	</div>
-	<div class="col-md-9">
-		<dl class="d-flex gap-3">
-			<dt class="font-title mb-1">Prénom</dt>
-			<dd>{{ app.user.firstname }}</dd>
-		</dl>
-		<dl class="d-flex gap-3">
-			<dt class="font-title mb-1">Nom</dt>
-			<dd>{{ app.user.lastname }}</dd>
-		</dl>
-		<dl class="d-flex gap-3">
-			<dt class="font-title mb-1">Nationalité</dt>
-			<dd>{{ candidate.nationality|country_name }}</dd>
-		</dl>
+	<div class="col-lg-7 col-xl-9">
+
+		<div>
+			<span class="fw-bold fs-4">{{ app.user.firstname }}
+				{{ app.user.lastname }}</span>
+		</div>
+		<div class="d-flex gap-3">
+			<span>{{ candidate.nationality|country_name }}</span>
+		</div>
+
+		<div class="mt-4">
+			<p class="fw-bold font-title mb-1">À propos de moi</p>
+			<p>{{ candidate.aboutMe|nl2br }}</p>
+		</div>
+		<div class="mt-4">
+			<p class="fw-bold font-title mb-1">Centre d'intérêts</p>
+			<p>{{ candidate.hobby }}</p>
+		</div>
+
 	</div>
 
 </div>
 
-<div class="row m-0 my-5 p-2 box-shadow rounded">
+<div class="row m-0 my-4 p-2 box-shadow rounded">
 
 	<div class="row rounded p-4">
 		<h3 class="font-subtitle">Contact</h3>
 		<div class="col-xl-6">
 			<div class="rounded p-3">
-				<h4 class="mt-2">Adresse</h4>
+				<h4 class="font-title fs-5 mt-2">Adresse</h4>
 				<div class="d-flex align-items-center gap-3 my-1">
 					<span>
 						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-at" viewbox="0 0 16 16">
@@ -64,7 +71,7 @@
 		</div>
 		<div class="col-xl-6">
 			<div class="rounded p-3 h-100">
-				<h4 class="mt-2">Réseaux sociaux</h4>
+				<h4 class="font-title fs-5 mt-2">Réseaux sociaux</h4>
 				<div class="d-flex gap-3">
 					<a aria-label="github" class="nav-link" href="{{ candidate.github }}">
 						<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-github" viewbox="0 0 16 16">
@@ -87,24 +94,8 @@
 	</div>
 </div>
 
-<div class="row m-0 my-5 p-2 box-shadow rounded">
-	<div class="p-4">
-		<h3 class="font-subtitle">Description</h3>
-		<div class="mt-2">
-			<p class="font-title mb-1">À propos de moi</p>
-			<p>{{ candidate.aboutMe|nl2br }}</p>
-		</div>
-		<div class="mt-2">
-			<p class="font-title mb-1">Centre d'intérêts</p>
-			<p>{{ candidate.hobby }}</p>
-		</div>
-
-
-	</div>
-</div>
-
 <div class="d-flex justify-content-center">
-	<a class="btn btn-outline-tertiary btn" href="{{ path('app_candidate_edit') }}">
+	<a class="btn btn-outline-tertiary btn-sm" href="{{ path('app_candidate_edit') }}">
 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewbox="0 0 16 16">
 			<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
 		</svg>
