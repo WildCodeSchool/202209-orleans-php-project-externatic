@@ -23,7 +23,7 @@ class Application
     #[ORM\JoinColumn(nullable: false)]
     private ?Candidate $candidate = null;
 
-    #[ORM\ManyToOne(inversedBy: 'applications')]
+    #[ORM\ManyToOne(inversedBy: 'applications', fetch : 'EAGER')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Offer $offer = null;
 

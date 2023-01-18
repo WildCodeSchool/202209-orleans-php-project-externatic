@@ -60,7 +60,7 @@ class CandidateController extends AbstractController
     }
 
     #[Route('/mes-candidatures', name: 'show_offers_applied', methods: ['GET'])]
-    public function showAll(Candidate $candidate): Response
+    public function showAll(): Response
     {
         /** @var User */
         $user = $this->getUser();
