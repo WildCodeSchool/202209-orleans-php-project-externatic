@@ -13,6 +13,7 @@ use App\Repository\ApplicationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/candidat', name: 'app_candidate_')]
@@ -94,5 +95,28 @@ class CandidateController extends AbstractController
         }
 
         return $this->redirectToRoute('app_offer_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+    #[Route('/{id}/ajouter-aux-favoris', methods: ['GET', 'POST'], name: 'add_favorite')]
+    public function addToFavorite(Offer $offer, CandidateRepository $candidateRepository): JsonResponse
+    {
+        /** @var \App\Entity\User */
+        $user = $this->getUser();
+        $candidate = $user->getCandidate();
+
+        if ($candidate) {
+            if ($candidate->getFavorite()->contains($offer)) {
+                $candidate->removeFavorite($offer);
+            } else {
+                $candidate->addFavorite($offer);
+            }
+
+            $candidateRepository->save($candidate, true);
+        } else {
+            $this->addFlash('danger', 'Veuillez vous connecter.');
+        }
+
+        return $this->json(['isInFavorite' => $candidate->getFavorite()->contains($offer)]);
     }
 }

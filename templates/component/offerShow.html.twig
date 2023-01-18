@@ -1,7 +1,19 @@
+{% block javascripts %}
+	{{ encore_entry_script_tags('favorite') }}
+{% endblock %}
+
 <div class="d-flex flex-column align-items-center justify-content-center p-4">
 	<div>
 		{% if offer.isImportant and is_granted('ROLE_RECRUITER') %}
 			<span class="badge badge-pill bg-danger fw-normal fs-5 me-3">Important</span>
+		{% endif %}
+
+		{% if is_granted('ROLE_CANDIDATE') %}
+			<a id="favorite" class="text-decoration-none text-dark" href="{{ path('app_candidate_add_favorite', {id: offer.id})}}">
+				{% if app.user.candidate %}
+					<i class="bi {{ app.user.candidate.isInFavorite(offer) ? 'bi-star-fill' : 'bi-star' }}"></i>
+				{% endif %}
+			</a>
 		{% endif %}
 	</div>
 	<h2>{{ offer.title }}</h2>

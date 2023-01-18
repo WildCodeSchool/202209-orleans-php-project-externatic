@@ -14,6 +14,9 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: CandidateRepository::class)]
 #[Vich\Uploadable]
+/**
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ */
 class Candidate
 {
     #[ORM\Id]
@@ -111,11 +114,15 @@ class Candidate
     #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Application::class)]
     private Collection $applications;
 
+    #[ORM\ManyToMany(targetEntity: Offer::class, inversedBy: 'candidates')]
+    private Collection $favorite;
+
     public function __construct()
     {
         $this->education = new ArrayCollection();
         $this->experiences = new ArrayCollection();
         $this->applications = new ArrayCollection();
+        $this->favorite = new ArrayCollection();
     }
     public function getId(): ?int
     {
@@ -365,5 +372,34 @@ class Candidate
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection<int, Offer>
+     */
+    public function getFavorite(): Collection
+    {
+        return $this->favorite;
+    }
+
+    public function addFavorite(Offer $favorite): self
+    {
+        if (!$this->favorite->contains($favorite)) {
+            $this->favorite->add($favorite);
+        }
+
+        return $this;
+    }
+
+    public function removeFavorite(Offer $favorite): self
+    {
+        $this->favorite->removeElement($favorite);
+
+        return $this;
+    }
+
+    public function isInFavorite(Offer $offer): bool
+    {
+        return $this->favorite->contains($offer);
     }
 }
