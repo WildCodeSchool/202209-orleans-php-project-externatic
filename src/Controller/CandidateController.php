@@ -98,7 +98,6 @@ class CandidateController extends AbstractController
         return $this->redirectToRoute('app_offer_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[IsGranted('ROLE_CANDIDATE')]
     #[Route('/{id}/ajouter-aux-favoris', methods: ['GET', 'POST'], name: 'add_favorite')]
     public function addToFavorite(Offer $offer, CandidateRepository $candidateRepository): JsonResponse
     {
