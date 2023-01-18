@@ -108,7 +108,7 @@ class Candidate
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DatetimeInterface $updatedAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Application::class)]
+    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Application::class, fetch : 'EAGER')]
     private Collection $applications;
 
     public function __construct()
