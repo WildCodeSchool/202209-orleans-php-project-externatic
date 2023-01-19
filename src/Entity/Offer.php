@@ -57,10 +57,14 @@ class Offer
     #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Application::class)]
     private Collection $applications;
 
+    #[ORM\ManyToMany(targetEntity: Candidate::class, mappedBy: 'favorite')]
+    private Collection $candidates;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
         $this->applications = new ArrayCollection();
+        $this->candidates = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -201,6 +205,33 @@ class Offer
             if ($application->getOffer() === $this) {
                 $application->setOffer(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Candidate>
+     */
+    public function getCandidates(): Collection
+    {
+        return $this->candidates;
+    }
+
+    public function addCandidate(Candidate $candidate): self
+    {
+        if (!$this->candidates->contains($candidate)) {
+            $this->candidates->add($candidate);
+            $candidate->addFavorite($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCandidate(Candidate $candidate): self
+    {
+        if ($this->candidates->removeElement($candidate)) {
+            $candidate->removeFavorite($this);
         }
 
         return $this;

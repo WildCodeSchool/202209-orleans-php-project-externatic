@@ -1,35 +1,38 @@
 <div class="col-lg-6">
-  <div class="card card-background p-2">
-    <div class="m-2">
-      <div class="d-flex justify-content-end">
-        <div class="d-flex justify-content-end">
-          <div>
-            {% if is_granted('ROLE_CANDIDATE') %}
-              {% if application.applicationStatus == constant("App\\Entity\\Application::APPLICATION_STATUS")['IN_PROGRESS']  %}
-                <span class="badge badge-pill bg-warning fw-normal">En cours</span>
-              {% elseif application.applicationStatus == constant("App\\Entity\\Application::APPLICATION_STATUS")['REJECTED'] %}
-                <span class="badge badge-pill bg-danger fw-normal">Rejetée</span>
-              {% elseif application.applicationStatus == constant("App\\Entity\\Application::APPLICATION_STATUS")['ACCEPTED'] %}
-                <span class="badge badge-pill bg-success fw-normal">Acceptée</span>
-              {% endif %}
-            {% endif %}
-          </div>
-        </div>
-        <div>
-          {% if offer.isImportant and is_granted('ROLE_RECRUITER') %}
-            <span class="badge badge-pill bg-danger fw-normal mx-1">Important</span>
-          {% endif %}
-        </div>
-      </div>
-      <div class="fs-6">{{ offer.city }}
-        ({{ offer.postalCode }})</div>
-      <div class="card-body">
-        <h2 class="fs-4 card-title card-offer-title">{{ offer.title }}</h2>
-      </div>
-      <div class="d-flex justify-content-between m-2">
-        <h3 class="fs-4">{{ offer.annualWage / 1000 }}K€/ an</h3>
-        <a href="{{ app.user ? path('app_offer_show_loggedin', { id: offer.id }) : path('app_offer_show_loggedout', { id: offer.id }) }}" class="btn btn-primary px-6 py-1">Voir</a>
-      </div>
-    </div>
-  </div>
+	<div class="card card-background p-2">
+		<div class="m-2">
+			<div class="d-flex justify-content-end">
+				<div class="d-flex justify-content-end">
+					<div>
+						{% if is_granted('ROLE_CANDIDATE') and application ?? false %}
+							{% if application.applicationStatus == constant("App\\Entity\\Application::APPLICATION_STATUS")['IN_PROGRESS']  %}
+								<span class="badge badge-pill bg-warning fw-normal">En cours</span>
+							{% elseif application.applicationStatus == constant("App\\Entity\\Application::APPLICATION_STATUS")['REJECTED'] %}
+								<span class="badge badge-pill bg-danger fw-normal">Rejetée</span>
+							{% elseif application.applicationStatus == constant("App\\Entity\\Application::APPLICATION_STATUS")['ACCEPTED'] %}
+								<span class="badge badge-pill bg-success fw-normal">Acceptée</span>
+							{% endif %}
+						{% endif %}
+					</div>
+				</div>
+				<div>
+					{% if offer.isImportant and is_granted('ROLE_RECRUITER') %}
+						<span class="badge badge-pill bg-danger fw-normal mx-1">Important</span>
+					{% endif %}
+										{% if is_granted('ROLE_CANDIDATE') %}
+						<i class="ms-1 bi {{app.user.candidate.isInFavorite(offer) ? 'bi-star-fill' : 'bi-star' }}"></i>
+					{% endif %}
+				</div>
+			</div>
+			<div class="fs-6">{{ offer.city }}
+				({{ offer.postalCode }})</div>
+			<div class="card-body">
+				<h2 class="fs-4 card-title card-offer-title">{{ offer.title }}</h2>
+			</div>
+			<div class="d-flex justify-content-between m-2">
+				<h3 class="fs-4">{{ offer.annualWage / 1000 }}K€/ an</h3>
+				<a href="{{ app.user ? path('app_offer_show_loggedin', { id: offer.id }) : path('app_offer_show_loggedout', { id: offer.id }) }}" class="btn btn-primary px-6 py-1">Voir</a>
+			</div>
+		</div>
+	</div>
 </div>
