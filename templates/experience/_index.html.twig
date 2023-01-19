@@ -1,63 +1,61 @@
-<div class="row mt-5 ">
+<div class="d-flex justify-content-center align-items-center mt-5 mb-3 p-4 rounded bg-container-secondary text-light box-shadow">
+	<h3 class="font-title title-profil fs-4">Expériences professionnelles</h3>
+</div>
 
-	<div class="d-flex justify-content-between align-items-center">
-		<h1 class="font-title title-profil display-5">Expériences professionnelles</h1>
-	</div>
+<div class="d-flex justify-content-center my-3">
+	<a class="btn btn-sm btn-outline-container-secondary d-flex align-items-center" href="{{ path('app_experience_new', {'id': app.user.candidate.id }) }}">
+		<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewbox="0 0 16 16">
+			<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+		</svg>
+		<span>Ajouter une expérience</span>
+	</a>
 </div>
 
 {% for experience in app.user.candidate.experiences %}
-	<div class="d-flex flex-column">
-		<div class="d-flex justify-content-between align-items-center mt-2">
-				<div class="d-flex align-items-center me-2">
-					<span class="badge badge-pill bg-info fs-6 fw-normal">{{ experience.contract ? experience.contract.name : ''  }}</span>
-				</div>
-			<div class="d-flex align-items-center">
-				<a class="btn btn-outline-primary btn-sm ms-2 align-items-center" href="{{ path('app_experience_edit', {'id': experience.id}) }}">
-					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewbox="0 0 16 16">
-						<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
-					</svg>
-					<span class="d-none d-md-inline ms-2">Modifier</span>
-				</a>
-				{{ include('experience/_delete_form.html.twig') }}
-			</div>
 
+	<div class="rounded box-shadow p-5">
+		<div class="d-flex">
+			<h2 class="font-title m-0">{{ experience.jobTitle }}</h2>
 		</div>
-			<div class="d-flex">
-				<h2 class="font-title m-0">{{ experience.jobTitle }}</h2>
-			</div>
-		<div class="row">
-			<div class="row">
-				<p class="font-title experiencePeriode mb-2 col-lg-4">
-					{{ (experience.startDate ? experience.startDate|date('d/m/Y') : '') ~ 
+
+		<div class="mt-1">
+			<p class="font-title experiencePeriode mb-2">
+				{{ (experience.startDate ? experience.startDate|date('d/m/Y') : '') ~ 
 								' - ' ~ 
 								(experience.isCurrentPosition ? 'Poste actuel' : (experience.endDate ? experience.endDate|date('d/m/Y') : '')) }}</p>
 
-			</div>
 		</div>
-	</div>
 
-	<div class="row mt-1">
-		<dl class="row">
-			<dd class="align-self-baseline fw-bolder">
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-buildings me-2" viewbox="0 0 16 16">
-					<path d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"/>
-					<path d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"/>
+		<div class="mt-2">
+			<span class="badge badge-pill bg-success fs-6 fw-normal me-2 text-dark border">{{ experience.contract ? experience.contract.name : ''  }}</span>
+			<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-buildings me-2" viewbox="0 0 16 16">
+				<path d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"/>
+				<path d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"/>
+			</svg>
+			<span>{{ experience.company }}</span>
+		</div>
+
+
+		<div class="mt-4">
+			<p class="align-self-baseline">{{ experience.jobDescription|nl2br }}</p>
+		</div>
+
+
+		<div class="d-flex justify-content-center align-items-center mt-4">
+			<a class="btn btn-outline-tertiary btn-sm ms-2 align-items-center" href="{{ path('app_experience_edit', {'id': experience.id}) }}">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewbox="0 0 16 16">
+					<path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
 				</svg>
-				{{ experience.company }}</dd>
-		</dl>
-
-
-		<dl class="row mb-5">
-			<dd class="align-self-baseline fs-5">{{ experience.jobDescription|nl2br }}</dd>
-		</dl>
-		<hr>
+				<span class="ms-2">Modifier</span>
+			</a>
+			{{ include('experience/_delete_form.html.twig') }}
+		</div>
 
 	</div>
-
 
 {% else %}
 	<div>
-		<p>Aucune expérience</p>
+		<p>Aucune expérience professionnelle enregistrée...</p>
 	</div>
 {% endfor %}
 

@@ -10,19 +10,26 @@ $secondary: #ca2262;
 $light: #fff;
 $dark: #333;
 $danger: #ba1a1a;
+$success: #C2FBBF;
 
 $tertiary: #8b92e9;
 $quaternary: #ffdbc8;
-$background-light: #fffbff;
+$background-light: #fffdff;
 $background-dark: #201a1b;
 $container-primary: #ffd9e1;
-$container-secondary: #cce5ff;
-$container-tertiary: #ffdbc8;
+$container-secondary: #0F697D;
+$container-tertiary: #7D0935;
 $grey-dark: #847376;
 
-$custom-colors: (
+$theme-colors: (
+    "primary" : $primary,
+    "secondary" : $secondary,
     "tertiary" : $tertiary,
     "quaternary" : $quaternary,
+    "light" : $light,
+    "dark" : $dark,
+    "danger" : $danger,
+    "success":  $success,
     "background-light" : $background-light,
     "background-dark" : $background-dark,
     "container-primary" : $container-primary,
@@ -32,9 +39,10 @@ $custom-colors: (
 
 $border-radius: 16px;
 $border-radius-input: 6px;
-$btn-border-radius: $border-radius;
+$btn-border-radius: calc($border-radius / 2);
 $btn-padding-y: 0.7rem;
 $btn-padding-x: 2rem;
+$box-shadow:rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;;
 
 $dashboard-min-height: 500px;
 $navbar-height: 5rem;
