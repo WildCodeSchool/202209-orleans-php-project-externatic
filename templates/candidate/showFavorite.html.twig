@@ -1,0 +1,20 @@
+{% extends 'dashboard_layout.html.twig' %}
+
+{% block title %}
+	{{ parent() ~ ' | Mes favories' }}
+{% endblock %}
+
+{% block sideNav %}
+	{% include './component/_sideBar_dashboard.html.twig' %}
+{% endblock %}
+
+{% block content %}
+	<div class="container p-4">
+		<h1>Toutes mes offres en favories</h1>
+		<div class="row justify-content-center g-4">
+			{% for offer in app.user.candidate.favorite	 %}
+				{% include "component/_card.html.twig" %}
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}
