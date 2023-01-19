@@ -24,7 +24,7 @@
 						<span class="badge badge-pill bg-danger fw-normal mx-1">Important</span>
 					{% endif %}
 					{% if is_granted('ROLE_CANDIDATE') %}
-						<a id="{{ offer.id }}" class=" toggleFavorite ms-2 text-decoration-none text-dark" data-set-id="{{ offer.id }}" href="{{ path('app_candidate_add_favorite', {id: offer.id})}}">
+						<a class=" toggleFavorite ms-2 text-decoration-none text-dark" href="{{ path('app_candidate_add_favorite', {id: offer.id})}}">
 							<i class="bi {{ app.user.candidate.isInFavorite(offer) ? 'bi-star-fill' : 'bi-star' }}"></i>
 						</a>
 					{% endif %}
