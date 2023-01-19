@@ -115,4 +115,10 @@ class CandidateController extends AbstractController
 
         return $this->json(['isInFavorite' => $candidate->getFavorite()->contains($offer)]);
     }
+
+    #[Route('/voir-mes-favoris', name: 'show_favories')]
+    public function showMyFavorite(): Response
+    {
+        return $this->render('candidate/showFavorite.html.twig', []);
+    }
 }
