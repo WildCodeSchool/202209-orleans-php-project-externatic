@@ -20,7 +20,7 @@ class CompanyType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'Description',
-                'attr' => [ "rows" => 30]
+                'attr' => [ "rows" => 20]
             ])
             ->add('postalCode', TextType::class, [
                 'label' => 'Code postal',
