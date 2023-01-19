@@ -19,12 +19,12 @@
       </thead>
       <tbody>
         {% for offer in offers %}
-          {% if offer.candidates is not empty %}
+          {% if offer.applications is not empty %}
             <tr>
               <td >{{ offer.title }}</td>
               <td class="text-center">{{ offer.city }}</td>
               <td class="text-center">{{ offer.createdAt|format_datetime('short', 'none') }}</td>
-              <td class="text-center">{{ offer.candidates.count }}</td>
+              <td class="text-center">{{ offer.applications.count }}</td>
               <td class="text-center">
                 <a href="{{ path('app_recruiter_applications_details', { id: offer.id }) }}" class="btn btn-primary px-6 py-1">Candidatures</a>
               </td>

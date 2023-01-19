@@ -5,13 +5,17 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Offer;
 use App\Entity\Candidate;
+use App\Entity\Application;
 use App\Form\CandidateType;
 use App\Repository\OfferRepository;
 use App\Repository\CandidateRepository;
+use App\Repository\ApplicationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 #[Route('/candidat', name: 'app_candidate_')]
 class CandidateController extends AbstractController
@@ -58,7 +62,7 @@ class CandidateController extends AbstractController
     }
 
     #[Route('/mes-candidatures', name: 'show_offers_applied', methods: ['GET'])]
-    public function showAll(Candidate $candidate): Response
+    public function showAll(): Response
     {
         /** @var User */
         $user = $this->getUser();
@@ -74,7 +78,8 @@ class CandidateController extends AbstractController
     public function applyToJob(
         Request $request,
         Offer $offer,
-        CandidateRepository $candidateRepository
+        CandidateRepository $candidateRepository,
+        ApplicationRepository $applicationRepo
     ): Response {
         /** @var User $user */
         $user = $this->getUser();
@@ -82,10 +87,32 @@ class CandidateController extends AbstractController
         $submittedToken = $request->request->get('token');
 
         if ($this->isCsrfTokenValid('apply-offer', $submittedToken)) {
-            $candidate->addOffer($offer);
+            $application = new Application();
+            $application->setApplicationStatus(Application::APPLICATION_STATUS['IN_PROGRESS']);
+            $application->setOffer($offer);
+            $candidate->addApplication($application);
+            $applicationRepo->save($application, true);
             $candidateRepository->save($candidate, true);
         }
 
         return $this->redirectToRoute('app_offer_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/ajouter-aux-favoris', methods: ['GET', 'POST'], name: 'add_favorite')]
+    public function addToFavorite(Offer $offer, CandidateRepository $candidateRepository): JsonResponse
+    {
+        /** @var \App\Entity\User */
+        $user = $this->getUser();
+        $candidate = $user->getCandidate();
+
+        if ($candidate->getFavorite()->contains($offer)) {
+            $candidate->removeFavorite($offer);
+        } else {
+            $candidate->addFavorite($offer);
+        }
+
+        $candidateRepository->save($candidate, true);
+
+        return $this->json(['isInFavorite' => $candidate->getFavorite()->contains($offer)]);
     }
 }

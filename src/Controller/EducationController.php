@@ -6,10 +6,12 @@ use App\Entity\User;
 use App\Entity\Education;
 use App\Form\EducationType;
 use App\Repository\EducationRepository;
+use App\Service\VerifyEntity;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Exception;
 
 #[Route('/formation')]
 class EducationController extends AbstractController
@@ -44,19 +46,19 @@ class EducationController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_education_show', methods: ['GET'])]
-    public function show(Education $education): Response
-    {
-        return $this->render('education/show.html.twig', [
-            'education' => $education,
-        ]);
-    }
-
     #[Route('/{id}/modifier', name: 'app_education_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Education $education, EducationRepository $educationRepository): Response
-    {
+    public function edit(
+        Request $request,
+        Education $education,
+        EducationRepository $educationRepository,
+    ): Response {
+
         $form = $this->createForm(EducationType::class, $education);
         $form->handleRequest($request);
+
+        if ($education->getCandidate()->getUser() !== $this->getUser()) {
+            return new Response("Vous n'êtes pas authorisé.", 403);
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $educationRepository->save($education, true);
