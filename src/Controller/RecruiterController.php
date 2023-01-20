@@ -26,7 +26,7 @@ class RecruiterController extends AbstractController
     public function applicationsDetails(int $id, OfferRepository $offerRepository): Response
     {
         $offer = $offerRepository->find($id);
-        //dd($offer);
+        
         return $this->render('recruiter/showApplications.html.twig', [
             'offer' => $offer,
         ]);

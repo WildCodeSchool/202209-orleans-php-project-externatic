@@ -14,9 +14,7 @@
 
 			{% include 'component/_card_candidate.html.twig' with { candidate: application.candidate } only %}
 
-			{{ form_start(form) }}
-			{{ form_label(form.ApplicationStatus) }}
-			{{ form_widget(form.ApplicationStatus) }}
+			
 
 			<div class="d-flex justify-content-between mt-4">
 				<a aria-label="Retour à l'index" class="btn btn-outline-secondary d-flex align-items-center" href="{{ path('app_recruiter_application') }}">
