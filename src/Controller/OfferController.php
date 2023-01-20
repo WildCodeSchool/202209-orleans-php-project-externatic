@@ -7,6 +7,8 @@ use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Form\SearchOfferType;
 use App\Repository\OfferRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -73,7 +75,7 @@ class OfferController extends AbstractController
             'form' => $form,
         ]);
     }
-
+    #[Security("is_granted('ROLE_RECRUITER') or is_granted('ROLE_CANDIDATE')")]
     #[Route('/{id}', name: 'show_loggedin', methods: ['GET'])]
     public function isLogShow(Offer $offer): Response
     {

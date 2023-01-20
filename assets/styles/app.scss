@@ -32,9 +32,13 @@ label {
     font-family: $font-subtitle;
 }
 
+.form-control, .form-select {
+    border-radius: $border-radius-input;
+}
+
 body {
     font-family: $font-body;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 300;
 }
 .nav-bar-avatar {
@@ -44,3 +48,15 @@ body {
 .account-container {
     font-size: 1rem;
 }
+.form-container {
+    max-width: 650px;
+    margin: auto;
+}
+.outline-custom {
+    border: 2px solid $grey-dark;
+}
+.box-shadow {
+    box-shadow: $box-shadow;
+}
+
+

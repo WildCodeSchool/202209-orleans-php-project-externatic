@@ -31,7 +31,9 @@ Encore
      * Each entry will result in one JavaScript file (e.g. app.js)
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
+    .addEntry('favorite', './assets/favorite.js')
     .addEntry('app', './assets/app.js')
+    .addEntry('homeScript', './assets/home.js')
     .addEntry('previewAvatar', './assets/preview.js')
     .addEntry('previewAvatarRegistration', './assets/previewRegistration.js')
     .addEntry('endDate', './assets/endDate.js')

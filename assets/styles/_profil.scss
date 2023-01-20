@@ -1,7 +1,7 @@
 @use 'root' as r;
 
 
-$profilPictureDiameter: 100px;
+$profilPictureDiameter: 200px;
 $intermediate: grey;
 
 .profilPicture {
@@ -15,9 +15,6 @@ $intermediate: grey;
     color: $intermediate;
 }
 
-.title-profil {
-    color: r.$primary;
-}
 .download-avatar, .form-check-label {
     font-size: 0.8rem;
 }

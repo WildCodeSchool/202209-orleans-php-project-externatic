@@ -54,12 +54,16 @@ class Offer
     #[ORM\ManyToOne(inversedBy: 'offers')]
     private ?Company $company = null;
 
-    #[ORM\ManyToMany(targetEntity: Candidate::class, mappedBy: 'offers')]
+    #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Application::class)]
+    private Collection $applications;
+
+    #[ORM\ManyToMany(targetEntity: Candidate::class, mappedBy: 'favorite')]
     private Collection $candidates;
 
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
+        $this->applications = new ArrayCollection();
         $this->candidates = new ArrayCollection();
     }
 
@@ -177,6 +181,36 @@ class Offer
     }
 
     /**
+     * @return Collection<int, Application>
+     */
+    public function getApplications(): Collection
+    {
+        return $this->applications;
+    }
+
+    public function addApplication(Application $application): self
+    {
+        if (!$this->applications->contains($application)) {
+            $this->applications->add($application);
+            $application->setOffer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeApplication(Application $application): self
+    {
+        if ($this->applications->removeElement($application)) {
+            // set the owning side to null (unless already changed)
+            if ($application->getOffer() === $this) {
+                $application->setOffer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * @return Collection<int, Candidate>
      */
     public function getCandidates(): Collection
@@ -188,7 +222,7 @@ class Offer
     {
         if (!$this->candidates->contains($candidate)) {
             $this->candidates->add($candidate);
-            $candidate->addOffer($this);
+            $candidate->addFavorite($this);
         }
 
         return $this;
@@ -197,7 +231,7 @@ class Offer
     public function removeCandidate(Candidate $candidate): self
     {
         if ($this->candidates->removeElement($candidate)) {
-            $candidate->removeOffer($this);
+            $candidate->removeFavorite($this);
         }
 
         return $this;

@@ -1,4 +1,4 @@
-<a href="#" class="menu-link menu-link-close d-flex justify-content-center align-items-center btn btn-primary my-2 mx-0 py-2 px-1 py-md-3 p-2" aria-label="Mon Dashboard">
+<a href="#" class="menu-link menu-link-close d-flex justify-content-center align-items-center btn btn-primary my-1 p-2" aria-label="Mon Dashboard">
 
 	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-heart" viewbox="0 0 16 16">
 		<path d="M8 6.982C9.664 5.309 13.825 8.236 8 12 2.175 8.236 6.336 5.309 8 6.982Z"/>
@@ -8,9 +8,10 @@
 	<span class="dashboard-link-title ms-2">Mon Dashboard</span>
 </a>
 
-<a class="menu-link menu-link-close d-flex justify-content-center align-items-center btn btn-primary my-2 mx-0 px-1 py-2 py-md-3 p-2" href="{{ path('app_candidate_show', {'id': app.user.candidate.id}) }}" aria-label="Mon Profil">
 
-	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewbox="0 0 16 16">
+<a class="menu-link menu-link-close d-flex justify-content-center align-items-center btn btn-primary my-1 p-2" href="{{ path('app_candidate_show') }}" aria-label="Mon Profil">
+	
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewbox="0 0 16 16">
 		<path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
 		<path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
 	</svg>
@@ -18,16 +19,16 @@
 	<span class="dashboard-link-title ms-2">Mon Profil</span>
 </a>
 
-<a class="menu-link menu-link-close d-flex justify-content-center align-items-center btn btn-primary my-2 mx-0 px-1 py-2 py-md-3 p-2" href="#" aria-label="Mon CV">
+<a class="menu-link menu-link-close d-flex justify-content-center align-items-center btn btn-primary my-2 mx-0 px-1 py-2 py-md-3 p-2" href="{{ path('app_candidate_edit') }}" aria-label="Mon CV">
 
-	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-post-fill" viewbox="0 0 16 16">
-		<path d="M12 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM4.5 3h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1 0-1zm0 2h7a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-.5.5h-7a.5.5 0 0 1-.5-.5v-8a.5.5 0 0 1 .5-.5z"/>
-
-	</span>
+		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-person" viewbox="0 0 16 16">
+			<path d="M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+			<path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2zM9.5 3A1.5 1.5 0 0 0 11 4.5h2v9.255S12 12 8 12s-5 1.755-5 1.755V2a1 1 0 0 1 1-1h5.5v2z"/>
+		</svg>
 	<span class="dashboard-link-title ms-2">Mon CV</span>
 </a>
 
-<a href="#" class="menu-link menu-link-close d-flex justify-content-center align-items-center btn btn-primary my-2 py-2 mx-0 px-1 py-md-3 p-2" aria-label="Mes Favoris">
+<a href="{{ path('app_candidate_show_favories') }}" class="menu-link menu-link-close d-flex justify-content-center align-items-center btn btn-primary my-1 p-2" aria-label="Mes Favoris">
 
 	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left-heart" viewbox="0 0 16 16">
 		<path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12ZM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2Z"/>
@@ -37,7 +38,7 @@
 	<span class="dashboard-link-title ms-2">Mes Favoris</span>
 </a>
 
-<a href="#" class="menu-link menu-link-close d-flex justify-content-center align-items-center btn btn-primary my-2 py-2 mx-0 px-1 py-md-3 p-2" aria-label="Mes Candidatures">
+<a href="{{ path('app_candidate_show_offers_applied') }}" class="menu-link menu-link-close d-flex justify-content-center align-items-center btn btn-primary my-1 p-2" aria-label="Mes Candidatures">
 
 	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-briefcase-fill" viewbox="0 0 16 16">
 		<path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v1.384l7.614 2.03a1.5 1.5 0 0 0 .772 0L16 5.884V4.5A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5z"/>

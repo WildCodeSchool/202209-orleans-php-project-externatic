@@ -12,8 +12,8 @@
 	<div class="container p-4">
 		<h1>Toutes mes offres candidatées</h1>
 		<div class="row justify-content-center g-4">
-			{% for offer in app.user.candidate.offers %}
-				{% include "component/_card.html.twig" with {offer:offer} only %}
+			{% for application in app.user.candidate.applications	 %}
+				{% include "component/_card.html.twig" with {offer:application.offer, application:application} only %}
 			{% endfor %}
 		</div>
 	</div>

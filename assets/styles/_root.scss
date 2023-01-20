@@ -6,14 +6,43 @@ $font-body: "Poppins", sans-serif;
 
 $primary: #851342;
 $secondary: #ca2262;
-$terciary: #0ea7c9;
+
 $light: #fff;
 $dark: #333;
+$danger: #ba1a1a;
+$success: #C2FBBF;
+
+$tertiary: #8b92e9;
+$quaternary: #ffdbc8;
+$background-light: #fffdff;
+$background-dark: #201a1b;
+$container-primary: #ffeff3;
+$container-secondary: #0F697D;
+$container-tertiary: #7D0935;
+$grey-dark: #847376;
+
+$theme-colors: (
+    "primary" : $primary,
+    "secondary" : $secondary,
+    "tertiary" : $tertiary,
+    "quaternary" : $quaternary,
+    "light" : $light,
+    "dark" : $dark,
+    "danger" : $danger,
+    "success":  $success,
+    "background-light" : $background-light,
+    "background-dark" : $background-dark,
+    "container-primary" : $container-primary,
+    "container-secondary" : $container-secondary,
+    "container-tertiary" : $container-tertiary
+);
 
 $border-radius: 16px;
-$btn-border-radius: $border-radius;
+$border-radius-input: 6px;
+$btn-border-radius: calc($border-radius / 2);
 $btn-padding-y: 0.7rem;
 $btn-padding-x: 2rem;
+$box-shadow:rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;;
 
 $dashboard-min-height: 500px;
 $navbar-height: 5rem;
