@@ -9,14 +9,18 @@
 {% endblock %}
 {% block content %}
 	<class="containerp-4">
-		<div class="d-flex justify-content-between align-items-center py-2">
-			<h1 class="w-75">Toutes les Offres</h1>
+		<div class="d-flex justify-content-center align-items-center gap-3 py-4">
+		<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+			<path stroke-linecap="round" stroke-linejoin="round" d="M7.5 7.5h-.75A2.25 2.25 0 004.5 9.75v7.5a2.25 2.25 0 002.25 2.25h7.5a2.25 2.25 0 002.25-2.25v-7.5a2.25 2.25 0 00-2.25-2.25h-.75m0-3l-3-3m0 0l-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 012.25 2.25v7.5a2.25 2.25 0 01-2.25 2.25h-7.5a2.25 2.25 0 01-2.25-2.25v-.75"/>
+		</svg>
+			<h1>Toutes les Offres</h1>
 		</div>
-		<div class="mb-4">
+		<hr>
+		<div class="my-5">
 			{% include './component/_searchBar.html.twig' %}
 		</div>
 		{% if is_granted("ROLE_RECRUITER") %}
-			<div class="d-flex justify-content-center my-3">
+			<div class="d-flex justify-content-center my-4">
 				<a aria-label="Ajouter une offre" class="btn btn-sm btn-secondary text-light" href="{{ path('app_offer_new') }}">
 					<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewbox="0 0 16 16">
 						<path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
