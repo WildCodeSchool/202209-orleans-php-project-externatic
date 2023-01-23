@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 
 class OfferType extends AbstractType implements FormTypeInterface
 {
@@ -35,9 +35,7 @@ class OfferType extends AbstractType implements FormTypeInterface
                 'format' => 'dd-MM-yyyy',
                 'help' => 'Jour/Mois/Année'
             ])
-            ->add('description', TextareaType::class, [
-                'attr' => ["rows" => "10"]
-            ])
+            ->add('description', CKEditorType::class)
             ->add('annualWage', MoneyType::class, [
                 'label' => 'Salaire',
             ])
