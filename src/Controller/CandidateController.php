@@ -123,4 +123,25 @@ class CandidateController extends AbstractController
     {
         return $this->render('candidate/showFavorite.html.twig', []);
     }
+
+    public function sidebarCandidate(): Response
+    {
+        /** @var User */
+        $user = $this->getUser();
+        $applications = $user->getCandidate()->getApplications();
+
+        $numberOfResponses = 0;
+
+        foreach ($applications as $application) {
+            if ($application->getApplicationStatus() !== Application::APPLICATION_STATUS['IN_PROGRESS']) {
+                $numberOfResponses++;
+            }
+        }
+
+        return $this->render('component/_sidenav_dashboard_candidate.html.twig', [
+
+            'numberOfResponses' => $numberOfResponses,
+
+        ]);
+    }
 }
