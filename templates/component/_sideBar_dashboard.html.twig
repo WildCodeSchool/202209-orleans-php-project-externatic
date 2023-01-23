@@ -42,9 +42,9 @@
 
 	<div class="links-title w-100 align-self-start text-white mt-2 ms-2 m-0">Mon espace</div>
 	<div class="w-100 d-flex flex-column justify-content-center align-items-center">
-
+	
 		{% if is_granted('ROLE_CANDIDATE') %}
-			{% include 'component/_sidenav_dashboard_candidate.html.twig' %}
+			{{ render(controller('App\\Controller\\CandidateController::sidebarCandidate')) }}
 		{% else %}
 			{% include 'component/_sidenav_dashboard_recruiter.html.twig' %}
 		{% endif %}
