@@ -25,7 +25,7 @@
 					{% endif %}
 					{% if is_granted('ROLE_CANDIDATE') %}
 						<a class=" toggleFavorite ms-2 text-decoration-none text-dark" href="{{ path('app_candidate_add_favorite', {id: offer.id})}}">
-							<i class="bi {{ app.user.candidate.isInFavorite(offer) ? 'bi-star-fill' : 'bi-star' }}"></i>
+							<i class="bi fs-4 {{ app.user.candidate.isInFavorite(offer) ? 'bi-bookmark-check-fill' : 'bi-bookmark' }}"></i>
 						</a>
 					{% endif %}
 				</div>

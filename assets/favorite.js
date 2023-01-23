@@ -23,13 +23,13 @@ allFavButton.forEach(favButton => {
             .then(function (res) {
                 let favoriteIcon = favoriteLink.firstElementChild;
                 if (res.isInFavorite) {
-                    favoriteIcon.classList.remove('bi-star');
-                    favoriteIcon.classList.add('bi-star-fill');
+                    favoriteIcon.classList.remove('bi-bookmark');
+                    favoriteIcon.classList.add('bi-bookmark-check-fill');
                     favoriteIsPending = false;
 
                 } else {
-                    favoriteIcon.classList.remove('bi-star-fill');
-                    favoriteIcon.classList.add('bi-star');
+                    favoriteIcon.classList.remove('bi-bookmark-check-fill');
+                    favoriteIcon.classList.add('bi-bookmark');
                     favoriteIsPending = false;
                 }
 
