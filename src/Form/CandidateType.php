@@ -6,6 +6,7 @@ use App\Entity\Skill;
 use App\Form\UserType;
 use App\Entity\Candidate;
 use App\Form\RegistrationFormType;
+use App\Repository\SkillRepository;
 use Symfony\Component\Form\AbstractType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -75,6 +76,10 @@ class CandidateType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true,
+                'query_builder' => function (SkillRepository $skillRepository) {
+                    return $skillRepository->createQueryBuilder('s')
+                        ->orderBy('s.name', 'ASC');
+                },
             ])
             ->add('cvFile', VichFileType::class, [
                 'label' => 'Curriculum Vitae',
