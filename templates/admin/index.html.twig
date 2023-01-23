@@ -18,9 +18,7 @@
 					<th>Prénom</th>
 					<th>Nom</th>
 					<th>Roles</th>
-					<th>Téléphone</th>
 					<th>Email</th>
-					<th>Dernière modification</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
@@ -29,10 +27,14 @@
 					<tr>
 						<td>{{ user.firstname }}</td>
 						<td>{{ user.lastname }}</td>
-						<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-						<td>{{ user.phoneNumber }}</td>
+
+						{% for key, role in constant('App\\Controller\\AdminUserController::ROLES') %}
+							{% if  user.roles[0] == key %}
+								<td>{{ role }}</td>
+							{% endif %}
+						{% endfor %}
+
 						<td>{{ user.email }}</td>
-						<td>{{ user.updatedAt ? user.updatedAt|date('d/m/Y H:i') : '' }}</td>
 						<td>
 							<div class="d-flex justify-content-between">
 								<div>
@@ -42,14 +44,12 @@
 							</div>
 						</td>
 					</tr>
-				{% else %}
-					<tr>
-						<td colspan="10">Aucun utilisateur</td>
-					</tr>
-				{% endfor %}
+				</tbody>
 			</tbody>
-		</table>
-
-
-	</div>
-{% endblock %}
+		</tr>
+	{% else %}
+		<tr>
+			<td colspan="10">Aucun utilisateur</td>
+		</tr>
+	{% endfor %}
+</tbody></table></div>{% endblock %}

@@ -11,13 +11,20 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[Route('/admin')]
-class AdminController extends AbstractController
+class AdminUserController extends AbstractController
 {
+    public const ROLES = [
+        "ROLE_ADMIN" => "Administrateur",
+        "ROLE_RECRUITER" => "Recruteur",
+        "ROLE_CANDIDATE" => "Candidat",
+        "ROLE_USER" => "Visiteur",
+    ];
+
     #[Route('/', name: 'app_admin_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('admin/index.html.twig', [
-            'users' => $userRepository->findAll(),
+            'users' => $userRepository->findBy([], ['lastname' => 'ASC',]),
         ]);
     }
 
