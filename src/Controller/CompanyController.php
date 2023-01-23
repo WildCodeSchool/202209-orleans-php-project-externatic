@@ -17,7 +17,7 @@ class CompanyController extends AbstractController
     public function index(CompanyRepository $companyRepository): Response
     {
         return $this->render('company/index.html.twig', [
-            'companies' => $companyRepository->findBy([], ["postalCode" => "ASC", "name" => "ASC"]),
+            'companies' => $companyRepository->findBy([], ["name" => "ASC", "city" => "ASC"]),
         ]);
     }
 
