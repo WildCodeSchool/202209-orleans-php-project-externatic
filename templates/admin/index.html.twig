@@ -18,6 +18,7 @@
 					<th>Prénom</th>
 					<th>Nom</th>
 					<th>Roles</th>
+					<th>Téléphone</th>
 					<th>Email</th>
 					<th>Actions</th>
 				</tr>
@@ -28,12 +29,24 @@
 						<td>{{ user.firstname }}</td>
 						<td>{{ user.lastname }}</td>
 
-						{% for key, role in constant('App\\Controller\\AdminUserController::ROLES') %}
-							{% if  user.roles[0] == key %}
-								<td>{{ role }}</td>
+						{% for key, role in user.roles %}
+							{% if role ==  "ROLE_ADMIN" %}
+								<td>{{ constant("App\\Controller\\AdminUserController::ROLES")["ROLE_ADMIN"] }}</td>
+
+							{% elseif role ==  "ROLE_RECRUITER" %}
+								<td>{{ constant("App\\Controller\\AdminUserController::ROLES")["ROLE_RECRUITER"] }}</td>
+
+							{% elseif role ==  "ROLE_CANDIDATE" %}
+								<td>{{ constant("App\\Controller\\AdminUserController::ROLES")["ROLE_CANDIDATE"] }}</td>
+
+							{% else %}
+								<td>{{ constant("App\\Controller\\AdminUserController::ROLES")["ROLE_USER"] }}</td>
+
 							{% endif %}
 						{% endfor %}
 
+
+						<td>{{ user.phoneNumber }}</td>
 						<td>{{ user.email }}</td>
 						<td>
 							<div class="d-flex justify-content-between">
