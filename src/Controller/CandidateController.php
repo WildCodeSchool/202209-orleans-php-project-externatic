@@ -133,7 +133,7 @@ class CandidateController extends AbstractController
         $numberOfResponses = 0;
 
         foreach ($applications as $application) {
-            if ($application->getApplicationStatus() !== "in-progress") {
+            if ($application->getApplicationStatus() !== Application::APPLICATION_STATUS['IN_PROGRESS']) {
                 $numberOfResponses++;
             }
         }
