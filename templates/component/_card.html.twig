@@ -7,6 +7,14 @@
 		<div class="d-flex justify-content-end">
 			<div class="d-flex justify-content-end">
 				<div>
+					{% if offer.isImportant and is_granted('ROLE_RECRUITER') %}
+						<span class="badge badge-pill bg-danger fw-normal mx-1">Important</span>
+					{% endif %}
+					{% if is_granted('ROLE_CANDIDATE') %}
+						<a class=" toggleFavorite ms-2 text-decoration-none text-dark" href="{{ path('app_candidate_add_favorite', {id: offer.id})}}">
+							<i class="bi fs-4 {{ app.user.candidate.isInFavorite(offer) ? 'bi-bookmark-check-fill' : 'bi-bookmark' }}"></i>
+						</a>
+					{% endif %}
 					{% if is_granted('ROLE_CANDIDATE') and application ?? false %}
 						{% if application.applicationStatus == constant("App\\Entity\\Application::APPLICATION_STATUS")['IN_PROGRESS']  %}
 							<span class="badge badge-pill bg-warning fw-normal">🟠 En cours d'étude</span>
@@ -17,16 +25,6 @@
 						{% endif %}
 					{% endif %}
 				</div>
-			</div>
-			<div>
-				{% if offer.isImportant and is_granted('ROLE_RECRUITER') %}
-					<span class="badge badge-pill bg-danger fw-normal mx-1">Important</span>
-				{% endif %}
-				{% if is_granted('ROLE_CANDIDATE') %}
-					<a class=" toggleFavorite ms-2 text-decoration-none text-dark" href="{{ path('app_candidate_add_favorite', {id: offer.id})}}">
-						<i class="bi {{ app.user.candidate.isInFavorite(offer) ? 'bi-star-fill' : 'bi-star' }}"></i>
-					</a>
-				{% endif %}
 			</div>
 		</div>
 		<div class="fs-6">{{ offer.city }}
