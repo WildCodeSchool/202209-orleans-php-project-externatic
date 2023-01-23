@@ -16,6 +16,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[Vich\Uploadable]
 /**
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 class Candidate
 {
@@ -117,12 +118,16 @@ class Candidate
     #[ORM\ManyToMany(targetEntity: Offer::class, inversedBy: 'candidates')]
     private Collection $favorite;
 
+    #[ORM\ManyToMany(targetEntity: Skill::class, inversedBy: 'candidates', fetch : 'EAGER')]
+    private Collection $skills;
+
     public function __construct()
     {
         $this->education = new ArrayCollection();
         $this->experiences = new ArrayCollection();
         $this->applications = new ArrayCollection();
         $this->favorite = new ArrayCollection();
+        $this->skills = new ArrayCollection();
     }
     public function getId(): ?int
     {
@@ -401,5 +406,29 @@ class Candidate
     public function isInFavorite(Offer $offer): bool
     {
         return $this->favorite->contains($offer);
+    }
+
+    /**
+     * @return Collection<int, Skill>
+     */
+    public function getSkills(): Collection
+    {
+        return $this->skills;
+    }
+
+    public function addSkill(Skill $skill): self
+    {
+        if (!$this->skills->contains($skill)) {
+            $this->skills->add($skill);
+        }
+
+        return $this;
+    }
+
+    public function removeSkill(Skill $skill): self
+    {
+        $this->skills->removeElement($skill);
+
+        return $this;
     }
 }

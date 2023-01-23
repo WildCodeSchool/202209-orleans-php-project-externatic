@@ -34,6 +34,8 @@ class CandidateFixtures extends Fixture implements DependentFixtureInterface
             $application->setOffer($this->getReference('offer_' . rand(0, OfferFixtures::NB_OFFER - 1)));
             $candidate->addApplication($application);
 
+            $candidate->addSkill($this->getReference('skill_' . rand(0, count(SkillFixtures::SKILLS) - 1)));
+
             $this->addReference('Candidate_' . $i, $candidate);
             $manager->persist($application);
             $manager->persist($candidate);
@@ -47,6 +49,7 @@ class CandidateFixtures extends Fixture implements DependentFixtureInterface
         return [
             OfferFixtures::class,
             UserFixtures::class,
+            SkillFixtures::class,
         ];
     }
 }

@@ -2,15 +2,18 @@
 
 namespace App\Form;
 
+use App\Entity\Skill;
 use App\Form\UserType;
 use App\Entity\Candidate;
 use App\Form\RegistrationFormType;
 use Symfony\Component\Form\AbstractType;
 use Vich\UploaderBundle\Form\Type\VichFileType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -67,10 +70,16 @@ class CandidateType extends AbstractType
                 'required' => false,
                 'help' => 'Renseignez votre lien portfolio',
             ])
+            ->add('skills', EntityType::class, [
+                'class' => Skill::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+            ])
             ->add('cvFile', VichFileType::class, [
                 'label' => 'Curriculum Vitae',
-                'required'      => false,
-                'allow_delete'  => true,
+                'required' => false,
+                'allow_delete' => true,
                 'delete_label' => 'Cochez pour supprimer le CV existant.',
                 'download_uri' => false,
             ]);
