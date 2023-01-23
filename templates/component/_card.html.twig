@@ -9,11 +9,11 @@
 				<div>
 					{% if is_granted('ROLE_CANDIDATE') and application ?? false %}
 						{% if application.applicationStatus == constant("App\\Entity\\Application::APPLICATION_STATUS")['IN_PROGRESS']  %}
-							<span class="badge badge-pill bg-warning fw-normal">En cours</span>
+							<span class="badge badge-pill bg-warning fw-normal">🟠 En cours d'étude</span>
 						{% elseif application.applicationStatus == constant("App\\Entity\\Application::APPLICATION_STATUS")['REJECTED'] %}
-							<span class="badge badge-pill bg-danger fw-normal">Rejetée</span>
+							<span class="badge badge-pill bg-danger fw-normal">🔴 Rejetée</span>
 						{% elseif application.applicationStatus == constant("App\\Entity\\Application::APPLICATION_STATUS")['ACCEPTED'] %}
-							<span class="badge badge-pill bg-success fw-normal">Acceptée</span>
+							<span class="badge badge-pill bg-success fw-normal">🟢 Acceptée</span>
 						{% endif %}
 					{% endif %}
 				</div>
