@@ -21,9 +21,7 @@ class ApplicationResponseType extends AbstractType
             ],
             'label' => 'Statut',
             'help' => 'Choisir et soumettre',
-        ])
-            ->add('Soumettre', SubmitType::class)
-        ;
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

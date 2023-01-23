@@ -93,9 +93,11 @@ class CandidateController extends AbstractController
             $candidate->addApplication($application);
             $applicationRepo->save($application, true);
             $candidateRepository->save($candidate, true);
+
+            $this->addFlash("success", "Votre candidature a bien été enregistrée.");
         }
 
-        return $this->redirectToRoute('app_offer_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_candidate_show_offers_applied', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/ajouter-aux-favoris', methods: ['GET', 'POST'], name: 'add_favorite')]
