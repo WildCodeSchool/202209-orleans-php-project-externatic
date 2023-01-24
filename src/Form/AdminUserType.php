@@ -18,7 +18,7 @@ class AdminUserType extends AbstractType
                 'required' => false,
                 'label' => 'Rôles',
                 'choices' => [
-                    AdminUserController::ROLES,
+                    array_flip(AdminUserController::ROLES),
                 ],
                 'multiple' => true,
                 'expanded' => true,

@@ -29,21 +29,20 @@
 						<td>{{ user.firstname }}</td>
 						<td>{{ user.lastname }}</td>
 
-						{% for key, role in user.roles %}
-							{% if role ==  "ROLE_ADMIN" %}
-								<td>{{ constant("App\\Controller\\AdminUserController::ROLES")["ROLE_ADMIN"] }}</td>
 
-							{% elseif role ==  "ROLE_RECRUITER" %}
-								<td>{{ constant("App\\Controller\\AdminUserController::ROLES")["ROLE_RECRUITER"] }}</td>
+						{% if user.roles|filter(role => role == "ROLE_ADMIN") %}
+							<td>{{ constant("App\\Controller\\AdminUserController::ROLES")["ROLE_ADMIN"] }}</td>
 
-							{% elseif role ==  "ROLE_CANDIDATE" %}
-								<td>{{ constant("App\\Controller\\AdminUserController::ROLES")["ROLE_CANDIDATE"] }}</td>
+						{% elseif user.roles|filter(role => role == "ROLE_RECRUITER") %}
+							<td>{{ constant("App\\Controller\\AdminUserController::ROLES")["ROLE_RECRUITER"] }}</td>
 
-							{% else %}
-								<td>{{ constant("App\\Controller\\AdminUserController::ROLES")["ROLE_USER"] }}</td>
+						{% elseif user.roles|filter(role => role == "ROLE_CANDIDATE") %}
+							<td>{{ constant("App\\Controller\\AdminUserController::ROLES")["ROLE_CANDIDATE"] }}</td>
 
-							{% endif %}
-						{% endfor %}
+						{% else %}
+							<td>{{ constant("App\\Controller\\AdminUserController::ROLES")["ROLE_USER"] }}</td>
+
+						{% endif %}
 
 
 						<td>{{ user.phoneNumber }}</td>
