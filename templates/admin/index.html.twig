@@ -29,17 +29,21 @@
 						<td>{{ user.firstname }}</td>
 						<td>{{ user.lastname }}</td>
 
+						{% set rank = 0 %}
 						{% for key, role in user.roles %}
-							{% if role ==  "ROLE_ADMIN" %}
+							{% if role ==  "ROLE_ADMIN" and rank < 3 %}
 								<td>{{ constant("App\\Controller\\AdminUserController::ROLES")["ROLE_ADMIN"] }}</td>
+								{% set rank = 3 %}
 
-							{% elseif role ==  "ROLE_RECRUITER" %}
+							{% elseif role ==  "ROLE_RECRUITER" and rank < 2 %}
 								<td>{{ constant("App\\Controller\\AdminUserController::ROLES")["ROLE_RECRUITER"] }}</td>
+								{% set rank = 2 %}
 
-							{% elseif role ==  "ROLE_CANDIDATE" %}
+							{% elseif role ==  "ROLE_CANDIDATE" and rank < 1 %}
 								<td>{{ constant("App\\Controller\\AdminUserController::ROLES")["ROLE_CANDIDATE"] }}</td>
+								{% set rank = 1 %}
 
-							{% else %}
+							{% elseif rank == 0 %}
 								<td>{{ constant("App\\Controller\\AdminUserController::ROLES")["ROLE_USER"] }}</td>
 
 							{% endif %}
