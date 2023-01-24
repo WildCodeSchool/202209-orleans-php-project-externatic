@@ -3,16 +3,19 @@
 namespace App\Form;
 
 use App\Entity\Offer;
+use App\Entity\Skill;
+use App\Repository\SkillRepository;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormTypeInterface;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use FOS\CKEditorBundle\Form\Type\CKEditorType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class OfferType extends AbstractType implements FormTypeInterface
 {
@@ -36,6 +39,17 @@ class OfferType extends AbstractType implements FormTypeInterface
                 'help' => 'Jour/Mois/Année'
             ])
             ->add('description', CKEditorType::class)
+            ->add('skills', EntityType::class, [
+                'class' => Skill::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+                'query_builder' => function (SkillRepository $skillRepository) {
+                    return $skillRepository->createQueryBuilder('s')
+                        ->orderBy('s.name', 'ASC');
+                },
+            ])
+
             ->add('annualWage', MoneyType::class, [
                 'label' => 'Salaire',
             ])
