@@ -87,11 +87,11 @@ class Candidate
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Education::class)]
+    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Education::class, cascade: ['persist', 'remove'])]
     #[ORM\OrderBy(["startDate" => "DESC"])]
     private Collection $education;
 
-    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Experience::class)]
+    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Experience::class, cascade: ['persist', 'remove'])]
     #[ORM\OrderBy(["startDate" => "DESC"])]
     private Collection $experiences;
 
@@ -112,13 +112,23 @@ class Candidate
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DatetimeInterface $updatedAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Application::class, fetch : 'EAGER')]
+    #[ORM\OneToMany(
+        mappedBy: 'candidate',
+        targetEntity: Application::class,
+        fetch: 'EAGER',
+        cascade: ['persist', 'remove']
+    )]
     private Collection $applications;
 
-    #[ORM\ManyToMany(targetEntity: Offer::class, inversedBy: 'candidates')]
+    #[ORM\ManyToMany(targetEntity: Offer::class, inversedBy: 'candidates', cascade: ['persist', 'remove'])]
     private Collection $favorite;
 
-    #[ORM\ManyToMany(targetEntity: Skill::class, inversedBy: 'candidates', fetch : 'EAGER')]
+    #[ORM\ManyToMany(
+        targetEntity: Skill::class,
+        inversedBy: 'candidates',
+        fetch: 'EAGER',
+        cascade: ['persist', 'remove']
+    )]
     private Collection $skills;
 
     public function __construct()
