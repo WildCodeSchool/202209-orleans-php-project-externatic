@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\SearchOfferType;
 use App\Repository\OfferRepository;
 use App\Repository\SponsorRepository;
+use App\Services\Geolocalisation;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,11 +17,14 @@ class HomeController extends AbstractController
     public function index(
         Request $request,
         OfferRepository $offerRepository,
-        SponsorRepository $sponsorRepository
+        SponsorRepository $sponsorRepository,
+        Geolocalisation $geolocalisation,
     ): Response {
         $sponsors = $sponsorRepository->findAll();
         $form = $this->createForm(SearchOfferType::class);
         $form->handleRequest($request);
+
+        dump($geolocalisation->getPosition("Toulouse"));
 
         if ($form->isSubmitted() && $form->isValid()) {
             $keyWord = $form->getData()['search'];
