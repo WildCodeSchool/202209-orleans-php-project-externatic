@@ -3,15 +3,16 @@
 namespace App\Controller;
 
 use DateTime;
+use App\Entity\User;
 use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Form\SearchOfferType;
 use App\Repository\OfferRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/offer', name: 'app_offer_')]
@@ -61,6 +62,9 @@ class OfferController extends AbstractController
     public function new(Request $request, OfferRepository $offerRepository): Response
     {
         $offer = new Offer();
+        /** @var User */
+        $user = $this->getUser();
+        $offer->setRecruiter($user->getRecruiter());
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
 

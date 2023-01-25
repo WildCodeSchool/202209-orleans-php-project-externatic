@@ -58,7 +58,6 @@ class OfferType extends AbstractType implements FormTypeInterface
             ->add('recruiter', EntityType::class, [
                 'class' => Recruiter::class,
                 'choice_label' => 'user.lastname',
-                'required' => false,
                 'multiple' => false,
                 'expanded' => false,
                 'query_builder' => function (RecruiterRepository $recruiterRepository) {

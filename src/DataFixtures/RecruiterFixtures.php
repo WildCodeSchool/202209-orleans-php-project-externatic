@@ -16,10 +16,7 @@ class RecruiterFixtures extends Fixture implements DependentFixtureInterface
         for ($i = 0; $i < UserFixtures::NB_USER_RECRUITER; $i++) {
             $recruiter = new Recruiter();
             $recruiter->setUser($this->getReference('UserRecruiter_' . $i));
-
-            for ($j = 0; $j < 4; $j++) {
-                $recruiter->addOffer($this->getReference('offer_' . rand(0, OfferFixtures::NB_OFFER - 1)));
-            }
+            $this->addReference('Recruiter_' . $i, $recruiter);
 
             $manager->persist($recruiter);
         }
@@ -31,7 +28,6 @@ class RecruiterFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             UserFixtures::class,
-            OfferFixtures::class,
         ];
     }
 }
