@@ -14,6 +14,7 @@ class UserFixtures extends Fixture
     private UserPasswordHasherInterface $passwordHasher;
 
     public const NB_USER_CANDIDATE = 20;
+    public const NB_USER_RECRUITER = 5;
 
     public function __construct(UserPasswordHasherInterface $passwordHasher)
     {
@@ -56,22 +57,23 @@ class UserFixtures extends Fixture
 
         $manager->persist($admin);
 
-        $recruiter = new User();
-        $recruiter->setEmail('recruiter@exemple.com');
-        $recruiter->setRoles(['ROLE_RECRUITER']);
-        $hashedPassword = $this->passwordHasher->hashPassword(
-            $recruiter,
-            'recruiter'
-        );
-        $recruiter->setPassword($hashedPassword);
-        $recruiter->setFirstname('Tom');
-        $recruiter->setLastname('Jerry');
-        $recruiter->setPhoneNumber('0633333333');
-        $recruiter->setUpdatedAt($date);
-        $this->addReference('UserRecruiter', $recruiter);
+        for ($i = 0; $i < self::NB_USER_RECRUITER; $i++) {
+            $recruiter = new User();
+            $recruiter->setEmail('recruiter_' . $i . '@exemple.com');
+            $recruiter->setRoles(['ROLE_RECRUITER']);
+            $hashedPassword = $this->passwordHasher->hashPassword(
+                $recruiter,
+                'recruiter_' . $i
+            );
+            $recruiter->setPassword($hashedPassword);
+            $recruiter->setFirstname($faker->firstName());
+            $recruiter->setLastname($faker->lastName());
+            $recruiter->setPhoneNumber('0633333333');
+            $recruiter->setUpdatedAt($date);
+            $this->addReference('UserRecruiter_' . $i, $recruiter);
 
-        $manager->persist($recruiter);
-
+            $manager->persist($recruiter);
+        }
         $manager->flush();
 
         $recruiter = new User();
@@ -86,7 +88,7 @@ class UserFixtures extends Fixture
         $recruiter->setPassword($hashedPassword);
         $recruiter->setPhoneNumber('0633333333');
         $recruiter->setUpdatedAt($date);
-        $this->addReference('UserRecruter', $recruiter);
+        $this->addReference('UserRecruiter', $recruiter);
 
         $manager->persist($recruiter);
 

@@ -2,13 +2,14 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Application;
-use App\Entity\Candidate;
+use Faker\Factory;
 use App\Entity\Offer;
+use App\Entity\Candidate;
+use App\Entity\Application;
+use App\DataFixtures\OfferFixtures;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Persistence\ObjectManager;
-use Faker\Factory;
 
 class CandidateFixtures extends Fixture implements DependentFixtureInterface
 {

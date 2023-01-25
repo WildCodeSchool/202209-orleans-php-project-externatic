@@ -63,6 +63,9 @@ class Offer
     #[ORM\ManyToMany(targetEntity: Skill::class, inversedBy: 'offers')]
     private Collection $skills;
 
+    #[ORM\ManyToOne(inversedBy: 'offers')]
+    private ?Recruiter $recruiter = null;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
@@ -261,6 +264,18 @@ class Offer
     public function removeSkill(Skill $skill): self
     {
         $this->skills->removeElement($skill);
+
+        return $this;
+    }
+
+    public function getRecruiter(): ?Recruiter
+    {
+        return $this->recruiter;
+    }
+
+    public function setRecruiter(?Recruiter $recruiter): self
+    {
+        $this->recruiter = $recruiter;
 
         return $this;
     }

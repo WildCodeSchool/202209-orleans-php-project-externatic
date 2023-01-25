@@ -12,6 +12,18 @@
       </div>
 
       <div>
+        {% if is_granted('ROLE_RECRUITER') %}
+          {% if offer.recruiter is not null %}
+            {% if offer.recruiter.user == app.user %}
+              <span class="badge badge-pill bg-primary fw-normal mx-1">{{ offer.recruiter.user.lastname }}</span>
+            {% else %}
+              <span class="badge badge-pill bg-tertiary fw-normal mx-1">{{ offer.recruiter.user.lastname }}</span>
+            {% endif %}
+          {% else %}
+            <span class="badge badge-pill bg-quaternary fw-normal mx-1">Non Attribuée</span>
+          {% endif %}
+        {% endif %}
+
         {% if offer.isImportant and is_granted('ROLE_RECRUITER') %}
           <span class="badge badge-pill bg-danger fw-normal mx-1">Important</span>
         {% endif %}
@@ -20,7 +32,7 @@
             <span class="badge badge-pill text-dark fw-normal">🟠 En cours d'étude</span>
           {% elseif application.applicationStatus == constant('App\\Entity\\Application::APPLICATION_STATUS')['REJECTED'] %}
             <span class="badge badge-pill text-dark fw-normal">🔴 Rejetée</span>
-            {% elseif application.applicationStatus == constant("App\\Entity\\Application::APPLICATION_STATUS")['ACCEPTED'] %}
+          {% elseif application.applicationStatus == constant('App\\Entity\\Application::APPLICATION_STATUS')['ACCEPTED'] %}
             <span class="badge badge-pill text-dark fw-normal">🟢 Acceptée</span>
           {% endif %}
         {% endif %}
