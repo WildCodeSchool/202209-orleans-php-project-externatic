@@ -70,7 +70,7 @@ class OfferController extends AbstractController
             $position = $geolocalisation->find($city, $postalCode);
 
             if (empty($position)) {
-                $this->addFlash('danger', "test");
+                $this->addFlash('danger', "Erreur, la ville ou le code postal saisi n'est pas valide");
             } else {
                 $offer->setLongitude($position["lng"]);
                 $offer->setLatitude($position["lat"]);
