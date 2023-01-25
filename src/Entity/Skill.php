@@ -21,9 +21,13 @@ class Skill
     #[ORM\ManyToMany(targetEntity: Candidate::class, mappedBy: 'skills')]
     private Collection $candidates;
 
+    #[ORM\ManyToMany(targetEntity: Offer::class, mappedBy: 'skills')]
+    private Collection $offers;
+
     public function __construct()
     {
         $this->candidates = new ArrayCollection();
+        $this->offers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -65,6 +69,33 @@ class Skill
     {
         if ($this->candidates->removeElement($candidate)) {
             $candidate->removeSkill($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Offer>
+     */
+    public function getOffers(): Collection
+    {
+        return $this->offers;
+    }
+
+    public function addOffer(Offer $offer): self
+    {
+        if (!$this->offers->contains($offer)) {
+            $this->offers->add($offer);
+            $offer->addSkill($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOffer(Offer $offer): self
+    {
+        if ($this->offers->removeElement($offer)) {
+            $offer->removeSkill($this);
         }
 
         return $this;
