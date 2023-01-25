@@ -60,6 +60,12 @@ class Offer
     #[ORM\ManyToMany(targetEntity: Candidate::class, mappedBy: 'favorite')]
     private Collection $candidates;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $latitude = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $longitude = null;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
@@ -233,6 +239,30 @@ class Offer
         if ($this->candidates->removeElement($candidate)) {
             $candidate->removeFavorite($this);
         }
+
+        return $this;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?float $latitude): self
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
 
         return $this;
     }

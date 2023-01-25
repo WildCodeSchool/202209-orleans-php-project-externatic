@@ -7,31 +7,37 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class Geolocalisation
 {
-    private $client;
+    private HttpClientInterface $client;
     public function __construct(HttpClientInterface $client)
     {
         $this->client = $client;
     }
-    public function getPosition(string $location)
+    public function find(string $location, string $postCode = ""): array
     {
         $response = $this->client->request(
             'GET',
-            'https://geocode.search.hereapi.com/v1/geocode',
+            'https://api-adresse.data.gouv.fr/search/',
             [
                 "query" => [
-                    'q' => "FRANCE" . $location,
-                    'apiKey' => $_ENV['APP_HERE_API']
+                    "q" => $location,
+                    "postcode" => $postCode
                 ]
             ]
         );
 
         $statusCode = $response->getStatusCode();
-        if ($statusCode !== 200) {
-            throw new Error("Une erreur est survenue, veuillez réessayer.");
+        if ($statusCode === 500) {
+            throw new Error("Une erreur est survenue, veuillez réessayer.", 500);
         } else {
             $position = $response->getContent();
             $position = $response->toArray();
-            return $position['items'][0]["position"];
+            $position = $position["features"][0]["geometry"]["coordinates"];
+
+            $positionFormat = [
+                "lat" => $position[1],
+                "lng" => $position[0]
+            ];
+            return $positionFormat;
         }
     }
 }
