@@ -118,7 +118,7 @@ class OfferController extends AbstractController
             $position = $geolocalisation->find($city, $postalCode);
 
             if (empty($position)) {
-                $this->addFlash('danger', "test");
+                $this->addFlash('danger', "Erreur, la ville ou le code postal saisi n'est pas valide");
                 return $this->redirectToRoute('app_offer_edit', ["id" => $offer->getId()]);
             } else {
                 $offer->setLongitude($position["lng"]);
