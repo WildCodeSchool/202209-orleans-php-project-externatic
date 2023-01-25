@@ -3,12 +3,17 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Entity\Candidate;
+use App\Entity\Recruiter;
 use App\Form\AdminUserType;
 use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\CandidateRepository;
+use App\Repository\RecruiterRepository;
+use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/admin')]
 class AdminUserController extends AbstractController
@@ -56,13 +61,39 @@ class AdminUserController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_admin_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, UserRepository $userRepository): Response
-    {
+    public function edit(
+        Request $request,
+        User $user,
+        UserRepository $userRepository,
+        RecruiterRepository $recruiterRepository,
+        CandidateRepository $candidateRepository,
+    ): Response {
         $form = $this->createForm(AdminUserType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->save($user, true);
+
+            $roles = $user->getRoles();
+            if (in_array("ROLE_RECRUITER", $roles)) {
+                if ($user->getRecruiter() === null) {
+                    $recruiter = new Recruiter();
+                    $recruiter->setUser($user);
+
+                    $recruiterRepository->save($recruiter, true);
+                    $this->addFlash("success", "Le rôle recruteur a bien été ajouté");
+                }
+            }
+
+            if (in_array("ROLE_CANDIDATE", $roles)) {
+                if ($user->getCandidate() === null) {
+                    $candidate = new Candidate();
+                    $candidate->setUser($user);
+
+                    $candidateRepository->save($candidate, true);
+                    $this->addFlash("success", "Le rôle candidat a bien été ajouté");
+                }
+            }
 
             return $this->redirectToRoute('app_admin_index', [], Response::HTTP_SEE_OTHER);
         }
