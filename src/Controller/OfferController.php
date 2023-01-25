@@ -7,6 +7,7 @@ use App\Form\OfferType;
 use App\Form\SearchOfferType;
 use App\Repository\OfferRepository;
 use App\Services\Geolocalisation;
+use Error;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -66,15 +67,18 @@ class OfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $city = $offer->getCity();
             $postalCode = $offer->getPostalCode();
-
             $position = $geolocalisation->find($city, $postalCode);
 
-            $offer->setLongitude($position["lng"]);
-            $offer->setLatitude($position["lat"]);
+            if (empty($position)) {
+                $this->addFlash('danger', "test");
+            } else {
+                $offer->setLongitude($position["lng"]);
+                $offer->setLatitude($position["lat"]);
 
-            $offerRepository->save($offer, true);
+                $offerRepository->save($offer, true);
 
-            return $this->redirectToRoute('app_offer_index');
+                return $this->redirectToRoute('app_offer_index');
+            }
         }
 
         return $this->renderForm('offer/new.html.twig', [
@@ -111,14 +115,18 @@ class OfferController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $city = $offer->getCity();
             $postalCode = $offer->getPostalCode();
-
             $position = $geolocalisation->find($city, $postalCode);
 
-            $offer->setLongitude($position["lng"]);
-            $offer->setLatitude($position["lat"]);
-            $offerRepository->save($offer, true);
+            if (empty($position)) {
+                $this->addFlash('danger', "test");
+                return $this->redirectToRoute('app_offer_edit', ["id" => $offer->getId()]);
+            } else {
+                $offer->setLongitude($position["lng"]);
+                $offer->setLatitude($position["lat"]);
 
-            return $this->redirectToRoute('app_offer_index', [], Response::HTTP_SEE_OTHER);
+                $offerRepository->save($offer, true);
+                return $this->redirectToRoute('app_offer_index', [], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->renderForm('offer/edit.html.twig', [

@@ -29,14 +29,17 @@ class Geolocalisation
         if ($statusCode === 500) {
             throw new Error("Une erreur est survenue, veuillez réessayer.", 500);
         } else {
-            $position = $response->getContent();
             $position = $response->toArray();
-            $position = $position["features"][0]["geometry"]["coordinates"];
+            if (empty($position["features"])) {
+                $positionFormat = [];
+            } else {
+                $position = $position["features"][0]["geometry"]["coordinates"];
 
-            $positionFormat = [
-                "lat" => $position[1],
-                "lng" => $position[0]
-            ];
+                $positionFormat = [
+                    "lat" => $position[1],
+                    "lng" => $position[0]
+                ];
+            }
             return $positionFormat;
         }
     }
