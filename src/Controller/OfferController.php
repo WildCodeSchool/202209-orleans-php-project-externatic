@@ -2,12 +2,11 @@
 
 namespace App\Controller;
 
-use DateTime;
 use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Form\SearchOfferType;
 use App\Repository\OfferRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use App\Services\Geolocalisation;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,13 +57,21 @@ class OfferController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, OfferRepository $offerRepository): Response
+    public function new(Request $request, OfferRepository $offerRepository, Geolocalisation $geolocalisation): Response
     {
         $offer = new Offer();
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $city = $offer->getCity();
+            $postalCode = $offer->getPostalCode();
+
+            $position = $geolocalisation->find($city, $postalCode);
+
+            $offer->setLongitude($position["lng"]);
+            $offer->setLatitude($position["lat"]);
+
             $offerRepository->save($offer, true);
 
             return $this->redirectToRoute('app_offer_index');
@@ -92,12 +99,23 @@ class OfferController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Offer $offer, OfferRepository $offerRepository): Response
-    {
+    public function edit(
+        Request $request,
+        Offer $offer,
+        OfferRepository $offerRepository,
+        Geolocalisation $geolocalisation
+    ): Response {
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $city = $offer->getCity();
+            $postalCode = $offer->getPostalCode();
+
+            $position = $geolocalisation->find($city, $postalCode);
+
+            $offer->setLongitude($position["lng"]);
+            $offer->setLatitude($position["lat"]);
             $offerRepository->save($offer, true);
 
             return $this->redirectToRoute('app_offer_index', [], Response::HTTP_SEE_OTHER);
