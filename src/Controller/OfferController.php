@@ -8,6 +8,10 @@ use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Form\SearchOfferType;
 use App\Repository\OfferRepository;
+
+use App\Services\Geolocalisation;
+use Error;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -59,7 +63,7 @@ class OfferController extends AbstractController
     }
 
     #[Route('/new', name: 'new', methods: ['GET', 'POST'])]
-    public function new(Request $request, OfferRepository $offerRepository): Response
+    public function new(Request $request, OfferRepository $offerRepository, Geolocalisation $geolocalisation): Response
     {
         $offer = new Offer();
         /** @var User */
@@ -69,9 +73,20 @@ class OfferController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $offerRepository->save($offer, true);
+            $city = $offer->getCity();
+            $postalCode = $offer->getPostalCode();
+            $position = $geolocalisation->find($city, $postalCode);
 
-            return $this->redirectToRoute('app_offer_index');
+            if (empty($position)) {
+                $this->addFlash('danger', "Erreur, la ville ou le code postal saisi n'est pas valide");
+            } else {
+                $offer->setLongitude($position["lng"]);
+                $offer->setLatitude($position["lat"]);
+
+                $offerRepository->save($offer, true);
+
+                return $this->redirectToRoute('app_offer_index');
+            }
         }
 
         return $this->renderForm('offer/new.html.twig', [
@@ -96,15 +111,30 @@ class OfferController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Offer $offer, OfferRepository $offerRepository): Response
-    {
+    public function edit(
+        Request $request,
+        Offer $offer,
+        OfferRepository $offerRepository,
+        Geolocalisation $geolocalisation
+    ): Response {
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $offerRepository->save($offer, true);
+            $city = $offer->getCity();
+            $postalCode = $offer->getPostalCode();
+            $position = $geolocalisation->find($city, $postalCode);
 
-            return $this->redirectToRoute('app_offer_index', [], Response::HTTP_SEE_OTHER);
+            if (empty($position)) {
+                $this->addFlash('danger', "Erreur, la ville ou le code postal saisi n'est pas valide");
+                return $this->redirectToRoute('app_offer_edit', ["id" => $offer->getId()]);
+            } else {
+                $offer->setLongitude($position["lng"]);
+                $offer->setLatitude($position["lat"]);
+
+                $offerRepository->save($offer, true);
+                return $this->redirectToRoute('app_offer_index', [], Response::HTTP_SEE_OTHER);
+            }
         }
 
         return $this->renderForm('offer/edit.html.twig', [

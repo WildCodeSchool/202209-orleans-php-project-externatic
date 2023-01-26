@@ -16,7 +16,7 @@ class HomeController extends AbstractController
     public function index(
         Request $request,
         OfferRepository $offerRepository,
-        SponsorRepository $sponsorRepository
+        SponsorRepository $sponsorRepository,
     ): Response {
         $sponsors = $sponsorRepository->findAll();
         $form = $this->createForm(SearchOfferType::class);

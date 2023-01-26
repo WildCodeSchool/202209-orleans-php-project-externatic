@@ -1,16 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-	{{ parent() ~ ' | Mes favories' }}
+	{{ parent() ~ ' | Administration' }}
 {% endblock %}
 
-{% block body %}
+{% block content %}
 	<div class="container">
 		<div class="d-flex justify-content-between">
 			<h1>Administration des utilisateurs</h1>
-			<div>
-				<a class="btn btn-secondary btn-sm" href="{{ path('app_admin_new') }}">Ajouter</a>
-			</div>
 		</div>
 		<table class="table">
 			<thead>
