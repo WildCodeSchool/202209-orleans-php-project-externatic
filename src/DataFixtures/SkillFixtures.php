@@ -15,6 +15,7 @@ class SkillFixtures extends Fixture
         'Java',
         'GO',
         'Python',
+        'C++',
     ];
     public function load(ObjectManager $manager): void
     {

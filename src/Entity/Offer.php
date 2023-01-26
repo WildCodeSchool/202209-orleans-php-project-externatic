@@ -60,6 +60,11 @@ class Offer
     #[ORM\ManyToMany(targetEntity: Candidate::class, mappedBy: 'favorite')]
     private Collection $candidates;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $latitude = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $longitude = null;
     #[ORM\ManyToMany(targetEntity: Skill::class, inversedBy: 'offers')]
     private Collection $skills;
 
@@ -241,6 +246,29 @@ class Offer
         return $this;
     }
 
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?float $latitude): self
+    {
+        $this->latitude = $latitude;
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Skill>
      */
@@ -257,7 +285,6 @@ class Offer
 
         return $this;
     }
-
     public function removeSkill(Skill $skill): self
     {
         $this->skills->removeElement($skill);
