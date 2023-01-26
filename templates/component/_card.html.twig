@@ -13,11 +13,7 @@
 
       <div>
         {% if is_granted('ROLE_RECRUITER') %}
-          {% if offer.recruiter.user == app.user %}
-            <span class="badge badge-pill bg-primary fw-normal mx-1">{{ offer.recruiter.user.lastname }}</span>
-          {% else %}
-            <span class="badge badge-pill bg-tertiary fw-normal mx-1">{{ offer.recruiter.user.lastname }}</span>
-          {% endif %}
+            <span class="badge badge-pill {{ (offer.recruiter.user == app.user) ? 'bg-primary' : 'bg-tertiary' }} fw-normal mx-1">{{ offer.recruiter.user.lastname }}</span>  
         {% endif %}
 
         {% if offer.isImportant and is_granted('ROLE_RECRUITER') %}
