@@ -285,7 +285,6 @@ class Offer
 
         return $this;
     }
- 
     public function removeSkill(Skill $skill): self
     {
         $this->skills->removeElement($skill);
