@@ -11,9 +11,11 @@ class SkillFixtures extends Fixture
     public const SKILLS = [
         'PHP',
         'C#',
-        'JAVASCRIPT',
-        'JAVA',
-        'PYTHON',
+        'JavaScript',
+        'Java',
+        'GO',
+        'Python',
+        'C++',
     ];
     public function load(ObjectManager $manager): void
     {

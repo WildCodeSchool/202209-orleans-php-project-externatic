@@ -65,12 +65,15 @@ class Offer
 
     #[ORM\Column(nullable: true)]
     private ?float $longitude = null;
+    #[ORM\ManyToMany(targetEntity: Skill::class, inversedBy: 'offers')]
+    private Collection $skills;
 
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
         $this->applications = new ArrayCollection();
         $this->candidates = new ArrayCollection();
+        $this->skills = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -251,7 +254,6 @@ class Offer
     public function setLatitude(?float $latitude): self
     {
         $this->latitude = $latitude;
-
         return $this;
     }
 
@@ -263,6 +265,30 @@ class Offer
     public function setLongitude(?float $longitude): self
     {
         $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Skill>
+     */
+    public function getSkills(): Collection
+    {
+        return $this->skills;
+    }
+
+    public function addSkill(Skill $skill): self
+    {
+        if (!$this->skills->contains($skill)) {
+            $this->skills->add($skill);
+        }
+
+        return $this;
+    }
+ 
+    public function removeSkill(Skill $skill): self
+    {
+        $this->skills->removeElement($skill);
 
         return $this;
     }
