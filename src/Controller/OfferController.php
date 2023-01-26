@@ -11,7 +11,6 @@ use App\Repository\OfferRepository;
 
 use App\Services\Geolocalisation;
 use Error;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
