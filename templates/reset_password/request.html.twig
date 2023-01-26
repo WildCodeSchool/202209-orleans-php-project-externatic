@@ -4,9 +4,9 @@
 {{ parent() ~ ' | Réinitialisation du mot de passe' }}
 {% endblock %}
 
-{% block body %}
+{% block content %}
    
-   <div class="container">
+    <div class="form-container">
     {% for flash_error in app.flashes('reset_password_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}

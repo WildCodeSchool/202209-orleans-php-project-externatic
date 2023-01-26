@@ -4,9 +4,9 @@
 {{ parent() ~ ' | Réinitialisation du mot de passe' }}
 {% endblock %}
 
-{% block body %}
+{% block content %}
   
-  <div class="container">
+    <div class="form-container">
     <p>
        Un e-mail vient d'être envoyé à votre adresse mail contenant un lien que vous pouvez utiliser pour réinitialiser votre mot de passe.
         Le lien expire dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
