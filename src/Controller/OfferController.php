@@ -8,7 +8,6 @@ use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Form\SearchOfferType;
 use App\Repository\OfferRepository;
-
 use App\Services\Geolocalisation;
 use Error;
 use Symfony\Component\HttpFoundation\Request;
