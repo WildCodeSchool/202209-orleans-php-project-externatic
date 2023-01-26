@@ -70,7 +70,7 @@ class CandidateController extends AbstractController
 
         $applications = $candidate->getApplications();
 
-        if (count($applications) > 0) {
+        if (!$applications->isEmpty()) {
             foreach ($applications as $application) {
                 if ($application->isNotification()) {
                     $application->setNotification(false);
