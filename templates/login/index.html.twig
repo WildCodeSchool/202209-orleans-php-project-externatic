@@ -18,8 +18,11 @@
 				<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
 				<input type="hidden" name="_target_path" value="{{ path('app_default_login') }}"/>
 			</div>
-
+<div>
 			<div class="fs-5 mt-2">Pas encore inscrit ?<a class="text-decoration-none ms-4" href="{{ path('app_register') }}">S'inscrire</a>
+			<div class="fs-5 mt-2">Mot de passe oublié ?<a class="text-decoration-none ms-4" href="{{ path('app_forgot_password_request') }}">Cliquez ici</a>
+</div>
+
 			</div>
 			<div class="d-flex justify-content-end align-items-baseline mt-3">
 				<button type="submit" class="btn btn-primary">
