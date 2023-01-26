@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Offer;
+use App\Entity\SearchOfferModule;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,6 +17,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class OfferRepository extends ServiceEntityRepository
 {
+    public const DEGREE_TO_KM = 111;
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Offer::class);
@@ -39,42 +41,49 @@ class OfferRepository extends ServiceEntityRepository
         }
     }
 
-    public function findByKeyWord(string $value): array
+    public function findByKeyWord(SearchOfferModule $search): array
     {
+        $query = $this->createQueryBuilder('o');
+        if ($search->getSearch() !== null) {
+            $query->Where('o.title LIKE :val')
+                ->setParameter('val', '%' . $search->getSearch() . '%');
+        }
+        if ($search->getLongitude() !== null && $search->getLongitude() !== null) {
+            $range = $search->getRange() / self::DEGREE_TO_KM;
+            $latMinRange = $search->getLatitude() - $range;
+            $latMaxRange = $search->getLatitude() + $range;
+            $lngMinRange = $search->getLongitude() - $range;
+            $lngMaxRange = $search->getLongitude() + $range;
 
-        $query = $this->createQueryBuilder('o')
-            ->Where('o.title LIKE :val')
-            ->orWhere('o.description LIKE :val')
-            ->orWhere('o.postalCode LIKE :val')
-            ->orWhere("o.city LIKE :val")
-            ->setParameter('val', '%' . $value . '%')
-            ->getQuery();
+            $query->andWhere('o.latitude BETWEEN ' . $latMinRange . ' AND ' . $latMaxRange)
+                ->andWhere('o.longitude BETWEEN ' . $lngMinRange . ' AND ' . $lngMaxRange);
+        }
 
-        return $query->getResult();
+        return $query->getQuery()->getResult();
     }
 
-//    /**
-//     * @return Offer[] Returns an array of Offer objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('o.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    //    /**
+    //     * @return Offer[] Returns an array of Offer objects
+    //     */
+    //    public function findByExampleField($value): array
+    //    {
+    //        return $this->createQueryBuilder('o')
+    //            ->andWhere('o.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->orderBy('o.id', 'ASC')
+    //            ->setMaxResults(10)
+    //            ->getQuery()
+    //            ->getResult()
+    //        ;
+    //    }
 
-//    public function findOneBySomeField($value): ?Offer
-//    {
-//        return $this->createQueryBuilder('o')
-//            ->andWhere('o.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+    //    public function findOneBySomeField($value): ?Offer
+    //    {
+    //        return $this->createQueryBuilder('o')
+    //            ->andWhere('o.exampleField = :val')
+    //            ->setParameter('val', $value)
+    //            ->getQuery()
+    //            ->getOneOrNullResult()
+    //        ;
+    //    }
 }

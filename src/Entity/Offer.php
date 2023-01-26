@@ -3,16 +3,16 @@
 namespace App\Entity;
 
 use DateTime;
-use DateTimeImmutable;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OfferRepository;
+use App\Entity\GpsPositionInterface;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OfferRepository::class)]
-class Offer
+class Offer implements GpsPositionInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -28,6 +28,8 @@ class Geolocalisation
         $statusCode = $response->getStatusCode();
         if ($statusCode === 500) {
             throw new Error("Une erreur est survenue, veuillez réessayer.", 500);
+        } elseif ($statusCode === 400) {
+            return [];
         } else {
             $position = $response->toArray();
             if (empty($position["features"])) {
