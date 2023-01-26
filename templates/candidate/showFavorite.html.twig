@@ -24,7 +24,7 @@
 		<hr>
 		<div class="row justify-content-center g-4">
 			
-			{% if app.user.candidate.favorite is null %}
+			{% if app.user.candidate.favorite is not null %}
 			
 			{% for offer in app.user.candidate.favorite	 %}
 				<div class="col-lg-6">

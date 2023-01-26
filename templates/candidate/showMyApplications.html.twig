@@ -19,7 +19,7 @@
 		</div>
 		<hr>
 		<div class="row justify-content-center g-4 mt-2">
-			{% if app.user.candidate.applications is null %}
+			{% if app.user.candidate.applications is not null %}
 				{% for application in app.user.candidate.applications	 %}
 					<div class="col-lg-6">
 						{% include "component/_card.html.twig" with {offer:application.offer, application:application} only %}
