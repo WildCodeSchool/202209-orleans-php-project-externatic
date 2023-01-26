@@ -62,11 +62,22 @@ class CandidateController extends AbstractController
     }
 
     #[Route('/mes-candidatures', name: 'show_offers_applied', methods: ['GET'])]
-    public function showAll(): Response
+    public function showAll(CandidateRepository $candidateRepository): Response
     {
         /** @var User */
         $user = $this->getUser();
         $candidate = $user->getCandidate();
+
+        $applications = $candidate->getApplications();
+
+        if (count($applications) > 0) {
+            foreach ($applications as $application) {
+                if ($application->isNotification()) {
+                    $application->setNotification(false);
+                }
+            }
+            $candidateRepository->save($candidate, true);
+        }
 
         return $this->render('candidate/showMyApplications.html.twig', [
             'candidate' => $candidate
@@ -133,7 +144,7 @@ class CandidateController extends AbstractController
         $numberOfResponses = 0;
 
         foreach ($applications as $application) {
-            if ($application->getApplicationStatus() !== Application::APPLICATION_STATUS['IN_PROGRESS']) {
+            if ($application->isNotification()) {
                 $numberOfResponses++;
             }
         }

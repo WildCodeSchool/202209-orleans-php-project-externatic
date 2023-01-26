@@ -31,6 +31,7 @@ class CandidateFixtures extends Fixture implements DependentFixtureInterface
 
             $application = new Application();
             $application->setApplicationStatus(Application::APPLICATION_STATUS['IN_PROGRESS']);
+            $application->setNotification(false);
             $application->setOffer($this->getReference('offer_' . rand(0, OfferFixtures::NB_OFFER - 1)));
             $candidate->addApplication($application);
 

@@ -43,9 +43,10 @@ class RecruiterController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $application->setNotification(true);
             $applicationRepo->save($application, true);
 
-            $this->addFlash('success', 'Votre decision est prise en compte');
+            $this->addFlash('success', 'Votre décision est prise en compte');
 
             return $this->redirectToRoute(
                 'app_recruiter_applications_details',
