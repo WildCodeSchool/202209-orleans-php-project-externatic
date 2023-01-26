@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\SearchOfferModule;
+use App\Entity\User;
 use App\Form\SearchOfferType;
-use App\Repository\OfferRepository;
-use App\Repository\SponsorRepository;
-use App\Services\DistanceCalculator;
-use App\Services\Geolocalisation;
 use App\Services\OfferFounder;
+use App\Entity\SearchOfferModule;
+use App\Services\Geolocalisation;
+use App\Repository\OfferRepository;
+use App\Services\DistanceCalculator;
+use App\Repository\SponsorRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,7 +32,13 @@ class HomeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $offers = $offerFounder->foundByLocation($searchOfferModule);
 
-            return $this->renderForm('offer/index.html.twig', [
+            if ($this->getUser()) {
+                $template = 'offer/showAll.html.twig';
+            } else {
+                $template = 'offer/index.html.twig';
+            }
+
+            return $this->renderForm($template, [
                 'form' => $form,
                 'offers' => $offers,
             ]);

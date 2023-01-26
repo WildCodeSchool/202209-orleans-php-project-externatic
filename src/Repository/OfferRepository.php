@@ -56,7 +56,9 @@ class OfferRepository extends ServiceEntityRepository
             $lngMaxRange = $search->getLongitude() + $range;
 
             $query->andWhere('o.latitude BETWEEN ' . $latMinRange . ' AND ' . $latMaxRange)
-                ->andWhere('o.longitude BETWEEN ' . $lngMinRange . ' AND ' . $lngMaxRange);
+                ->andWhere('o.longitude BETWEEN ' . $lngMinRange . ' AND ' . $lngMaxRange)
+                ->setMaxResults(50)
+                ->orderBy('o.createdAt', 'DESC');
         }
 
         return $query->getQuery()->getResult();

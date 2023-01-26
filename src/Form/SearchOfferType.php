@@ -24,7 +24,7 @@ class SearchOfferType extends AbstractType implements FormTypeInterface
                 "required" => false,
             ])
             ->add('range', RangeType::class, [
-                "label" => "Rayon",
+                "label" => "Rayon : ",
                 "required" => true,
                 "attr" => [
                     "min" => 10,
