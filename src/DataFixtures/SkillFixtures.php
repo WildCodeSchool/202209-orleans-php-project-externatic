@@ -19,7 +19,6 @@ class SkillFixtures extends Fixture
     ];
     public function load(ObjectManager $manager): void
     {
-
         for ($i = 0; $i < count(self::SKILLS); $i++) {
             $skill = new Skill();
             $skill->setName((self::SKILLS[$i]));

@@ -71,6 +71,8 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
                 }
             }
 
+            $offer->setRecruiter($this->getReference('Recruiter_' . rand(0, UserFixtures::NB_USER_RECRUITER - 1)));
+
             $this->addReference('offer_' . $i, $offer);
 
 
@@ -84,6 +86,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
         return [
             CompanyFixtures::class,
             SkillFixtures::class,
+            RecruiterFixtures::class,
         ];
     }
 }

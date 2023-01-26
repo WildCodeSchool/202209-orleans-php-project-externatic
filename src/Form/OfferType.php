@@ -4,7 +4,9 @@ namespace App\Form;
 
 use App\Entity\Offer;
 use App\Entity\Skill;
+use App\Entity\Recruiter;
 use App\Repository\SkillRepository;
+use App\Repository\RecruiterRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormTypeInterface;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
@@ -52,6 +54,17 @@ class OfferType extends AbstractType implements FormTypeInterface
 
             ->add('annualWage', MoneyType::class, [
                 'label' => 'Salaire',
+            ])
+            ->add('recruiter', EntityType::class, [
+                'class' => Recruiter::class,
+                'choice_label' => 'user.lastname',
+                'multiple' => false,
+                'expanded' => false,
+                'query_builder' => function (RecruiterRepository $recruiterRepository) {
+                    return $recruiterRepository->createQueryBuilder('recruiter')
+                    ->join('recruiter.user', 'user')
+                    ->orderBy('user.lastname', 'DESC');
+                },
             ])
             ->add('isImportant', CheckboxType::class, [
                 'label' => 'Important',
