@@ -23,8 +23,7 @@
 		</div>
 		<hr>
 		<div class="row justify-content-center g-4">
-			
-			{% if app.user.candidate.favorite is not null %}
+			{% if app.user.candidate.favorite|length > 0  %}
 			
 			{% for offer in app.user.candidate.favorite	 %}
 				<div class="col-lg-6">
