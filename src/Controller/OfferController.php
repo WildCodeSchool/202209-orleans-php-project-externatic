@@ -18,13 +18,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/offer', name: 'app_offer_')]
 class OfferController extends AbstractController
 {
+    public const MAX_OFFER = 100;
+
     #[Route('/', name: 'index', methods: ['GET', 'POST'])]
     public function index(
         Request $request,
         OfferRepository $offerRepository,
         OfferFounder $offerFounder,
     ): Response {
-        $offers = $offerRepository->findBy([], ["createdAt" => "DESC"], 100);
+        $offers = $offerRepository->findBy([], ["createdAt" => "DESC"], self::MAX_OFFER);
         $searchOfferModule = new SearchOfferModule();
         $form = $this->createForm(SearchOfferType::class, $searchOfferModule);
         $form->handleRequest($request);
@@ -43,7 +45,7 @@ class OfferController extends AbstractController
         OfferRepository $offerRepository,
         OfferFounder $offerFounder
     ): Response {
-        $offers = $offerRepository->findBy([], ["createdAt" => "DESC"], 100);
+        $offers = $offerRepository->findBy([], ["createdAt" => "DESC"], self::MAX_OFFER);
         $searchOfferModule = new SearchOfferModule();
         $form = $this->createForm(SearchOfferType::class, $searchOfferModule);
         $form->handleRequest($request);
