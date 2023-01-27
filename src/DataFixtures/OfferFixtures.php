@@ -5,7 +5,6 @@ namespace App\DataFixtures;
 use Faker\Factory;
 use App\Entity\Offer;
 use App\Services\Geolocalisation;
-use App\Entity\Skill;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -16,7 +15,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
 
     private const TITLE_OFFERS = [
         ['Développeur C++ Oracle Full Remote H/F', 'C++'],
-        ['Développeur fullstack PHP/JS H/F (Nantes Nord)', 'PHP'],
+        ['Développeur fullstack PHP/JS H/F', 'PHP'],
         ['Stage Master 2 (4 à 6 mois) – Développeur fullstack Java / JS @Fintech H/F', 'Java'],
         ['Développeur Back-End Java Spring Full remote H/F', 'Java'],
         ['Développeur GO – Angular H/F #éditeur agricole', 'GO'],

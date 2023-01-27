@@ -40,6 +40,7 @@ Encore
      * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
      */
     .addEntry('favorite', './assets/favorite.js')
+    .addEntry('rangeSearchbar', './assets/rangeSearchbar.js')
     .addEntry('app', './assets/app.js')
     .addEntry('homeScript', './assets/home.js')
     .addEntry('previewAvatar', './assets/preview.js')

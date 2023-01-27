@@ -3,7 +3,8 @@
 namespace App\Controller;
 
 use App\Form\SearchOfferType;
-use App\Repository\OfferRepository;
+use App\Services\OfferFounder;
+use App\Entity\SearchOfferModule;
 use App\Repository\SponsorRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,20 +16,25 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(
         Request $request,
-        OfferRepository $offerRepository,
         SponsorRepository $sponsorRepository,
+        OfferFounder $offerFounder,
     ): Response {
         $sponsors = $sponsorRepository->findAll();
-        $form = $this->createForm(SearchOfferType::class);
+        $searchOfferModule = new SearchOfferModule();
+        $form = $this->createForm(SearchOfferType::class, $searchOfferModule);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $keyWord = $form->getData()['search'];
-            $keyWord = trim($keyWord);
+            $offers = $offerFounder->foundByLocation($searchOfferModule);
 
-            $keyWord ? $offers = $offerRepository->findByKeyWord($keyWord) : $offers = $offerRepository->findAll();
+            if ($this->getUser()) {
+                $template = 'offer/showAll.html.twig';
+            } else {
+                $template = 'offer/index.html.twig';
+            }
 
-            return $this->renderForm('offer/index.html.twig', [
+            return $this->renderForm($template, [
                 'form' => $form,
                 'offers' => $offers,
             ]);
