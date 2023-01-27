@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Entity\GpsPositionInterface;
-use App\Services\Geolocalisation;
 
 class DistanceCalculator
 {

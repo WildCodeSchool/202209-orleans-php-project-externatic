@@ -2,13 +2,9 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Form\SearchOfferType;
 use App\Services\OfferFounder;
 use App\Entity\SearchOfferModule;
-use App\Services\Geolocalisation;
-use App\Repository\OfferRepository;
-use App\Services\DistanceCalculator;
 use App\Repository\SponsorRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
