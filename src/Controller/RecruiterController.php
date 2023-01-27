@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Repository\OfferRepository;
 use App\Form\ApplicationResponseType;
 use App\Repository\ApplicationRepository;
