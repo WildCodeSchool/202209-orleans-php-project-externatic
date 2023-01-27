@@ -30,6 +30,9 @@ class Application
     #[ORM\Column(length: 255)]
     private ?string $applicationStatus = null;
 
+    #[ORM\Column]
+    private ?bool $notification = false;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -67,6 +70,18 @@ class Application
     public function setApplicationStatus(string $applicationStatus): self
     {
         $this->applicationStatus = $applicationStatus;
+
+        return $this;
+    }
+
+    public function isNotification(): ?bool
+    {
+        return $this->notification;
+    }
+
+    public function setNotification(bool $notification): self
+    {
+        $this->notification = $notification;
 
         return $this;
     }
