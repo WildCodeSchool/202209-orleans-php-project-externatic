@@ -10,6 +10,7 @@ use App\Form\CandidateType;
 use App\Repository\OfferRepository;
 use App\Repository\CandidateRepository;
 use App\Repository\ApplicationRepository;
+use App\Services\Completion;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,8 +21,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 #[Route('/candidat', name: 'app_candidate_')]
 class CandidateController extends AbstractController
 {
-    public const NUMBER_OF_ITEMS = 3;
-
     #[Route('/', name: 'show', methods: ['GET'])]
     public function show(): Response
     {
@@ -88,31 +87,18 @@ class CandidateController extends AbstractController
 
     #[Route('/mon-tableau-de-bord', name: 'show_dashboard', methods: ['GET'])]
     public function showDashboard(
-        CandidateRepository $candidateRepository,
         ApplicationRepository $applicationRepo,
+        Completion $completion,
     ): Response {
         /** @var User */
         $user = $this->getUser();
         $candidate = $user->getCandidate();
-        $completionProfil = 0;
-
-        if (!$candidate->getExperiences()->isEmpty()) {
-            $completionProfil++;
-        }
-        if (!$candidate->getSkills()->isEmpty()) {
-            $completionProfil++;
-        }
-        if (!$candidate->getEducation()->isEmpty()) {
-            $completionProfil++;
-        }
-
-        $completionProfil = ($completionProfil / self::NUMBER_OF_ITEMS) * 100;
 
         return $this->render('candidate/showDashboard.html.twig', [
             'numberOfFavorite' => count($candidate->getFavorite()),
             'numberOfApplication' => count($candidate->getApplications()),
             'numberOfAppValidate' => count($applicationRepo->findValidatedApplication($candidate)),
-            'completionProfil' => ceil($completionProfil),
+            'completionProfil' => $completion->completionProfil($candidate),
 
         ]);
     }
