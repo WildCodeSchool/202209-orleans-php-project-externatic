@@ -1,0 +1,74 @@
+{% extends 'dashboard_layout.html.twig' %}
+
+{% block title %}
+	{{ parent() ~ ' | Mon tableau de bord' }}
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('card') }}
+{% endblock %}
+
+{% block sideNav %}
+	{% include './component/_sideBar_dashboard.html.twig' %}
+{% endblock %}
+
+{% block content %}
+
+	<div class="container">
+		<h1>Mon tableau de bord</h1>
+
+		<div class="row">
+			<div class="col">
+				<div class="py-2">
+					<div class="text-center bg-secondary text-light rounded box-shadow p-4">
+						<div class="display-2 text-subtitle fw-bolder ">{{ numberOfFavorite }}</div>
+						<div class="fs-5">Nombre de favoris</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="py-2  h-100 ">
+					<div class="d-flex flex-column justify-content-center align-items-center h-100 bg-secondary text-light rounded box-shadow p-4">
+						<div class="display-2 text-subtitle fw-bolder ">{{ numberOfApplication }}</div>
+						<div class="fs-5">Nombre de candidatures</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<div class="py-2  h-100 ">
+					<div class="d-flex flex-column justify-content-center align-items-center h-100 bg-secondary text-light rounded box-shadow p-4">
+						<div class="display-2 text-subtitle fw-bolder ">{{ numberOfAppValidate }}</div>
+						<div class="fs-5">Nombre de candidature acceptée</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col">
+				<div class="py-2">
+					<div class="text-center bg-secondary text-light rounded box-shadow p-4">
+						<div class="pt-3 px-5 mx-5">
+							<div class="progress mt-3" style="height:40px;">
+								<div class="progress-bar bg-container-secondary text-light fs-4" role="progressbar" aria-valuenow="{{ completionProfil }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ completionProfil }}%;
+																">{{ completionProfil }}
+									%</div>
+							</div>
+						</div>
+						<div class="fs-5 my-3">Avancement du profil</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+{% endblock %}
