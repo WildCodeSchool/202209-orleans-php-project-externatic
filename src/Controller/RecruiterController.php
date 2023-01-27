@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
+use App\Form\RecruiterType;
+use App\Repository\UserRepository;
 use App\Repository\OfferRepository;
 use App\Form\ApplicationResponseType;
-use App\Form\RecruiterType;
 use App\Repository\ApplicationRepository;
-use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -36,6 +37,7 @@ class RecruiterController extends AbstractController
     #[Route('/recruiter/modifier-mon-profil', name: 'app_recruiter_edit_profil')]
     public function editProfil(UserRepository $userRepository, Request $request): Response
     {
+        /** @var User */
         $user = $this->getUser();
         $form = $this->createForm(RecruiterType::class, $user);
         $form->handleRequest($request);
