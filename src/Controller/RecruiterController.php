@@ -21,6 +21,18 @@ class RecruiterController extends AbstractController
             'offers' => $offers,
         ]);
     }
+    #[Route('/espace-recruteur/mes-offres', name: 'app_recruiter_myOffer')]
+    public function showRecruiterOffer(OfferRepository $offerRepository): Response
+    {
+        /** @var User */
+        $user = $this->getUser();
+        $recruiterId = $user->getRecruiter()->getId();
+        $offers = $offerRepository->findBy(["recruiter" => $recruiterId]);
+
+        return $this->render('recruiter/showMyOffer.html.twig', [
+            'offers' => $offers,
+        ]);
+    }
 
     #[Route('/recruiter/applications/{id}', name: 'app_recruiter_applications_details')]
     public function applicationsDetails(int $id, OfferRepository $offerRepository): Response
