@@ -2,13 +2,14 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Application;
-use App\Entity\Candidate;
+use Faker\Factory;
 use App\Entity\Offer;
+use App\Entity\Candidate;
+use App\Entity\Application;
+use App\DataFixtures\OfferFixtures;
+use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
-use Doctrine\Persistence\ObjectManager;
-use Faker\Factory;
 
 class CandidateFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -31,6 +32,7 @@ class CandidateFixtures extends Fixture implements DependentFixtureInterface
 
             $application = new Application();
             $application->setApplicationStatus(Application::APPLICATION_STATUS['IN_PROGRESS']);
+            $application->setNotification(false);
             $application->setOffer($this->getReference('offer_' . rand(0, OfferFixtures::NB_OFFER - 1)));
             $candidate->addApplication($application);
 

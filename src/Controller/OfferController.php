@@ -2,13 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Offer;
 use App\Form\OfferType;
 use App\Form\SearchOfferType;
+use App\Services\OfferFounder;
 use App\Entity\SearchOfferModule;
 use App\Services\Geolocalisation;
 use App\Repository\OfferRepository;
-use App\Services\OfferFounder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -64,6 +65,9 @@ class OfferController extends AbstractController
     public function new(Request $request, OfferRepository $offerRepository, Geolocalisation $geolocalisation): Response
     {
         $offer = new Offer();
+        /** @var User */
+        $user = $this->getUser();
+        $offer->setRecruiter($user->getRecruiter());
         $form = $this->createForm(OfferType::class, $offer);
         $form->handleRequest($request);
 
