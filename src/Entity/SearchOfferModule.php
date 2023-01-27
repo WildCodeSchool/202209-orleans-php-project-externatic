@@ -10,7 +10,7 @@ class SearchOfferModule implements GpsPositionInterface
     private ?float $latitude = null;
     private ?string $search = null;
     private ?string $location = null;
-    private int $range = 5;
+    private int $range = 10;
 
     public function getLongitude(): ?float
     {
