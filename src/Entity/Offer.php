@@ -3,16 +3,16 @@
 namespace App\Entity;
 
 use DateTime;
-use DateTimeImmutable;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\OfferRepository;
+use App\Entity\GpsPositionInterface;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: OfferRepository::class)]
-class Offer
+class Offer implements GpsPositionInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -60,11 +60,23 @@ class Offer
     #[ORM\ManyToMany(targetEntity: Candidate::class, mappedBy: 'favorite')]
     private Collection $candidates;
 
+    #[ORM\Column(nullable: true)]
+    private ?float $latitude = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?float $longitude = null;
+    #[ORM\ManyToMany(targetEntity: Skill::class, inversedBy: 'offers')]
+    private Collection $skills;
+
+    #[ORM\ManyToOne(inversedBy: 'offers')]
+    private ?Recruiter $recruiter = null;
+
     public function __construct()
     {
         $this->setCreatedAt(new DateTime('now'));
         $this->applications = new ArrayCollection();
         $this->candidates = new ArrayCollection();
+        $this->skills = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -233,6 +245,64 @@ class Offer
         if ($this->candidates->removeElement($candidate)) {
             $candidate->removeFavorite($this);
         }
+
+        return $this;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(?float $latitude): self
+    {
+        $this->latitude = $latitude;
+        return $this;
+    }
+
+    public function getLongitude(): ?float
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude(?float $longitude): self
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Skill>
+     */
+    public function getSkills(): Collection
+    {
+        return $this->skills;
+    }
+
+    public function addSkill(Skill $skill): self
+    {
+        if (!$this->skills->contains($skill)) {
+            $this->skills->add($skill);
+        }
+
+        return $this;
+    }
+    public function removeSkill(Skill $skill): self
+    {
+        $this->skills->removeElement($skill);
+
+        return $this;
+    }
+
+    public function getRecruiter(): ?Recruiter
+    {
+        return $this->recruiter;
+    }
+
+    public function setRecruiter(?Recruiter $recruiter): self
+    {
+        $this->recruiter = $recruiter;
 
         return $this;
     }

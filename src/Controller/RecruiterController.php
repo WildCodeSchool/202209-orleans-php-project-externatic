@@ -26,7 +26,7 @@ class RecruiterController extends AbstractController
     public function applicationsDetails(int $id, OfferRepository $offerRepository): Response
     {
         $offer = $offerRepository->find($id);
-        //dd($offer);
+
         return $this->render('recruiter/showApplications.html.twig', [
             'offer' => $offer,
         ]);
@@ -43,13 +43,14 @@ class RecruiterController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $application->setNotification(true);
             $applicationRepo->save($application, true);
 
-            $this->addFlash('success', 'Votre decision est prise en compte');
+            $this->addFlash('success', 'Votre décision est prise en compte');
 
             return $this->redirectToRoute(
-                'app_recruiter_application_decision',
-                ['id' => $application->getId()],
+                'app_recruiter_applications_details',
+                ['id' => $application->getOffer()->getId()],
                 Response::HTTP_SEE_OTHER
             );
         }

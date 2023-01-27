@@ -31,7 +31,7 @@ class Company
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $email = null;
 
-    #[ORM\OneToMany(mappedBy: 'company', targetEntity: Offer::class)]
+    #[ORM\OneToMany(mappedBy: 'company', targetEntity: Offer::class, cascade: ['persist', 'remove'])]
     private Collection $offers;
 
     public function __construct()

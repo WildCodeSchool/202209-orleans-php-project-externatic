@@ -1,20 +1,23 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-  {{ parent() ~ ' | Offres' }}
+	{{ parent() ~ ' | Offres' }}
 {% endblock %}
 {% block stylesheets %}
-{{ parent() }}
-  {{ encore_entry_link_tags('card') }}
+	{{ parent() }}
+	{{ encore_entry_link_tags('card') }}
 {% endblock %}
 {% block body %}
-  <div class="container p-2">
-    {% include './component/_searchBar.html.twig' %}
-    <h1 class="mt-2">{{ offers|length }} offres sélectionnées</h1>
-    <div class="row justify-content-center g-4">
-      {% for offer in offers %}
-        {% include 'component/_card.html.twig' with { offer: offer } only %}
-      {% endfor %}
-    </div>
-  </div>
+	<div class="container p-2">
+		{% include './component/_searchBar.html.twig' %}
+		<h1 class="mt-5 fs-5">{{ offers|length }}
+			offres sélectionnées</h1>
+		<div class="row justify-content-center g-4">
+			{% for offer in offers %}
+				<div class="col-lg-6">
+					{% include 'component/_card.html.twig' with { offer: offer } only %}
+				</div>
+			{% endfor %}
+		</div>
+	</div>
 {% endblock %}

@@ -62,11 +62,22 @@ class CandidateController extends AbstractController
     }
 
     #[Route('/mes-candidatures', name: 'show_offers_applied', methods: ['GET'])]
-    public function showAll(): Response
+    public function showAll(CandidateRepository $candidateRepository): Response
     {
         /** @var User */
         $user = $this->getUser();
         $candidate = $user->getCandidate();
+
+        $applications = $candidate->getApplications();
+
+        if (!$applications->isEmpty()) {
+            foreach ($applications as $application) {
+                if ($application->isNotification()) {
+                    $application->setNotification(false);
+                }
+            }
+            $candidateRepository->save($candidate, true);
+        }
 
         return $this->render('candidate/showMyApplications.html.twig', [
             'candidate' => $candidate
@@ -122,5 +133,26 @@ class CandidateController extends AbstractController
     public function showMyFavorite(): Response
     {
         return $this->render('candidate/showFavorite.html.twig', []);
+    }
+
+    public function sidebarCandidate(): Response
+    {
+        /** @var User */
+        $user = $this->getUser();
+        $applications = $user->getCandidate()->getApplications();
+
+        $numberOfResponses = 0;
+
+        foreach ($applications as $application) {
+            if ($application->isNotification()) {
+                $numberOfResponses++;
+            }
+        }
+
+        return $this->render('component/_sidenav_dashboard_candidate.html.twig', [
+
+            'numberOfResponses' => $numberOfResponses,
+
+        ]);
     }
 }

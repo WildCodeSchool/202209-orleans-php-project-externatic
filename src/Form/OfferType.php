@@ -3,16 +3,21 @@
 namespace App\Form;
 
 use App\Entity\Offer;
+use App\Entity\Skill;
+use App\Entity\Recruiter;
+use App\Repository\SkillRepository;
+use App\Repository\RecruiterRepository;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormTypeInterface;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class OfferType extends AbstractType implements FormTypeInterface
 {
@@ -35,11 +40,31 @@ class OfferType extends AbstractType implements FormTypeInterface
                 'format' => 'dd-MM-yyyy',
                 'help' => 'Jour/Mois/Année'
             ])
-            ->add('description', TextareaType::class, [
-                'attr' => ["rows" => "10"]
+            ->add('description', CKEditorType::class)
+            ->add('skills', EntityType::class, [
+                'class' => Skill::class,
+                'choice_label' => 'name',
+                'multiple' => true,
+                'expanded' => true,
+                'query_builder' => function (SkillRepository $skillRepository) {
+                    return $skillRepository->createQueryBuilder('s')
+                        ->orderBy('s.name', 'ASC');
+                },
             ])
+
             ->add('annualWage', MoneyType::class, [
                 'label' => 'Salaire',
+            ])
+            ->add('recruiter', EntityType::class, [
+                'class' => Recruiter::class,
+                'choice_label' => 'user.lastname',
+                'multiple' => false,
+                'expanded' => false,
+                'query_builder' => function (RecruiterRepository $recruiterRepository) {
+                    return $recruiterRepository->createQueryBuilder('recruiter')
+                    ->join('recruiter.user', 'user')
+                    ->orderBy('user.lastname', 'DESC');
+                },
             ])
             ->add('isImportant', CheckboxType::class, [
                 'label' => 'Important',

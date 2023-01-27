@@ -16,6 +16,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 #[Vich\Uploadable]
 /**
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
  */
 class Candidate
 {
@@ -86,11 +87,11 @@ class Candidate
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Education::class)]
+    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Education::class, cascade: ['persist', 'remove'])]
     #[ORM\OrderBy(["startDate" => "DESC"])]
     private Collection $education;
 
-    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Experience::class)]
+    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Experience::class, cascade: ['persist', 'remove'])]
     #[ORM\OrderBy(["startDate" => "DESC"])]
     private Collection $experiences;
 
@@ -111,11 +112,24 @@ class Candidate
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DatetimeInterface $updatedAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'candidate', targetEntity: Application::class, fetch : 'EAGER')]
+    #[ORM\OneToMany(
+        mappedBy: 'candidate',
+        targetEntity: Application::class,
+        fetch: 'EAGER',
+        cascade: ['persist', 'remove']
+    )]
     private Collection $applications;
 
-    #[ORM\ManyToMany(targetEntity: Offer::class, inversedBy: 'candidates')]
+    #[ORM\ManyToMany(targetEntity: Offer::class, inversedBy: 'candidates', cascade: ['persist', 'remove'])]
     private Collection $favorite;
+
+    #[ORM\ManyToMany(
+        targetEntity: Skill::class,
+        inversedBy: 'candidates',
+        fetch: 'EAGER',
+        cascade: ['persist', 'remove']
+    )]
+    private Collection $skills;
 
     public function __construct()
     {
@@ -123,6 +137,7 @@ class Candidate
         $this->experiences = new ArrayCollection();
         $this->applications = new ArrayCollection();
         $this->favorite = new ArrayCollection();
+        $this->skills = new ArrayCollection();
     }
     public function getId(): ?int
     {
@@ -401,5 +416,29 @@ class Candidate
     public function isInFavorite(Offer $offer): bool
     {
         return $this->favorite->contains($offer);
+    }
+
+    /**
+     * @return Collection<int, Skill>
+     */
+    public function getSkills(): Collection
+    {
+        return $this->skills;
+    }
+
+    public function addSkill(Skill $skill): self
+    {
+        if (!$this->skills->contains($skill)) {
+            $this->skills->add($skill);
+        }
+
+        return $this;
+    }
+
+    public function removeSkill(Skill $skill): self
+    {
+        $this->skills->removeElement($skill);
+
+        return $this;
     }
 }
