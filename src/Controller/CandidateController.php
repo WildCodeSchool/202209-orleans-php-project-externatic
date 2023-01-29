@@ -10,6 +10,7 @@ use App\Form\CandidateType;
 use App\Repository\OfferRepository;
 use App\Repository\CandidateRepository;
 use App\Repository\ApplicationRepository;
+use App\Services\Completion;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -84,6 +85,23 @@ class CandidateController extends AbstractController
         ]);
     }
 
+    #[Route('/mon-tableau-de-bord', name: 'show_dashboard', methods: ['GET'])]
+    public function showDashboard(
+        ApplicationRepository $applicationRepo,
+        Completion $completion,
+    ): Response {
+        /** @var User */
+        $user = $this->getUser();
+        $candidate = $user->getCandidate();
+
+        return $this->render('candidate/showDashboard.html.twig', [
+            'numberOfFavorite' => count($candidate->getFavorite()),
+            'numberOfApplication' => count($candidate->getApplications()),
+            'numberOfAppValidate' => count($applicationRepo->findValidatedApplication($candidate)),
+            'completionProfil' => $completion->completionProfil($candidate),
+
+        ]);
+    }
 
     #[Route('/{offer}/candidater', name: 'apply_to_job', methods: ['GET', 'POST'])]
     public function applyToJob(
