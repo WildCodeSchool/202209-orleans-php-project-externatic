@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Repository\OfferRepository;
 use App\Form\ApplicationResponseType;
 use App\Repository\ApplicationRepository;
@@ -18,6 +19,18 @@ class RecruiterController extends AbstractController
         $offers = $offerRepository->findBy([], ['createdAt' => 'DESC']);
 
         return $this->render('recruiter/applications.html.twig', [
+            'offers' => $offers,
+        ]);
+    }
+    #[Route('/espace-recruteur/mes-offres', name: 'app_recruiter_myOffer')]
+    public function showRecruiterOffer(OfferRepository $offerRepository): Response
+    {
+        /** @var User */
+        $user = $this->getUser();
+        $recruiterId = $user->getRecruiter()->getId();
+        $offers = $offerRepository->findBy(["recruiter" => $recruiterId]);
+
+        return $this->render('recruiter/showMyOffer.html.twig', [
             'offers' => $offers,
         ]);
     }
