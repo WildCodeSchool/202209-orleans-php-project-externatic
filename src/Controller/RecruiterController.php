@@ -2,11 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Application;
 use App\Services\ApplyStatus;
 use App\Repository\OfferRepository;
 use App\Form\ApplicationResponseType;
-use App\Repository\ApplicationRepository;
 use App\Repository\SponsorRepository;
+use App\Repository\ApplicationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,7 +33,10 @@ class RecruiterController extends AbstractController
         $recruiter = $user->getRecruiter();
 
         return $this->render('recruiter/showDashboard.html.twig', [
-            'sumApplicationInProgress' => $applyStatus->sumApplicationStatus($recruiter, "in-progress"),
+            'sumApplicationInProgress' => $applyStatus->sumApplicationStatus(
+                $recruiter,
+                Application::APPLICATION_STATUS['IN_PROGRESS']
+            ),
             'numberOfSponsor' => count($sponsorRepository->findAll()),
             'sumNoApplication' => $applyStatus->sumApplicationNoStatus($recruiter),
 
