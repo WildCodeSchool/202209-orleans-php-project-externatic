@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\RecruiterType;
+use App\Repository\UserRepository;
 use App\Repository\OfferRepository;
 use App\Form\ApplicationResponseType;
 use App\Repository\ApplicationRepository;
@@ -44,6 +46,26 @@ class RecruiterController extends AbstractController
             'offer' => $offer,
         ]);
     }
+    #[Route('/recruiter/modifier-mon-profil', name: 'app_recruiter_edit_profil')]
+    public function editProfil(UserRepository $userRepository, Request $request): Response
+    {
+        /** @var User */
+        $user = $this->getUser();
+        $form = $this->createForm(RecruiterType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $userRepository->save($user, true);
+            $this->addFlash('success', 'Votre mise à jour a été prise en compte.');
+
+            return $this->redirectToRoute('app_account', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm("recruiter/profilEdit.html.twig", [
+            'form' => $form,
+        ]);
+    }
+
     #[Route('/recruiter/applicationDecision/{id}', name: 'app_recruiter_application_decision')]
     public function applicationDecision(
         int $id,
