@@ -1,3 +1,5 @@
+import L from "leaflet"
+
 const latitude = document.getElementById('map').dataset.latitude
 const longitude = document.getElementById('map').dataset.longitude
 
