@@ -5,8 +5,11 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RecruiterType;
 use App\Repository\UserRepository;
+use App\Entity\Application;
+use App\Services\ApplyStatus;
 use App\Repository\OfferRepository;
 use App\Form\ApplicationResponseType;
+use App\Repository\SponsorRepository;
 use App\Repository\ApplicationRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,6 +37,24 @@ class RecruiterController extends AbstractController
 
         return $this->render('recruiter/showMyOffer.html.twig', [
             'offers' => $offers,
+        ]);
+    }
+
+    #[Route('/recruteur/mon-tableau-de-bord', methods: ['GET'], name: 'app_recruiter_dashboard')]
+    public function showDashboard(ApplyStatus $applyStatus, SponsorRepository $sponsorRepository): Response
+    {
+        /** @var \App\Entity\User */
+        $user = $this->getUser();
+        $recruiter = $user->getRecruiter();
+
+        return $this->render('recruiter/showDashboard.html.twig', [
+            'sumApplicationInProgress' => $applyStatus->sumApplicationStatus(
+                $recruiter,
+                Application::APPLICATION_STATUS['IN_PROGRESS']
+            ),
+            'numberOfSponsor' => count($sponsorRepository->findAll()),
+            'sumNoApplication' => $applyStatus->sumApplicationNoStatus($recruiter),
+
         ]);
     }
 
