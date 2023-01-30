@@ -85,6 +85,18 @@ class CandidateController extends AbstractController
         ]);
     }
 
+    #[Route('/mes-candidatures-acceptees', name: 'show_offers_applied_accepted', methods: ['GET'])]
+    public function showAcceptedApply(ApplicationRepository $applicationRepo): Response
+    {
+        /** @var User */
+        $user = $this->getUser();
+        $candidate = $user->getCandidate();
+
+        return $this->render('candidate/showMyAcceptedApplications.html.twig', [
+            'applications' => $applicationRepo->findValidatedApplication($candidate),
+        ]);
+    }
+
     #[Route('/mon-tableau-de-bord', name: 'show_dashboard', methods: ['GET'])]
     public function showDashboard(
         ApplicationRepository $applicationRepo,
