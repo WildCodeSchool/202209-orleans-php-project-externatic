@@ -4,7 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Candidate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\Expr\Func;
 use Doctrine\Persistence\ManagerRegistry;
+use PhpParser\Builder\Function_;
 
 /**
  * @extends ServiceEntityRepository<Candidate>

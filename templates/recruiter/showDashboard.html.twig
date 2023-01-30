@@ -1,0 +1,65 @@
+{% extends 'dashboard_layout.html.twig' %}
+
+{% block title %}
+	{{ parent() ~ ' | Mon tableau de bord' }}
+{% endblock %}
+
+{% block stylesheets %}
+	{{ parent() }}
+	{{ encore_entry_link_tags('card') }}
+{% endblock %}
+
+{% block sideNav %}
+	{% include './component/_sideBar_dashboard.html.twig' %}
+{% endblock %}
+
+{% block content %}
+
+	<div class="container">
+		<h1>Mon tableau de bord</h1>
+
+		<div class="row my-3">
+			<div class="col">
+				<a class="py-2 h-100  text-decoration-none" href="#">
+					<div class="text-center bg-secondary text-light rounded box-shadow p-4">
+						<div class="display-2 text-subtitle fw-bolder ">{{ app.user.recruiter.offers|length }}</div>
+						<div class="fs-5">Nombre d'offres en charge</div>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div class="row my-3">
+			<div class="col-md-6">
+				<a class="py-2  h-100 text-decoration-none" href="#">
+					<div class="d-flex flex-column justify-content-center align-items-center h-100 bg-secondary text-light rounded box-shadow p-4">
+						<div class="display-2 text-subtitle fw-bolder ">{{ sumApplicationInProgress }}</div>
+						<div class="fs-5">Nombre de candidatures à traiter</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-md-6">
+				<a class="py-2  h-100 text-decoration-none" href="#">
+					<div class="d-flex flex-column justify-content-center align-items-center h-100 bg-secondary text-light rounded box-shadow p-4">
+						<div class="display-2 text-subtitle fw-bolder ">{{ sumNoApplication }}</div>
+						<div class="fs-5">Nombre d'offres sans candidature</div>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div class="row my-3">
+			<div class="col">
+				<a class="py-2 h-100  text-decoration-none" href="#">
+					<div class="text-center bg-secondary text-light rounded box-shadow p-4">
+						<div class="display-2 text-subtitle fw-bolder ">{{ numberOfSponsor }}</div>
+						<div class="fs-5">Nombre d'entreprise partenaire</div>
+					</div>
+				</a>
+			</div>
+		</div>
+
+	</div>
+
+{% endblock %}
