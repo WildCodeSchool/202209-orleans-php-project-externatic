@@ -1,0 +1,30 @@
+{% extends 'dashboard_layout.html.twig' %}
+
+{% block title %}
+	{{ parent() ~ ' | Mes Offres' }}
+{% endblock %}
+
+{% block content %}
+
+	<div class="container p-4">
+		<div class="d-flex justify-content-center align-items-center gap-3 py-4">
+			<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="none" viewbox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="bi bi-chat-left-heart">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-9.941l-7.81 7.81a1.5 1.5 0 002.112 2.13"/>
+			</svg>
+			<h1>Mes Offres</h1>
+		</div>
+		<hr>
+		<div class="my-5">
+			<div class="row justify-content-center g-4">
+
+				{% for offer in offers %}
+					<div class="col-lg-6">
+						{% include 'component/_card.html.twig' with { offer: offer } only %}
+					</div>
+				{% endfor %}
+
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
