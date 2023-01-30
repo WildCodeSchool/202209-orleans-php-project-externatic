@@ -4,20 +4,36 @@
 	{{ parent() ~ ' | ' ~ offer.title }}
 {% endblock %}
 
+{% block stylesheets %}
+	{{ parent() }}
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
+{% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('mapOfferShow') }}
+{% endblock %}
+
 {% block body %}
 	<h1 class="d-none">Offre</h1>
-	<div class="container p-4">
-	
-        {% include 'component/offerShow.html.twig' %}
+	<div class="container p-5 box-shadow rounded my-5">
+		<div class="row align-items-center">
+			<div class="col-xl-6">
+				{% include 'component/offerShow.html.twig' %}
 
-	<div class="d-flex justify-content-between mt-5">
-			<a aria-label="Retour à l'index" class="btn btn-outline-tertiary d-flex align-items-center" href={{ app.user ? path('app_offer_showAll') : path('app_offer_index') }}>
-				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class=" bi bi-arrow-left me-2" viewbox="0 0 16 16">
-					<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
-				</svg>
-				<span class="d-none d-lg-block">Retour</span>
-			</a>
-			<a aria-label="S'inscrire / Se connecter" class="btn btn-outline-secondary d-flex align-items-center" href={{ path('app_login') }}>Pas encore inscrit ?</a>
+				<div class="d-flex justify-content-between mt-5">
+					<a aria-label="Retour à l'index" class="btn btn-outline-tertiary d-flex align-items-center" href={{ app.user ? path('app_offer_showAll') : path('app_offer_index') }}>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class=" bi bi-arrow-left me-2" viewbox="0 0 16 16">
+							<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+						</svg>
+						<span class="d-none d-lg-block">Retour</span>
+					</a>
+					<a aria-label="S'inscrire / Se connecter" class="btn btn-outline-secondary d-flex align-items-center" href={{ path('app_login') }}>Pas encore inscrit ?</a>
+				</div>
+			</div>
+			<div class="col-xl-6">
+				{% include "./component/_mapShowOffer.html.twig" %}
+			</div>
+		</div>
 	</div>
-    </div>
 {% endblock %}

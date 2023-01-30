@@ -57,5 +57,8 @@ body {
 .box-shadow {
     box-shadow: $box-shadow;
 }
+#map {
+    aspect-ratio: 1/1;
+}
 
 
