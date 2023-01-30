@@ -28,7 +28,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
         ["city" => 'Soulac', "postalCode" => '33780'],
         ["city" => 'Nantes', "postalCode" => '45000'],
         ["city" => 'Pornic', "postalCode" => '44210'],
-        ["city" => 'La Roche sur Yon', "postalCode" => '45000'],
+        ["city" => 'La Roche sur Yon', "postalCode" => '85000'],
         ["city" => 'Angers', "postalCode" => '49000'],
         ["city" => 'Tarbes', "postalCode" => '65000'],
         ["city" => 'Caen', "postalCode" => '14000'],
