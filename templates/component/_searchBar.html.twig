@@ -4,16 +4,16 @@
 
 {{ form_start(form) }}
 
-<div class="input-group">
-	<div class="form-control">
+<div class="input-group d-flex flex-column flex-sm-row">
+	<div class="form-control w-100 w-sm-25 ">
 		{{ form_label(form.search) }}
 		{{ form_widget(form.search, { attr: { class: 'border-0', placeholder: 'Recherchez par mot(s) clé(s)' } }) }}
 	</div>
-	<div class="form-control">
+	<div class="form-control w-100 w-sm-25">
 		{{ form_label(form.location) }}
 		{{ form_widget(form.location, { attr: { class: 'border-0', placeholder: 'Recherchez par ville' } }) }}
 	</div>
-	<div class="form-control">
+	<div class="form-control w-100 w-sm-25">
 		<div class="d-flex justify-content-between align-items-center">
 			<div>
 				{{ form_label(form.range) }}
