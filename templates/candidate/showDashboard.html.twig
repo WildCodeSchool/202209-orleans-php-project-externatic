@@ -23,7 +23,7 @@
 				<a class="py-2 h-100  text-decoration-none" href="{{ path('app_candidate_show_favories') }}">
 					<div  class="text-center bg-secondary text-light rounded box-shadow p-4">
 						<div class="display-2 text-subtitle fw-bolder ">{{ numberOfFavorite }}</div>
-						<div class="fs-5">Nombre de favoris</div>
+						<div class="fs-5  text-center">Nombre de favoris</div>
 					</div>
 				</a>
 			</div>
@@ -32,19 +32,19 @@
 
 		<div class="row my-3">
 			<div class="col-md-6">
-				<a class="py-2  h-100 text-decoration-none" href="{{ path('app_candidate_show_offers_applied') }}">
+				<a class="py-2 h-100 text-decoration-none" href="{{ path('app_candidate_show_offers_applied') }}">
 					<div  class="d-flex flex-column justify-content-center align-items-center h-100 bg-secondary text-light rounded box-shadow p-4">
 						<div class="display-2 text-subtitle fw-bolder ">{{ numberOfApplication }}</div>
-						<div class="fs-5">Nombre de candidatures</div>
+						<div class="fs-5  text-center">Nombre de candidatures</div>
 					</div>
 				</a>
 			</div>
 
-			<div class="col-md-6">
+			<div class="col-md-6 mt-3 mt-sm-0">
 				<a class="py-2  h-100 text-decoration-none" href="{{ path('app_candidate_show_offers_applied_accepted') }}">
 					<div  class="d-flex flex-column justify-content-center align-items-center h-100 bg-secondary text-light rounded box-shadow p-4">
 						<div class="display-2 text-subtitle fw-bolder ">{{ numberOfAppValidate }}</div>
-						<div class="fs-5">Nombre de candidature acceptée</div>
+						<div class="fs-5 text-center">Nombre de candidature acceptée</div>
 					</div>
 				</a>
 			</div>
@@ -55,14 +55,18 @@
 			<div class="col">
 				<a class="py-2 text-decoration-none" href="{{ path('app_candidate_show') }}">
 					<div  class="text-center bg-secondary text-light rounded box-shadow p-4">
-						<div class="pt-3 px-5 mx-5">
-							<div class="progress mt-3" style="height:40px;">
-								<div class="progress-bar bg-container-secondary text-light fs-4" role="progressbar" aria-valuenow="{{ completionProfil }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ completionProfil }}%;
-																">{{ completionProfil }}
-									%</div>
+						<div class="pt-3 px-5 mx-5 d-flex d-sm-none justify-content-center">
+						<div class="text-light display-2 fw-bolder">{{ completionProfil }}%</div>
+						</div>
+						
+						
+						<div class="pt-3 px-5 mx-5 d-none d-sm-block">
+							<div class=" progress mt-3" style="height:40px;">
+								<div class="progress-bar bg-container-secondary text-light fs-4" role="progressbar" 
+								aria-valuenow="{{ completionProfil }}" aria-valuemin="0" aria-valuemax="100" style="width:{{ completionProfil }}%;">{{ completionProfil }}%</div>
 							</div>
 						</div>
-						<div class="fs-5 my-3">Avancement du profil</div>
+						<div class="fs-5 my-3  text-center">Avancement du profil</div>
 					</div>
 				</a>
 			</div>

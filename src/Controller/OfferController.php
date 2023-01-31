@@ -10,6 +10,7 @@ use App\Services\OfferFounder;
 use App\Entity\SearchOfferModule;
 use App\Services\Geolocalisation;
 use App\Repository\OfferRepository;
+use App\Services\OfferToJson;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -26,6 +27,8 @@ class OfferController extends AbstractController
         Request $request,
         OfferRepository $offerRepository,
         OfferFounder $offerFounder,
+        OfferToJson $offerToJson,
+        Geolocalisation $geolocalisation
     ): Response {
         $offers = $offerRepository->findBy([], ["createdAt" => "DESC"], self::MAX_OFFER);
         $searchOfferModule = new SearchOfferModule();
@@ -34,17 +37,23 @@ class OfferController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $offers = $offerFounder->foundByLocation($searchOfferModule);
+            $searchCoords = $geolocalisation->find($searchOfferModule->getLocation() ?? "");
         }
+
         return $this->renderForm('offer/index.html.twig', [
             'form' => $form,
             'offers' => $offers,
+            'jsonOffers' => $offerToJson->get($offers),
+            'searchCoords' => json_encode($searchCoords ?? ""),
         ]);
     }
     #[Route('/toutes-les-offres', name: 'showAll', methods: ['GET', 'POST'])]
     public function showAll(
         Request $request,
         OfferRepository $offerRepository,
-        OfferFounder $offerFounder
+        OfferFounder $offerFounder,
+        OfferToJson $offerToJson,
+        Geolocalisation $geolocalisation
     ): Response {
         $offers = $offerRepository->findBy([], ["createdAt" => "DESC"], self::MAX_OFFER);
         $searchOfferModule = new SearchOfferModule();
@@ -53,11 +62,14 @@ class OfferController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $offers = $offerFounder->foundByLocation($searchOfferModule);
+            $searchCoords = $geolocalisation->find($searchOfferModule->getLocation() ?? "");
         }
 
         return $this->renderForm('offer/showAll.html.twig', [
             'form' => $form,
             'offers' => $offers,
+            'jsonOffers' => $offerToJson->get($offers),
+            'searchCoords' => json_encode($searchCoords ?? ""),
         ]);
     }
 

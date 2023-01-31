@@ -6,7 +6,14 @@
 {% block stylesheets %}
 	{{ parent() }}
 	{{ encore_entry_link_tags('card') }}
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin=""/>
 {% endblock %}
+
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('mapShowAllOffers') }}
+{% endblock %}
+
 {% block content %}
 	<div class="container p-4">
 		<div class="d-flex justify-content-center align-items-center gap-3 py-4">
@@ -16,6 +23,7 @@
 			<h1>Toutes les Offres</h1>
 		</div>
 		<hr>
+
 		<div class="my-5">
 			{% include './component/_searchBar.html.twig' %}
 		</div>
@@ -31,6 +39,11 @@
 				</a>
 			</div>
 		{% endif %}
+		<div class="row">
+			<div class="py-5 px-1 px-xl-4 d-flex justify-content-center align-items-center">
+				<div id="map" data-offers="{{ jsonOffers }}" data-link="/offer" data-search="{{ searchCoords ?? "" }}" class="w-100 rounded box-shadow" style="height:400px"></div>
+			</div>
+		</div>
 		<div class="row justify-content-center g-4">
 			{% for offer in offers %}
 				<div class="col-lg-6">
