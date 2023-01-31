@@ -27,7 +27,12 @@ It's symfony website-skeleton project with some additional library (webpack, fix
 2. Check yarn & node are installed
 
 ### Install
-
+0. PHP 8.1.xx minimum required
+-> sudo update-alternatives --set php /usr/bin/php8.1
+-> sudo update-alternatives --config php
+choose version and validate
+-> php -v to verify.
+0. Need to set email DSN
 1. Clone this project
 2. Run `composer install`
 3. Run `yarn install`
