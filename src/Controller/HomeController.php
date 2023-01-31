@@ -43,7 +43,7 @@ class HomeController extends AbstractController
                 'form' => $form,
                 'offers' => $offers,
                 'jsonOffers' => $offerToJson->get($offers),
-                'searchCoords' => json_encode($searchCoords ?? ""),
+                'searchCoords' => json_encode($searchCoords),
             ]);
         }
 
