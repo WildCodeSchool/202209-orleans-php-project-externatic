@@ -1,3 +1,4 @@
+{% if not is_granted('ROLE_ADMIN') %}
 <a href="{{ path('app_recruiter_dashboard') }}" class="menu-link menu-link-close d-flex justify-content-center align-items-center btn btn-primary my-1 p-2" aria-label="Mon Dashboard">
 
 	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-heart" viewbox="0 0 16 16">
@@ -7,6 +8,7 @@
 
 	<span class="dashboard-link-title ms-2">Mon Dashboard</span>
 </a>
+{% endif %}
 
 <a class="menu-link menu-link-close d-flex justify-content-center align-items-center btn btn-primary my-1 p-2" href="{{ path('app_recruiter_myOffer')}}" aria-label="Mes offres">
 
