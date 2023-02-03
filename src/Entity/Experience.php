@@ -17,7 +17,6 @@ class Experience
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank()]
     private ?string $company = null;
 
     #[Assert\Expression(
@@ -25,7 +24,6 @@ class Experience
         message: 'La date de début doit être inférieure à la date de fin.',
     )]
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\NotBlank()]
     private ?DateTimeInterface $startDate = null;
 
     #[Assert\LessThan('tomorrow')]
@@ -41,11 +39,9 @@ class Experience
     private ?bool $isCurrentPosition = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank()]
     private ?string $jobTitle = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    #[Assert\NotBlank()]
     private ?string $jobDescription = null;
 
     #[ORM\ManyToOne(inversedBy: 'experiences')]

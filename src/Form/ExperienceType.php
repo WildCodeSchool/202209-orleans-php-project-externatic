@@ -22,11 +22,13 @@ class ExperienceType extends AbstractType
             ->add('company', TextType::class, [
                 'label' => 'Entreprise',
                 'help' => 'Renseignez le nom de l\'entreprise',
+                'required' => false,
             ])
             ->add('startDate', DateType::class, [
                 'label' => 'Date de début',
                 'years' => range(date('Y') - 50, date('Y')),
                 'widget' => 'single_text',
+                'required' => false,
             ])
             ->add('endDate', DateType::class, [
                 'label' => 'Date de fin',
@@ -47,15 +49,18 @@ class ExperienceType extends AbstractType
                 'expanded' => false,
                 'attr' => ['class' => 'form-select my-2 '],
                 'help' => 'Sélectionnez le type de contrat',
+                'required' => false,
             ])
             ->add('jobTitle', TextType::class, [
                 'label' => 'Intitulé du poste',
                 'help' => 'Renseignez le nom du poste occupé',
+                'required' => false,
             ])
             ->add('jobDescription', TextareaType::class, [
                 'label' => 'Description',
                 'help' => 'Donnez une description de votre expérience',
-                'attr' => ["rows" => "3"]
+                'attr' => ["rows" => "3"],
+                'required' => false,
             ]);
     }
 
