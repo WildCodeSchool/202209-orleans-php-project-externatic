@@ -21,7 +21,10 @@ class RecruiterController extends AbstractController
     #[Route('/espace-recruteur/candidatures', name: 'app_recruiter_application')]
     public function showApplications(OfferRepository $offerRepository): Response
     {
-        $offers = $offerRepository->findAllInProgress();
+        /** @var User */
+        $user = $this->getUser();
+        $recruiterId = $user->getRecruiter()->getId();
+        $offers = $offerRepository->findAllInProgress($recruiterId);
 
         return $this->render('recruiter/applications.html.twig', [
             'offers' => $offers,
