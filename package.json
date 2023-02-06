@@ -19,6 +19,8 @@
     "license": "UNLICENSED",
     "private": true,
     "scripts": {
+        "setup": "composer install && yarn install && yarn build",
+        "migration": "symfony console d:d:c && symfony console d:m:m && symfony console d:f:l",
         "dev-server": "encore dev-server --no-client-overlay-warnings",
         "dev": "encore dev",
         "watch": "encore dev --watch",
