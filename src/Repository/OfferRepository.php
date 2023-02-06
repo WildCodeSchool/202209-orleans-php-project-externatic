@@ -64,6 +64,16 @@ class OfferRepository extends ServiceEntityRepository
         return $query->getQuery()->getResult();
     }
 
+    public function findAllInProgress(): array
+    {
+        $query = $this->createQueryBuilder('o')
+            ->leftJoin('o.applications', 'a')
+            ->where('a.applicationStatus = :status ')
+            ->setParameter('status', 'in-progress')
+            ;
+            return $query->getQuery()->getResult();
+    }
+
     //    /**
     //     * @return Offer[] Returns an array of Offer objects
     //     */
