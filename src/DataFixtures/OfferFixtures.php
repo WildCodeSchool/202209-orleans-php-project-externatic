@@ -11,7 +11,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
 class OfferFixtures extends Fixture implements DependentFixtureInterface
 {
-    public const NB_OFFER = 50;
+    public const NB_OFFER = 60;
 
     private const TITLE_OFFERS = [
         ['Développeur C++ Oracle Full Remote H/F', 'C++'],
