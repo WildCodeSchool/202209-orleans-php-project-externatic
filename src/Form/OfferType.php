@@ -50,7 +50,8 @@ class OfferType extends AbstractType implements FormTypeInterface
             ->add('targetDate', DateType::class, [
                 'label' => 'Pour le',
                 'label_attr' => ['class' => 'font-subtitle'],
-                'format' => 'dd-MM-yyyy',
+                'years' => range(date('Y') - 50, date('Y')),
+                'widget' => 'single_text',
                 'help' => 'Jour/Mois/Année'
             ])
             ->add('description', CKEditorType::class)
