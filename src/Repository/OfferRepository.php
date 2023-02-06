@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Offer;
 use App\Entity\Recruiter;
+use App\Entity\Application;
 use App\Entity\SearchOfferModule;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -72,7 +73,7 @@ class OfferRepository extends ServiceEntityRepository
             ->leftJoin('o.applications', 'a')
             ->andWhere('a.applicationStatus = :status ')
             ->setParameter('recruiterId', $recruiterId)
-            ->setParameter('status', 'in-progress')
+            ->setParameter('status', Application::APPLICATION_STATUS['IN_PROGRESS'])
             ->orderBy('o.createdAt', 'DESC');
         return $query->getQuery()->getResult();
     }
