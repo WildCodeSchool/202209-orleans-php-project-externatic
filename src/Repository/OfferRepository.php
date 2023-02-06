@@ -70,7 +70,7 @@ class OfferRepository extends ServiceEntityRepository
             ->leftJoin('o.applications', 'a')
             ->where('a.applicationStatus = :status ')
             ->setParameter('status', 'in-progress')
-            ;
+            ->orderBy('o.createdAt', 'DESC');
             return $query->getQuery()->getResult();
     }
 
