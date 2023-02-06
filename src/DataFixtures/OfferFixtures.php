@@ -26,7 +26,7 @@ class OfferFixtures extends Fixture implements DependentFixtureInterface
         ["city" => 'Orléans', "postalCode" => '45000'],
         ["city" => 'Lacanau', "postalCode" => '33680'],
         ["city" => 'Soulac', "postalCode" => '33780'],
-        ["city" => 'Nantes', "postalCode" => '45000'],
+        ["city" => 'Nantes', "postalCode" => '44000'],
         ["city" => 'Pornic', "postalCode" => '44210'],
         ["city" => 'La Roche sur Yon', "postalCode" => '85000'],
         ["city" => 'Angers', "postalCode" => '49000'],
