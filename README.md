@@ -102,9 +102,9 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 ## Authors
 
 * Hugues Hertout - https://github.com/hhertout
-* Cedric Le Valégant - https://github.com/cedriclv
+* Cédric Le Valégant - https://github.com/cedriclv
 * William Bouet - https://github.com/williambouet
-* 
+* Hugo Houdas - https://github.com/HuHoudas
 
 ## License
 
