@@ -77,7 +77,7 @@ class OfferType extends AbstractType implements FormTypeInterface
                 'query_builder' => function (RecruiterRepository $recruiterRepository) {
                     return $recruiterRepository->createQueryBuilder('recruiter')
                     ->join('recruiter.user', 'user')
-                    ->orderBy('user.lastname', 'DESC');
+                    ->orderBy('user.lastname', 'ASC');
                 },
             ])
             ->add('isImportant', CheckboxType::class, [
