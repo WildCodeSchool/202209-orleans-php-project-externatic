@@ -35,7 +35,7 @@ choose version and validate
 0. Need to set email DSN
 1. Clone this project
 2. Run `yarn setup`
-3. Create your env.local file from .env depend of the database you wanna use
+3. Create your env.local file from .env depending on the database you would like to use
 4. Run `yarn migration` to build assets
 
 ### Working
