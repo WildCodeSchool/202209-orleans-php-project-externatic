@@ -51,10 +51,10 @@ class Offer implements GpsPositionInterface
     #[Assert\Type(type: Types::BOOLEAN)]
     private ?bool $isImportant = false;
 
-    #[ORM\ManyToOne(inversedBy: 'offers')]
+    #[ORM\ManyToOne(inversedBy: 'offers', cascade:["persist"])]
     private ?Company $company = null;
 
-    #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Application::class)]
+    #[ORM\OneToMany(mappedBy: 'offer', targetEntity: Application::class, cascade:["persist", "remove"])]
     private Collection $applications;
 
     #[ORM\ManyToMany(targetEntity: Candidate::class, mappedBy: 'favorite')]

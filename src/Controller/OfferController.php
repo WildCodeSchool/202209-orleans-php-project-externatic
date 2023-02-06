@@ -96,7 +96,7 @@ class OfferController extends AbstractController
 
                 $offerRepository->save($offer, true);
 
-                return $this->redirectToRoute('app_offer_index');
+                return $this->redirectToRoute('app_offer_showAll');
             }
         }
 
