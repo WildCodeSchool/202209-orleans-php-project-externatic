@@ -13,7 +13,7 @@
 
     <div class="row align-items-center box-shadow p-5 rounded g-3">
       <div class="col-lg-5 col-xl-4 d-flex justify-content-center align-items-center">
-        <img class="profilPicture rounded-circle border m-4 border-secondary" src="{{ candidate.user.avatar is empty ? asset('build/images/default_avatar.png') : vich_uploader_asset(app.candidate.user) }}" alt="Image de profil" />
+        <img class="profilPicture rounded-circle border m-4 border-secondary" src="{{ candidate.user.avatar is empty ? asset('build/images/default_avatar.png') : vich_uploader_asset(candidate.user) }}" alt="Image de profil" />
       </div>
       <div class="col-lg-7 col-xl-8">
         <div class="fs-4 fw-bold">{{ candidate.user.firstname }}
