@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'dashboard_layout.html.twig' %}
 
 {% block title %}{{ parent() ~ ' | ' ~ company.name }}{% endblock %}
 
@@ -8,11 +8,8 @@
 	{{ encore_entry_link_tags('card') }}
 {% endblock %}
 
-{% block navbar %}
-    {% include './component/_navigation_bar.html.twig' %}
-{% endblock %}
 
-{% block body %}
+{% block content %}
 <div class="container p-4">
     <div>
         <h1 class="font-title fw-bold fs-2 mt-4 mb-0">{{ company.name }}</h1>
@@ -44,7 +41,7 @@
                 </div>
             {% else %}
                 <div>Cette entreprise n'a pas d'offre en cours !
-                    <a href="" class="btn btn-secondary mx-2">
+                    <a href="{{ path('app_offer_new') }}" class="btn btn-secondary mx-2">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                         </svg>

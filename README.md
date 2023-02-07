@@ -34,9 +34,9 @@ choose version and validate
 -> php -v to verify.
 0. Need to set email DSN
 1. Clone this project
-2. Run `composer install`
-3. Run `yarn install`
-4. Run `yarn encore dev` to build assets
+2. Run `yarn setup`
+3. Create your env.local file from .env depending on the database you would like to use
+4. Run `yarn migration` to build assets
 
 ### Working
 
@@ -101,7 +101,10 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 ## Authors
 
-Wild Code School trainers team
+* Hugues Hertout - https://github.com/hhertout
+* Cédric Le Valégant - https://github.com/cedriclv
+* William Bouet - https://github.com/williambouet
+* Hugo Houdas - https://github.com/HuHoudas
 
 ## License
 

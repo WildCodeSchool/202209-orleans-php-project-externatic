@@ -3,9 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Offer;
+use App\Entity\Recruiter;
+use App\Entity\Application;
 use App\Entity\SearchOfferModule;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Offer>
@@ -61,6 +63,18 @@ class OfferRepository extends ServiceEntityRepository
                 ->orderBy('o.createdAt', 'DESC');
         }
 
+        return $query->getQuery()->getResult();
+    }
+
+    public function findAllInProgress(int $recruiterId): array
+    {
+        $query = $this->createQueryBuilder('o')
+            ->andWhere('o.recruiter = :recruiterId')
+            ->leftJoin('o.applications', 'a')
+            ->andWhere('a.applicationStatus = :status ')
+            ->setParameter('recruiterId', $recruiterId)
+            ->setParameter('status', Application::APPLICATION_STATUS['IN_PROGRESS'])
+            ->orderBy('o.createdAt', 'DESC');
         return $query->getQuery()->getResult();
     }
 

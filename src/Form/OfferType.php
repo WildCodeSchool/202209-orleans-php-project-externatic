@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Offer;
 use App\Entity\Skill;
+use App\Entity\Company;
 use App\Entity\Recruiter;
 use App\Repository\SkillRepository;
+use App\Repository\CompanyRepository;
 use App\Repository\RecruiterRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormTypeInterface;
@@ -27,6 +29,17 @@ class OfferType extends AbstractType implements FormTypeInterface
             ->add('title', TextType::class, [
                 'label' => 'Titre de l\'offre',
             ])
+            ->add('company', EntityType::class, [
+                'label' => 'Entreprise',
+                'class' => Company::class,
+                'choice_label' => 'name',
+                'multiple' => false,
+                'expanded' => false,
+                'query_builder' => function (CompanyRepository $companyRepository) {
+                    return $companyRepository->createQueryBuilder('c')
+                        ->orderBy('c.name', 'ASC');
+                },
+            ])
 
             ->add('city', TextType::class, [
                 'label' => 'Ville',
@@ -37,7 +50,8 @@ class OfferType extends AbstractType implements FormTypeInterface
             ->add('targetDate', DateType::class, [
                 'label' => 'Pour le',
                 'label_attr' => ['class' => 'font-subtitle'],
-                'format' => 'dd-MM-yyyy',
+                'years' => range(date('Y') - 50, date('Y')),
+                'widget' => 'single_text',
                 'help' => 'Jour/Mois/Année'
             ])
             ->add('description', CKEditorType::class)
@@ -63,7 +77,7 @@ class OfferType extends AbstractType implements FormTypeInterface
                 'query_builder' => function (RecruiterRepository $recruiterRepository) {
                     return $recruiterRepository->createQueryBuilder('recruiter')
                     ->join('recruiter.user', 'user')
-                    ->orderBy('user.lastname', 'DESC');
+                    ->orderBy('user.lastname', 'ASC');
                 },
             ])
             ->add('isImportant', CheckboxType::class, [

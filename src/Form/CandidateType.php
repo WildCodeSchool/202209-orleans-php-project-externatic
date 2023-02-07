@@ -30,6 +30,7 @@ class CandidateType extends AbstractType
             ->add('nationality', CountryType::class, [
                 'label' => 'Nationalité',
                 'help' => 'Renseignez votre nationalité dans la liste',
+                'required' => false,
             ])
             ->add('address', TextType::class, [
                 'label' => 'Adresse',

@@ -96,7 +96,7 @@ class OfferController extends AbstractController
 
                 $offerRepository->save($offer, true);
 
-                return $this->redirectToRoute('app_offer_index');
+                return $this->redirectToRoute('app_offer_showAll');
             }
         }
 
@@ -144,7 +144,7 @@ class OfferController extends AbstractController
                 $offer->setLatitude($position["lat"]);
 
                 $offerRepository->save($offer, true);
-                return $this->redirectToRoute('app_offer_index', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_offer_showAll', [], Response::HTTP_SEE_OTHER);
             }
         }
 
