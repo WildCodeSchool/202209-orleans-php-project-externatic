@@ -70,4 +70,10 @@ final class VersionFinalProduction extends AbstractMigration
 
 
     }
+    public function down(Schema $schema): void
+    {
+        $this->addSql('TRUNCATE TABLE sponsor');
+        $this->addSql('TRUNCATE TABLE contract');
+        $this->addSql('TRUNCATE TABLE skill');
+    }
 }

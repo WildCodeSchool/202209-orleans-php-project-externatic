@@ -22,7 +22,7 @@
 		</svg>
 		<span class="dashboard-link-title ms-2">Les Offres</span>
 	</a>
-
+{% if not is_granted('ROLE_ADMIN') %}
 	<a href="{{ path('app_account') }}" class="menu-link menu-link-close d-flex justify-content-center align-items-center btn btn-primary my-1 mx-0 py-2 px-1 py-md-3 p-2" aria-label="Retour à l'accueil">
 
 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-gear" viewbox="0 0 16 16">
@@ -30,6 +30,7 @@
 		</svg>
 		<span class="dashboard-link-title ms-2">Mon compte</span>
 	</a>
+{% endif %}
 	<a href="{{ path('app_logout') }}" class="menu-link menu-link-close d-flex justify-content-center align-items-center btn btn-primary my-1 mx-0 py-2 px-1 py-md-2 p-2" aria-label="Retour à l'accueil">
 
 		<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewbox="0 0 16 16">
@@ -39,12 +40,13 @@
 		<span class="dashboard-link-title ms-2">Déconnexion</span>
 	</a>
 
-
 	<div class="links-title w-100 align-self-start text-white mt-2 ms-2 m-0">Mon espace</div>
 	<div class="w-100 d-flex flex-column justify-content-center align-items-center">
 	
 		{% if is_granted('ROLE_CANDIDATE') %}
 			{{ render(controller('App\\Controller\\CandidateController::sidebarCandidate')) }}
+		{% elseif is_granted('ROLE_ADMIN') %}
+				{% include 'component/_sidenav_dashboard_admin.html.twig' %}			
 		{% else %}
 			{% include 'component/_sidenav_dashboard_recruiter.html.twig' %}
 		{% endif %}
