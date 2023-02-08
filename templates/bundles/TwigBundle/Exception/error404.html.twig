@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() ~ '| Page introuvable' }}
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container">
+    <article class="d-flex justify-content-center align-items-center">
+        <h1>Cette page n'existe pas</h1>
+        <a href="{{ path('app_home') }}" class="btn btn-secondary">Retour au menu</a>
+    </article>
+</div>
+
+{% endblock %}
