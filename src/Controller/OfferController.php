@@ -105,7 +105,7 @@ class OfferController extends AbstractController
             'form' => $form,
         ]);
     }
-    #[Security("is_granted('ROLE_RECRUITER') or is_granted('ROLE_CANDIDATE')")]
+    #[Security("is_granted('ROLE_RECRUITER') or is_granted('ROLE_CANDIDATE') or is_granted('ROLE_ADMIN')")]
     #[Route('/{id}', name: 'show_loggedin', methods: ['GET'])]
     public function isLogShow(Offer $offer): Response
     {
