@@ -17,7 +17,7 @@
 {% block body %}
 	<h1 class="d-none">Offre</h1>
 	<div class="container p-5 box-shadow rounded my-5">
-		<div class="row align-items-center">
+		<div class="row">
 			<div class="col-xl-6">
 				{% include 'component/offerShow.html.twig' %}
 
@@ -31,7 +31,7 @@
 					<a aria-label="S'inscrire / Se connecter" class="btn btn-outline-secondary d-flex align-items-center" href={{ path('app_login') }}>Pas encore inscrit ?</a>
 				</div>
 			</div>
-			<div class="col-xl-6">
+			<div class="col-xl-6 pt-xl-5">
 				{% include "./component/_mapShowOffer.html.twig" %}
 			</div>
 		</div>
