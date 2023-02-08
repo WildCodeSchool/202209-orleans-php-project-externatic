@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() ~ '| Accès non autorisé' }}
+{% endblock %}
+
+
+{% block body %}
+
+<div class="container">
+    <article class="d-flex justify-content-center align-items-center">
+        <h1>Vous n'êtes pas autorisé à voir cette page.</h1>
+        <a href="{{ path('app_home') }}" class="btn btn-secondary">Retour au menu</a>
+    </article>
+</div>
+
+{% endblock %}
